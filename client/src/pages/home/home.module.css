@@ -60,3 +60,24 @@
 .delivery img {
     filter: drop-shadow(0px 0px 4px var(--PRIMARY_ALPHA_50)) drop-shadow(5px 5px 10px white);
 }
+
+.recommended-wrapper {
+    margin: 5em 0;
+}
+
+.products-wrapper {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1em;
+    grid-auto-columns: calc(100% / 1.8);
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior: contain;
+    scroll-snap-type: inline mandatory;
+    padding: 1em 1em;
+    scroll-padding: 0 1em;
+}
+
+.products-wrapper > * {
+    scroll-snap-align: start;
+}
