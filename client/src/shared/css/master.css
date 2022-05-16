@@ -7,6 +7,9 @@
     --NEUTRAL_0: #f6f6f6;
     --NEUTRAL_1: #eaeaea;
     --NEUTRAL_2: #d2d2d2;
+    --NEUTRAL_3: #a4a4a4;
+    --NEUTRAL_4: #868686;
+    --NEUTRAL_5: #707070;
 }
 
 ::-webkit-scrollbar {
@@ -80,7 +83,7 @@ h1 {
     border-right: 5px solid transparent;
 }
 
-.heading:hover:before{
+.heading:hover:before {
     border-bottom-width: 14px;
     top: calc(100% + 2px - 14px);
 }
