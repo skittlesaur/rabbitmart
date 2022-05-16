@@ -10,8 +10,8 @@
     align-items: center;
     justify-content: center;
     padding: 2em;
-    gap: 1.5em;
-    height: 100vh;
+    gap: 2em;
+    height: 80vh;
     background: linear-gradient(180deg, var(--PRIMARY_ALPHA_50) 0%, white 50%);
 }
 
@@ -39,9 +39,16 @@
     font-size: 2rem;
 }
 
+.hero h1 {
+    font-size: 1.8rem;
+    line-height: 2rem;
+    text-align: center;
+}
+
 .hero p {
     font-size: .9rem;
     margin-top: -1.5em;
+    text-align: center;
 }
 
 .delivery {
