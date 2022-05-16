@@ -11,7 +11,7 @@ const Home = () => {
                 <p>Making on-demand retail a reality!</p>
                 <Link className={'btn1'} to={'products'}>Shop Now</Link>
                 <div className={styles['delivery']}>
-                    <img src={DeliveryImg} alt={'Delivery'} loading={'lazy'}/>
+                    <img src={DeliveryImg} alt={'Delivery'}/>
                 </div>
             </div>
             <Categories/>
