@@ -1,0 +1,61 @@
+
+.categories {
+    margin: 2em 0;
+}
+
+.categories-scroll {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1em;
+    grid-auto-columns: calc(100% / calc(8em));
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior: contain;
+    scroll-snap-type: inline mandatory;
+    padding: 1em 1em;
+    scroll-padding: 0 1em;
+}
+
+.category {
+    scroll-snap-align: start;
+    cursor: pointer;
+    position: relative;
+
+    --CATEGORY_SIZE: 8em;
+    width: var(--CATEGORY_SIZE);
+    height: var(--CATEGORY_SIZE);
+
+    padding: 1em .25em;
+
+    background: linear-gradient(240deg, var(--NEUTRAL_0) 10%, var(--NEUTRAL_1) 100%);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.category div {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--PRIMARY);
+    filter: drop-shadow(2px 2px 0px white);
+}
+
+
+.category img {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+    object-position: 50% 0;
+    opacity: .7;
+    transition: 0.2s all ease-in-out;
+    filter: blur(0) brightness(.9);
+}
+
+.category:hover img {
+    filter: blur(3px) brightness(1.05);
+}

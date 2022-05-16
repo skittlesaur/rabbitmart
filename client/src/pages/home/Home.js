@@ -1,6 +1,7 @@
 import styles from './home.module.css';
 import {Link} from "react-router-dom";
 import DeliveryImg from '../../shared/assets/delivery.png';
+import Categories from "../../components/categories/Categories";
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
                     <img src={DeliveryImg} alt={'Delivery'} loading={'lazy'}/>
                 </div>
             </div>
+            <Categories/>
         </div>
     );
 }
