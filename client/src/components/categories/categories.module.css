@@ -7,7 +7,6 @@
     display: grid;
     grid-auto-flow: column;
     gap: 1em;
-    grid-auto-columns: calc(100% / calc(8em));
     overflow-x: auto;
     overflow-y: hidden;
     overscroll-behavior: contain;
@@ -58,4 +57,12 @@
 
 .category:hover img {
     filter: blur(3px) brightness(1.05);
+}
+
+/* Large Laptop Support */
+@media screen and (min-width: 1440px) {
+    .categories {
+        max-width: 1200px;
+        margin: auto;
+    }
 }

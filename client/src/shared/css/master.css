@@ -77,6 +77,7 @@ section {
 }
 
 .heading2 {
+    display: inline-block;
     margin-left: 1em;
     padding-left: 2em;
     transition: 0.2s all ease-out;
