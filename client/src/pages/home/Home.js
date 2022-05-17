@@ -3,6 +3,9 @@ import {Link} from "react-router-dom";
 import DeliveryImg from '../../shared/assets/delivery.png';
 import Categories from "../../components/categories/Categories";
 import ProductCard from "../../components/product-card/ProductCard";
+import DeliveryIcon from '../../shared/assets/why/delivery.png';
+import ReliableIcon from '../../shared/assets/why/reliable.png';
+import PricesIcon from '../../shared/assets/why/prices.png';
 
 const Home = () => {
     const categories = ['Cold Drinks', 'Hot Drinks', 'Groceries', 'Fruits & Vegetables', 'Breakfast'];
@@ -54,6 +57,29 @@ const Home = () => {
                     <Link to={'/products'} className={`btn1 ${styles['see-all']}`}>See All</Link>
                 </div>
             </section>
+            <div className={styles['why']}>
+                <div className={styles['why-component']}>
+                    <img src={DeliveryIcon} alt={'Delivery'}/>
+                    <div className={'why-text'}>
+                        <div className={styles['why-title']}>Under 20 minutes</div>
+                        <div className={styles['why-desc']}>Delivered on time - Every time!</div>
+                    </div>
+                </div>
+                <div className={styles['why-component']}>
+                    <img src={ReliableIcon} alt={'Reliable'}/>
+                    <div className={'why-text'}>
+                        <div className={styles['why-title']}>Reliable</div>
+                        <div className={styles['why-desc']}>Get what you order - Every time!</div>
+                    </div>
+                </div>
+                <div className={styles['why-component']}>
+                    <img src={PricesIcon} alt={'Prices'}/>
+                    <div className={'why-text'}>
+                        <div className={styles['why-title']}>Amazing prices</div>
+                        <div className={styles['why-desc']}>Offers offers offers - Every time!</div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
