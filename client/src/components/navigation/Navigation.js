@@ -49,11 +49,11 @@ const Navigation = () => {
                 <input ref={searchInput} placeholder={'Search'}
                        className={`${styles['search']} ${search === SEARCH_VISIBLE && styles['search-active']}`}/>
                 <div onClick={handleSearch} className={`material-symbols-outlined ${styles['icon']}`}>search</div>
-                <Link to={'/cart'} className={`material-symbols-outlined ${styles['icon']}`}
-                      style={{display: search === SEARCH_VISIBLE ? 'none' : 'block'}}>shopping_cart</Link>
+                <Link to={'/cart'}
+                      className={`material-symbols-outlined ${styles['icon']} ${search === SEARCH_VISIBLE && styles['hide-icon']}`}>shopping_cart</Link>
                 <div
                     onClick={() => setMenuActive(true)}
-                    className={`material-symbols-outlined ${styles['icon']} ${search === SEARCH_VISIBLE && styles['hide-icon']}`}>menu
+                    className={`material-symbols-outlined ${styles['icon']} ${styles['menu']} ${search === SEARCH_VISIBLE && styles['hide-icon']}`}>menu
                 </div>
             </div>
         </div>
