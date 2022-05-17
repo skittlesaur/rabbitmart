@@ -44,7 +44,7 @@ const Home = () => {
                     {categories.map((category, j) =>
                         <div key={j} className={styles['category-wrapper']}>
                             <div className={'heading2'}>
-                                <Link to={`/products/${category}`}><h2>{category}</h2></Link>
+                                <Link to={`/products/${category}`}>{category}</Link>
                             </div>
                             <div className={styles['products-wrapper']}>
                                 {products.map((product, i) => <ProductCard product={product} key={i}/>)}
