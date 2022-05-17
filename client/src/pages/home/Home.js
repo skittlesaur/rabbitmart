@@ -42,7 +42,7 @@ const Home = () => {
                 </div>
                 <div className={styles['categories-wrapper']}>
                     {categories.map((category, j) =>
-                        <div className={styles['category-wrapper']}>
+                        <div key={j} className={styles['category-wrapper']}>
                             <div className={'heading2'}>
                                 <h2>{category}</h2>
                             </div>
