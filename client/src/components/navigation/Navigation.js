@@ -3,6 +3,7 @@ import Logo from '../../shared/assets/logo.png';
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import {SEARCH_HIDDEN, SEARCH_VISIBLE} from "./constants/search";
+import {useNavigate} from "react-router-dom";
 
 
 const Navigation = () => {
@@ -10,6 +11,7 @@ const Navigation = () => {
     const [search, setSearch] = useState(SEARCH_HIDDEN);
     const [menuActive, setMenuActive] = useState(false);
     const [searchInput, setSearchInput] = useState("");
+    const navigate = useNavigate();
 
     const handleSearch = () => {
         const width = window.innerWidth;
@@ -17,7 +19,7 @@ const Navigation = () => {
         if (width < 980 && search === SEARCH_HIDDEN) {
             setSearch(SEARCH_VISIBLE);
         } else {
-            console.log(searchInput);
+            navigate(`/products?search=${searchInput.replaceAll(' ', '%20')}`);
         }
 
     }
