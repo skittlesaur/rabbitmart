@@ -6,67 +6,10 @@ import ProductCard from "../../components/product-card/ProductCard";
 import DeliveryIcon from '../../shared/assets/why/delivery.png';
 import ReliableIcon from '../../shared/assets/why/reliable.png';
 import PricesIcon from '../../shared/assets/why/prices.png';
+import DummyData from './DummyResponse.json';
 
 const Home = () => {
-    const categories = ['Cold Drinks', 'Hot Drinks', 'Groceries', 'Fruits & Vegetables', 'Breakfast'];
-
-    const products = [
-        {
-            "_id": {
-                "$oid": "6283c53abe9fa244b53d24f7"
-            },
-            "name": "Straberry Pack",
-            "price": 17,
-            "image": "https://fresh.hmart.com/media/catalog/product/cache/0c75b0d6b380af6dca3ec180c127a709/7/1/71575620002_1.png",
-            "weight": 250,
-            "measurement": "gm",
-            "category": "Fruits & Vegetables"
-        },
-        {
-            "_id": {
-                "$oid": "6283c53abe9fa244b53d24f8"
-            },
-            "name": "Imported Black Grapes",
-            "price": 44,
-            "image": "https://thefruteria.online/wp-content/uploads/2022/02/1642324866392.png",
-            "weight": 500,
-            "measurement": "gm",
-            "category": "Fruits & Vegetables"
-        },
-        {
-            "_id": {
-                "$oid": "6283c53abe9fa244b53d24f9"
-            },
-            "name": "Imported Sweet Pineapples",
-            "price": 90,
-            "image": "https://alchetron.com/cdn/pineapple-52c07283-1bf0-4b37-8f14-2c0f74bb44c-resize-750.png",
-            "weight": 1,
-            "measurement": "pc",
-            "category": "Fruits & Vegetables"
-        },
-        {
-            "_id": {
-                "$oid": "6283c53abe9fa244b53d24fa"
-            },
-            "name": "Imported Mixed Apples",
-            "price": 74,
-            "image": "https://www.sunmoonfood.com/wp-content/uploads/Fuji-Apples-02.png",
-            "weight": 6,
-            "measurement": "pcs",
-            "category": "Fruits & Vegetables"
-        },
-        {
-            "_id": {
-                "$oid": "6283c53abe9fa244b53d24fb"
-            },
-            "name": "Imported Yellow Apples",
-            "price": 70,
-            "image": "https://www.marlene.it/media/c7006c54-9054-4670-97ec-5b54b38ab8d2/602_x_602/p=5/golden-rgb-en.png",
-            "weight": 6,
-            "measurement": "pcs",
-            "category": "Fruits & Vegetables"
-        }
-    ]
+    const products = DummyData;
 
     return (
         <div className={styles['wrapper']}>
@@ -91,13 +34,13 @@ const Home = () => {
                     <h1 className={'heading'}>Recommended Products</h1>
                 </div>
                 <div className={styles['categories-wrapper']}>
-                    {categories.map((category, j) =>
-                        <div key={j} className={styles['category-wrapper']}>
+                    {products.map((item, i) =>
+                        <div key={i} className={styles['category-wrapper']}>
                             <div className={'heading2'}>
-                                <Link to={`/products/${category}`}>{category}</Link>
+                                <Link to={`/products/${item.category}`}>{item.category}</Link>
                             </div>
                             <div className={styles['products-wrapper']}>
-                                {products.map((product, i) => <ProductCard product={product} key={i}/>)}
+                                {item.items.map((product, j) => <ProductCard product={product} key={`${i}${j}`}/>)}
                             </div>
                         </div>
                     )}
