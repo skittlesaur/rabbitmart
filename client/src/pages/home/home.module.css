@@ -139,6 +139,12 @@
     .delivery {
         width: 20em;
     }
+
+    .why {
+        justify-content: center;
+        padding: 4em 2em;
+        flex-direction: row;
+    }
 }
 
 /* Laptop Support */
@@ -158,6 +164,10 @@
 
     .delivery {
         width: 30em;
+    }
+
+    .why {
+        gap: 5em;
     }
 }
 
