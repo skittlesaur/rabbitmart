@@ -17,6 +17,7 @@
 
 .hero > * {
     z-index: 1;
+    align-self: center;
 }
 
 .hero:after {
@@ -117,4 +118,33 @@
 .why-desc {
     font-size: .8rem;
     color: var(--NEUTRAL_4);
+}
+
+/* Large Mobile Support */
+@media screen and (min-width: 425px) {
+    .products-wrapper {
+        grid-auto-columns: calc(100% / 2.1);
+    }
+}
+
+/* Tablet Support */
+@media screen and (min-width: 768px) {
+    .products-wrapper {
+        grid-auto-columns: calc(100% / 3.4);
+    }
+}
+
+/* Laptop Support */
+@media screen and (min-width: 1024px) {
+    .products-wrapper {
+        grid-auto-columns: 1fr
+    }
+}
+
+/* Large Laptop Support */
+@media screen and (min-width: 1440px) {
+    .categories-wrapper {
+        max-width: 1200px;
+        margin: auto;
+    }
 }

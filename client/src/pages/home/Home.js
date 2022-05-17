@@ -21,7 +21,7 @@ const Home = () => {
         }
     }
 
-    const products = Array(20).fill(null).map(() => getTestProduct());
+    const products = Array(5).fill(null).map(() => getTestProduct());
 
     return (
         <div className={styles['wrapper']}>
