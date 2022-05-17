@@ -51,6 +51,7 @@ const Home = () => {
                             </div>
                         </div>
                     )}
+                    <Link to={'/products'} className={`btn1 ${styles['see-all']}`}>See All</Link>
                 </div>
             </section>
         </div>

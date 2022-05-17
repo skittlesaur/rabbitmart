@@ -83,3 +83,7 @@
     flex-direction: column;
     gap: 2em;
 }
+
+.see-all {
+    align-self: center;
+}
