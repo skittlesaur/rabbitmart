@@ -6,22 +6,10 @@ import ProductCard from "../../components/product-card/ProductCard";
 import DeliveryIcon from '../../shared/assets/why/delivery.png';
 import ReliableIcon from '../../shared/assets/why/reliable.png';
 import PricesIcon from '../../shared/assets/why/prices.png';
+import DummyData from './DummyResponse.json';
 
 const Home = () => {
-    const categories = ['Cold Drinks', 'Hot Drinks', 'Groceries', 'Fruits & Vegetables', 'Breakfast'];
-    const getTestProduct = () => {
-        return {
-            id: 1,
-            name: "Coca-Cola Can",
-            price: Math.random() * 1000,
-            image: "https://cdnprod.mafretailproxy.com/sys-master-root/hf4/h05/27691794989086/443516_main.jpg_480Wx480H",
-            weight: Math.floor(Math.random() * 900 + 100),
-            measurement: "ml",
-            category: "Cold Drinks"
-        }
-    }
-
-    const products = Array(5).fill(null).map(() => getTestProduct());
+    const products = DummyData;
 
     return (
         <div className={styles['wrapper']}>
@@ -46,13 +34,13 @@ const Home = () => {
                     <h1 className={'heading'}>Recommended Products</h1>
                 </div>
                 <div className={styles['categories-wrapper']}>
-                    {categories.map((category, j) =>
-                        <div key={j} className={styles['category-wrapper']}>
+                    {products.map((item, i) =>
+                        <div key={i} className={styles['category-wrapper']}>
                             <div className={'heading2'}>
-                                <Link to={`/products/${category}`}>{category}</Link>
+                                <Link to={`/products/${item.category}`}>{item.category}</Link>
                             </div>
                             <div className={styles['products-wrapper']}>
-                                {products.map((product, i) => <ProductCard product={product} key={i}/>)}
+                                {item.items.map((product, j) => <ProductCard product={product} key={`${i}${j}`}/>)}
                             </div>
                         </div>
                     )}
