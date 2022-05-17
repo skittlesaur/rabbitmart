@@ -8,6 +8,14 @@
 .image-wrapper {
     padding: 1.5em;
     background: var(--NEUTRAL_0);
+    min-height: 55%;
+    max-height: 55%;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.image-wrapper img {
+    object-fit: contain;
 }
 
 .content {
