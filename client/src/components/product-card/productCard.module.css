@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     border: 1px solid var(--NEUTRAL_3);
 }
 
@@ -17,6 +16,8 @@
     width: 100%;
     padding: 1em;
     gap: .75em;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .name {

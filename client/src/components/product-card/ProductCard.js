@@ -8,11 +8,13 @@ const ProductCard = ({product}) => {
             </div>
             <div className={styles['content']}>
                 <p className={styles['name']}>{product.name}</p>
-                <div className={styles['details']}>
-                    <p className={styles['weight']}>{product.weight}{product.measurement}</p>
-                    <p className={styles['price']}>{Number(product.price).toFixed(2)} EGP</p>
+                <div className={styles['footer']}>
+                    <div className={styles['details']}>
+                        <p className={styles['weight']}>{product.weight}{product.measurement}</p>
+                        <p className={styles['price']}>{Number(product.price).toFixed(2)} EGP</p>
+                    </div>
+                    <div className={styles['add-to-cart']}>Add to Cart</div>
                 </div>
-                <div className={styles['add-to-cart']}>Add to Cart</div>
             </div>
         </div>
     );
