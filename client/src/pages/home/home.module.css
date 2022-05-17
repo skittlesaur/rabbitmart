@@ -4,15 +4,18 @@
 }
 
 .hero {
-    position: relative;
+    height: 80vh;
+    background: linear-gradient(180deg, var(--PRIMARY_ALPHA_50) 0%, white 50%);
+}
+
+.hero, .hero-text {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 2em;
     gap: 2em;
-    height: 80vh;
-    background: linear-gradient(180deg, var(--PRIMARY_ALPHA_50) 0%, white 50%);
+    position: relative;
 }
 
 .hero > * {
@@ -53,7 +56,7 @@
 }
 
 .delivery {
-    width: min(80%, 50em);
+    width: 80%;
     padding: 0 5%;
     border-bottom: 2px solid #b7b7b7;
 }
@@ -132,12 +135,29 @@
     .products-wrapper {
         grid-auto-columns: calc(100% / 3.4);
     }
+
+    .delivery {
+        width: 20em;
+    }
 }
 
 /* Laptop Support */
 @media screen and (min-width: 1024px) {
     .products-wrapper {
         grid-auto-columns: 1fr
+    }
+
+    .hero {
+        flex-direction: row;
+        gap: 1em;
+    }
+
+    .hero:after {
+        background-position: 0 -20em;
+    }
+
+    .delivery {
+        width: 30em;
     }
 }
 

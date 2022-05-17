@@ -26,9 +26,11 @@ const Home = () => {
     return (
         <div className={styles['wrapper']}>
             <div className={styles['hero']}>
-                <h1>Groceries and more in <span>20</span> minutes</h1>
-                <p>Making on-demand retail a reality!</p>
-                <Link className={'btn1'} to={'products'}>Shop Now</Link>
+                <div className={styles['hero-text']}>
+                    <h1>Groceries and more in <span>20</span> minutes</h1>
+                    <p>Making on-demand retail a reality!</p>
+                    <Link className={'btn1'} to={'products'}>Shop Now</Link>
+                </div>
                 <div className={styles['delivery']}>
                     <img src={DeliveryImg} alt={'Delivery'}/>
                 </div>
