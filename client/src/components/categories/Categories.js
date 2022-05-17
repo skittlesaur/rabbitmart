@@ -99,7 +99,7 @@ const Categories = () => {
         <div className={styles['categories']}>
             <div className={`${styles['categories-scroll']}`}>
                 {categories.map((item, i) =>
-                    <Link to={`/products/${item.to}`} className={styles['category']}>
+                    <Link key={i} to={`/products/${item.to}`} className={styles['category']}>
                         <div>{item.display}</div>
                         <img src={item.img} alt={item.display}/>
                     </Link>
