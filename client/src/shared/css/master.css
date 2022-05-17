@@ -49,6 +49,7 @@ p, div, a {
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 h1 {
@@ -56,9 +57,29 @@ h1 {
     font-weight: 600;
 }
 
+h2 {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+section {
+    margin: 1.5em 0;
+}
+
+.heading, .heading2 {
+    position: relative;
+    cursor: default;
+    user-select: none;
+}
+
 .heading {
     text-align: center;
-    position: relative;
+}
+
+.heading2 {
+    margin-left: 1em;
+    padding-left: 2em;
+    transition: 0.2s all ease-out;
 }
 
 .heading-wrapper {
@@ -86,6 +107,26 @@ h1 {
 .heading:hover:before {
     border-bottom-width: 14px;
     top: calc(100% + 2px - 14px);
+}
+
+.heading2:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: calc(50% - 1px);
+    height: 3px;
+    width: 1.5em;
+    background: var(--PRIMARY);
+    border-radius: 5px;
+    transition: 0.2s all ease-out;
+}
+
+.heading2:hover {
+    padding-left: 2.5em;
+}
+
+.heading2:hover:before {
+    width: 2em;
 }
 
 img {
