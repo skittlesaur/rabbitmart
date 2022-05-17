@@ -1,7 +1,7 @@
 import styles from './navigation.module.css';
 import Logo from '../../shared/assets/logo.png';
 import {Link} from "react-router-dom";
-import {useRef, useState} from "react";
+import {useState} from "react";
 import {SEARCH_HIDDEN, SEARCH_VISIBLE} from "./constants/search";
 
 
@@ -9,14 +9,15 @@ const Navigation = () => {
 
     const [search, setSearch] = useState(SEARCH_HIDDEN);
     const [menuActive, setMenuActive] = useState(false);
-    const searchInput = useRef();
+    const [searchInput, setSearchInput] = useState("");
 
     const handleSearch = () => {
+        const width = window.innerWidth;
 
-        if (search === SEARCH_VISIBLE) {
-
-        } else {
+        if (width < 980 && search === SEARCH_HIDDEN) {
             setSearch(SEARCH_VISIBLE);
+        } else {
+            console.log(searchInput);
         }
 
     }
@@ -46,7 +47,8 @@ const Navigation = () => {
                 </nav>
             </div>
             <div className={styles['actions']}>
-                <input ref={searchInput} placeholder={'Search'}
+                <input onChange={(e) => setSearchInput(e.target.value)} value={searchInput}
+                       placeholder={'Search'}
                        className={`${styles['search']} ${search === SEARCH_VISIBLE && styles['search-active']}`}/>
                 <div onClick={handleSearch} className={`material-symbols-outlined ${styles['icon']}`}>search</div>
                 <Link to={'/cart'}
