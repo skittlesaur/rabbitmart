@@ -3,6 +3,7 @@
 :root {
     --PRIMARY: #00b106;
     --PRIMARY_ALPHA_50: rgba(26, 224, 33, 0.50);
+    --RABBIT_YELLO: #e0ff16;
 
     --NEUTRAL_0: #f6f6f6;
     --NEUTRAL_1: #eaeaea;
@@ -150,4 +151,12 @@ img {
 
 .btn1:hover {
     transform: scale(1.05);
+}
+
+.material-symbols-outlined {
+    user-select: none;
+    font-variation-settings: 'FILL' 0,
+    'wght' 600,
+    'GRAD' 0,
+    'opsz' 48
 }
