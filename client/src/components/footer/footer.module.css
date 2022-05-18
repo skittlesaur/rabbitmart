@@ -1,8 +1,15 @@
 .wrapper {
-    background: var(--NEUTRAL_4);
+    background: var(--NEUTRAL_9);
     display: flex;
-    align-items: center;
     flex-direction: column;
+}
+
+.top-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em 1em;
+    gap: 1em;
 }
 
 .logo-wrapper {
@@ -15,11 +22,49 @@
     object-fit: contain;
 }
 
+.pages-wrapper {
+    display: flex;
+    flex-direction: column;
+    color: var(--NEUTRAL_1);
+    gap: 1em;
+}
+
+.page-title {
+    font-weight: 500;
+}
+
+.pages-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.pages-list > * {
+    font-size: .8rem;
+    position: relative;
+    padding-left: 1em;
+    display: flex;
+    gap: .5em;
+}
+
+.pages-list > *:before {
+    content: '>';
+    color: var(--RABBIT_YELLO);
+    transition: all .2s ease-out;
+}
+
+.pages-list > *:hover:before {
+    margin-right: .5em;
+}
+
+.pages-list p {
+    cursor: default;
+}
+
 .credits {
-    width: 100%;
-    background: var(--NEUTRAL_8);
     font-size: .8rem;
     text-align: center;
     color: white;
-    padding: .5em 0;
+    padding: .5em;
+    border-top: 1px solid var(--NEUTRAL_7);
+    margin: 0 2em;
 }
