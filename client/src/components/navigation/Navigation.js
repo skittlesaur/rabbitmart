@@ -19,7 +19,9 @@ const Navigation = () => {
         if (width < 980 && search === SEARCH_HIDDEN) {
             setSearch(SEARCH_VISIBLE);
         } else {
-            navigate(`/products?search=${searchInput.replaceAll(' ', '%20')}`);
+            navigate(`/products?search=${searchInput}`);
+            setSearch(SEARCH_HIDDEN);
+            setSearchInput('');
         }
 
     }
