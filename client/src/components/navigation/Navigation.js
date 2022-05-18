@@ -19,7 +19,9 @@ const Navigation = () => {
         if (width < 980 && search === SEARCH_HIDDEN) {
             setSearch(SEARCH_VISIBLE);
         } else {
-            navigate(`/products?search=${searchInput.replaceAll(' ', '%20')}`);
+            navigate(`/products?search=${searchInput}`);
+            setSearch(SEARCH_HIDDEN);
+            setSearchInput('');
         }
 
     }
@@ -31,6 +33,10 @@ const Navigation = () => {
         setSearch(SEARCH_HIDDEN);
     }
 
+    const closeMenu = () => {
+        setMenuActive(false);
+    }
+
     return (
         <div className={styles['wrapper']}>
             {search === SEARCH_VISIBLE && <div onClick={(e) => handleClose(e)} className={styles['hide-search']}/>}
@@ -38,14 +44,14 @@ const Navigation = () => {
                 <img src={Logo} alt={'Rabbit'}/>
             </Link>
             <div className={`${styles['nav-wrapper']} ${menuActive && styles['show-menu']}`}>
-                <div onClick={() => setMenuActive(false)} className={`${styles['close-menu']}`}><span
+                <div onClick={closeMenu} className={`${styles['close-menu']}`}><span
                     className={'material-symbols-outlined'}>close</span> Close
                 </div>
                 <nav className={styles['nav']}>
-                    <Link to={'/'}>Home</Link>
-                    <Link to={'/products'}>Products</Link>
-                    <Link to={'/orders'}>Previous Orders</Link>
-                    <Link to={'/shipping'}>Track Shipping</Link>
+                    <Link onClick={closeMenu} to={'/'}>Home</Link>
+                    <Link onClick={closeMenu} to={'/products'}>Products</Link>
+                    <Link onClick={closeMenu} to={'/orders'}>Previous Orders</Link>
+                    <Link onClick={closeMenu} to={'/shipping'}>Track Shipping</Link>
                 </nav>
             </div>
             <div className={styles['actions']}>
