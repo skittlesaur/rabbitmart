@@ -1,0 +1,25 @@
+.wrapper {
+    background: var(--NEUTRAL_4);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.logo-wrapper {
+    --SIZE: 5em;
+    width: var(--SIZE);
+    height: var(--SIZE);
+}
+
+.logo-wrapper img {
+    object-fit: contain;
+}
+
+.credits {
+    width: 100%;
+    background: var(--NEUTRAL_8);
+    font-size: .8rem;
+    text-align: center;
+    color: white;
+    padding: .5em 0;
+}
