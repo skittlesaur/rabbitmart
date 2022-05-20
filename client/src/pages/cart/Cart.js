@@ -12,6 +12,17 @@ const Cart = ({cart, cartCount, updateQuantity}) => {
         return total;
     }
 
+    if (cart && !cart.length)
+        return (
+            <div className={styles['wrapper']}>
+                <div className={'heading'}>
+                    <h1>Shopping Cart</h1>
+                </div>
+                <div className={styles['no-items']}>Your cart is empty</div>
+                <Link to={'/products'} className={'btn1'}>Start Shopping</Link>
+            </div>
+        )
+
     return (
         <div className={styles['wrapper']}>
             <div className={'heading'}>
@@ -24,7 +35,7 @@ const Cart = ({cart, cartCount, updateQuantity}) => {
                 <div className={styles['total-text']}>Total ({cartCount} Items):</div>
                 <div className={styles['total-amount']}>{getTotal()} EGP</div>
             </div>
-            <Link to={'/checkout'} className={`btn1 btn1-g`}>Checkout</Link>
+            <Link to={'/checkout'} className={`btn1`}>Checkout</Link>
         </div>
     );
 }

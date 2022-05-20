@@ -28,3 +28,8 @@
     font-size: 1.2rem;
     color: var(--PRIMARY);
 }
+
+.no-items {
+    align-self: center;
+    text-align: center;
+}
