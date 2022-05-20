@@ -25,6 +25,31 @@ const App = () => {
         }
     }
 
+    const removeProductFromCart = (product) => {
+        const productIndex = cart.findIndex((cartProduct) => cartProduct._id.$oid === product._id.$oid);
+
+        if (productIndex === -1)
+            return;
+
+        if (cart[productIndex].quantity === 1) {
+            const newArr = cart.filter((cartItem) => cartItem._id.$oid !== product._id.$oid);
+            setCart(newArr);
+        } else {
+            const updatedData = {...cart[productIndex], quantity: cart[productIndex].quantity - 1};
+            const newArray = [...cart];
+            newArray[productIndex] = updatedData;
+            setCart(newArray);
+        }
+    }
+
+    const updateQuantity = (product, operation) => {
+        if (operation === 'ADD')
+            return addProductToCart(product);
+
+        if (operation === 'REMOVE')
+            return removeProductFromCart(product)
+    }
+
     const [cartCount, setCartCount] = useState(0);
 
     useEffect(() => {
@@ -43,7 +68,8 @@ const App = () => {
             <Navigation cartCount={cartCount}/>
             <Routes>
                 <Route path={'/'} element={<Home addProductToCart={addProductToCart}/>}/>
-                <Route path={'/cart'} element={<CartPage cart={cart} cartCount={cartCount}/>}/>
+                <Route path={'/cart'}
+                       element={<CartPage cart={cart} cartCount={cartCount} updateQuantity={updateQuantity}/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>
