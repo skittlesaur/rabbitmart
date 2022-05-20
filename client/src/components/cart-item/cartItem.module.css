@@ -67,14 +67,25 @@
     border-color: white;
 }
 
-.remove:hover{
+.remove:hover {
     background: var(--RABBIT_YELLOW);
     color: black;
     border-color: black;
 }
 
 .price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.total-price {
     text-align: right;
     font-weight: 500;
     font-size: 1.1rem;
+}
+
+.unit-price {
+    font-size: .8rem;
+    color: var(--NEUTRAL_5);
 }
