@@ -4,14 +4,16 @@ import './shared/css/master.css';
 import Navigation from "./components/navigation/Navigation";
 import Footer from "./components/footer/Footer";
 import Cart from "./pages/cart/Cart";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+
+const cartInitialization = JSON.parse(localStorage.getItem('cart')) || [];
 
 const App = () => {
 
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState(cartInitialization);
 
     const addProductToCart = (product) => {
-        const productIndex = cart.findIndex((cartProduct) => cartProduct._id === product._id);
+        const productIndex = cart.findIndex((cartProduct) => cartProduct._id.$oid === product._id.$oid);
 
         if (productIndex >= 0) {
             const updatedData = {...cart[productIndex], quantity: cart[productIndex].quantity + 1};
@@ -22,6 +24,10 @@ const App = () => {
             setCart([...cart, {...product, quantity: 1}]);
         }
     }
+
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart])
 
     return (
         <BrowserRouter>
