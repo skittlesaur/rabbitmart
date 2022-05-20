@@ -24,7 +24,7 @@
 
 .actions {
     flex-grow: 1;
-    color: var(--RABBIT_YELLO);
+    color: var(--RABBIT_YELLOW);
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -35,6 +35,7 @@
     cursor: pointer;
     transition: 0.2s ease-out all;
     visibility: visible;
+    position: relative;
 }
 
 .actions > .icon:hover {
@@ -127,6 +128,24 @@
     transform: translateX(0);
 }
 
+.cart-counter {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--PRIMARY_ALPHA_50);
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .8rem;
+    font-weight: 500;
+    padding: .5em;
+    --SIZE: 1.5em;
+    width: var(--SIZE);
+    height: var(--SIZE);
+}
+
 @media screen and (min-width: 980px) {
     .menu {
         display: none !important;
@@ -162,7 +181,7 @@
     }
 
     .nav a:hover {
-        color: var(--RABBIT_YELLO);
+        color: var(--RABBIT_YELLOW);
     }
 
     .close-menu {
