@@ -36,6 +36,7 @@
     transition: 0.2s ease-out all;
     visibility: visible;
     position: relative;
+    z-index: 1;
 }
 
 .actions > .icon:hover {
@@ -87,6 +88,7 @@
     gap: 3em;
     transform: translateX(-110%);
     transition: .3s all ease-out;
+    z-index: 2;
 }
 
 .nav {
