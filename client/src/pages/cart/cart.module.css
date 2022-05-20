@@ -3,6 +3,7 @@
     flex-direction: column;
     padding: 4em 1em;
     gap: 2em;
+    min-height: 70vh;
 }
 
 .products-wrapper {
@@ -32,4 +33,25 @@
 .no-items {
     align-self: center;
     text-align: center;
+}
+
+.products-wrapper > * {
+    padding-bottom: 1em;
+    border-bottom: 1px solid var(--NEUTRAL_2);
+}
+
+/* Tablet Support */
+@media screen and (min-width: 768px) {
+    .wrapper {
+        max-width: 600px;
+        margin: auto;
+    }
+}
+
+
+/* Laptop Support */
+@media screen and (min-width: 1024px) {
+    .wrapper {
+        max-width: 800px;
+    }
 }
