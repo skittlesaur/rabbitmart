@@ -11,8 +11,8 @@ const CartItem = ({product, updateQuantity}) => {
                 <div className={styles['weight']}>{product.weight}{product.measurement}</div>
                 <div className={styles['quantity-wrapper']}>
                     <div className={styles['quantity']}>Quantity: {product.quantity}</div>
-                    <div className={`${styles['btn']} ${styles['add']}`}>+</div>
-                    <div className={`${styles['btn']} ${styles['remove']}`}>-</div>
+                    <div onClick={()=> updateQuantity(product, 'ADD')} className={`${styles['btn']} ${styles['add']}`}>+</div>
+                    <div onClick={() => updateQuantity(product, 'REMOVE')} className={`${styles['btn']} ${styles['remove']}`}>-</div>
                 </div>
             </div>
             <div className={styles['price']}>{product.price} EGP</div>
