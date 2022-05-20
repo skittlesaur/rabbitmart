@@ -3,7 +3,7 @@ import Home from "./pages/home/Home";
 import './shared/css/master.css';
 import Navigation from "./components/navigation/Navigation";
 import Footer from "./components/footer/Footer";
-import Cart from "./pages/cart/Cart";
+import CartPage from "./pages/cart/Cart";
 import {useEffect, useState} from "react";
 
 const cartInitialization = JSON.parse(localStorage.getItem('cart')) || [];
@@ -43,7 +43,7 @@ const App = () => {
             <Navigation cartCount={cartCount}/>
             <Routes>
                 <Route path={'/'} element={<Home addProductToCart={addProductToCart}/>}/>
-                <Route path={'/cart'} element={<Cart cart={cart}/>}/>
+                <Route path={'/cart'} element={<CartPage cart={cart}/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>
