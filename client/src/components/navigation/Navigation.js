@@ -61,8 +61,8 @@ const Navigation = ({cartCount}) => {
                 <div onClick={handleSearch} className={`material-symbols-outlined ${styles['icon']}`}>search</div>
                 <Link to={'/cart'}
                       className={`material-symbols-outlined ${styles['icon']} ${search === SEARCH_VISIBLE && styles['hide-icon']}`}>shopping_cart
-                    {cartCount &&
-                        <div className={styles['cart-counter']}>{cartCount < 100 ? cartCount : "+"}</div>}</Link>
+                    {cartCount ?
+                        <div className={styles['cart-counter']}>{cartCount < 100 ? cartCount : "+"}</div> : ''}</Link>
                 <div
                     onClick={() => setMenuActive(true)}
                     className={`material-symbols-outlined ${styles['icon']} ${styles['menu']} ${search === SEARCH_VISIBLE && styles['hide-icon']}`}>menu
