@@ -43,7 +43,7 @@ const App = () => {
             <Navigation cartCount={cartCount}/>
             <Routes>
                 <Route path={'/'} element={<Home addProductToCart={addProductToCart}/>}/>
-                <Route path={'/cart'} element={<CartPage cart={cart}/>}/>
+                <Route path={'/cart'} element={<CartPage cart={cart} cartCount={cartCount}/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>

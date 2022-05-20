@@ -79,6 +79,7 @@ section {
 
 .heading {
     text-align: center;
+    align-self: center;
 }
 
 .heading2 {

@@ -1,7 +1,30 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 4em 1em;
+    gap: 2em;
 }
 
+.products-wrapper {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.total-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1em;
+}
+
+.total-text {
+    font-size: .9rem;
+}
+
+.total-amount {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--PRIMARY);
+}
