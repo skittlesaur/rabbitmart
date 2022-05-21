@@ -148,7 +148,46 @@
     height: var(--SIZE);
 }
 
+.account-icon {
+    display: none;
+}
+
+.account-dropdown {
+    position: fixed;
+    top: 3.5em;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    box-shadow: 2px 3px 8px rgba(234, 234, 234, 0.5);
+    padding: 1em 2em;
+    border-radius: 5px;
+    width: 10em;
+    color: black;
+    gap: 1em;
+}
+
+.account-dropdown > * {
+    border-bottom: 1px solid var(--NEUTRAL_2);
+    text-align: center;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    font-size: .9rem;
+}
+
+.account-dropdown >*:hover{
+    background: var(--NEUTRAL_1);
+}
+
 @media screen and (min-width: 980px) {
+
+    .account-icon {
+        display: block;
+    }
+
+    .account {
+        display: none;
+    }
+
     .menu {
         display: none !important;
     }
