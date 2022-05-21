@@ -4,7 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {validateCart} from "../../actions/products";
 import {useState} from "react";
-import Error from "../../components/error/Error";
+import Error from "../../components/feedback/error/Error";
 
 const Cart = ({cart, cartCount, updateQuantity}) => {
 

@@ -1,8 +1,8 @@
-import styles from './error.module.css';
+import styles from './feedback.module.css';
 import {useEffect, useState} from "react";
-import {motion, AnimatePresence} from 'framer-motion'
+import {AnimatePresence, motion} from "framer-motion";
 
-const Error = ({error, setError}) => {
+const Feedback = ({style, message, setMessage}) => {
 
     const [visible, setVisible] = useState(true);
 
@@ -13,7 +13,7 @@ const Error = ({error, setError}) => {
 
             // reset error message (deletes component)
             setTimeout(() => {
-                setError('')
+                setMessage('')
             }, 500);
         }, 5000);
     }, [])
@@ -25,12 +25,13 @@ const Error = ({error, setError}) => {
                     initial={{opacity: 0}}
                     animate={{opacity: 1}}
                     exit={{opacity: 0}}
-                    className={styles['wrapper']}>
-                    {error}
+                    className={styles['wrapper']}
+                    style={style}>
+                    {message}
                 </motion.div>
             }
         </AnimatePresence>
     );
 }
 
-export default Error;
+export default Feedback;
