@@ -5,6 +5,7 @@ import Navigation from "./components/navigation/Navigation";
 import Footer from "./components/footer/Footer";
 import CartPage from "./pages/cart/Cart";
 import {useEffect, useState} from "react";
+import Signup from "./pages/authentication/signup/Signup";
 
 const cartInitialization = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -70,6 +71,7 @@ const App = () => {
                 <Route path={'/'} element={<Home addProductToCart={addProductToCart}/>}/>
                 <Route path={'/cart'}
                        element={<CartPage cart={cart} cartCount={cartCount} updateQuantity={updateQuantity}/>}/>
+                <Route path={'/signup'} element={<Signup/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>
