@@ -1,8 +1,28 @@
 import styles from './cart.module.css';
 import CartItem from "../../components/cart-item/CartItem";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {validateCart} from "../../actions/products";
+import {useState} from "react";
+import Error from "../../components/error/Error";
 
 const Cart = ({cart, cartCount, updateQuantity}) => {
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [error, setError] = useState('');
+
+    const handleCheckout = () => {
+        const onSuccess = (token) => {
+            navigate(`/checkout?token=${token}`);
+        }
+
+        const onError = (e) => {
+            setError(e.message);
+        }
+
+        dispatch(validateCart(cart, onSuccess, onError));
+    }
 
     const getTotal = () => {
         let total = 0;
@@ -25,6 +45,7 @@ const Cart = ({cart, cartCount, updateQuantity}) => {
 
     return (
         <div className={styles['wrapper']}>
+            {error && <Error error={error} setError={setError}/>}
             <div className={'heading'}>
                 <h1>Shopping Cart</h1>
             </div>
@@ -35,7 +56,7 @@ const Cart = ({cart, cartCount, updateQuantity}) => {
                 <div className={styles['total-text']}>Total ({cartCount} Items):</div>
                 <div className={styles['total-amount']}>{getTotal()} EGP</div>
             </div>
-            <Link to={'/checkout'} className={`btn1`}>Checkout</Link>
+            <div onClick={handleCheckout} className={`btn1`}>Checkout</div>
         </div>
     );
 }
