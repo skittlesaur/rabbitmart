@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import products from "./routes/products.js";
+import auth from "./routes/auth.js";
 
 const app = express();
 dotenv.config();
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
 app.use('/products', products);
+app.use('/auth', auth);
 
 app.get('/', (req, res) => {
     res.status(200).json({
