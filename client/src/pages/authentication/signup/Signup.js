@@ -1,4 +1,4 @@
-import styles from './signup.module.css';
+import styles from '../form.module.css';
 import Authentication from "../Authentication";
 import {Link} from "react-router-dom";
 
