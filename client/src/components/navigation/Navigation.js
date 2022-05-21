@@ -12,6 +12,17 @@ const Navigation = ({cartCount}) => {
     const [menuActive, setMenuActive] = useState(false);
     const [searchInput, setSearchInput] = useState("");
     const navigate = useNavigate();
+    const auth = !!localStorage.getItem('profile');
+    const [dropdown, setDropdown] = useState(false);
+
+    const handleLogout = () => {
+        localStorage.removeItem('profile');
+        navigate('/');
+    }
+
+    const handleDropDown = () => {
+        setDropdown(!dropdown);
+    }
 
     const handleSearch = () => {
         const width = window.innerWidth;
@@ -49,10 +60,12 @@ const Navigation = ({cartCount}) => {
                 </div>
                 <nav className={styles['nav']}>
                     <Link onClick={closeMenu} to={'/'}>Home</Link>
-                    <Link className={styles['account']} onClick={closeMenu} to={'/login'}>My Account</Link>
+                    {!auth && <Link className={styles['account']} onClick={closeMenu} to={'/login'}>Login/Sign Up</Link>}
                     <Link onClick={closeMenu} to={'/products'}>Products</Link>
-                    <Link onClick={closeMenu} to={'/orders'}>Previous Orders</Link>
+                    {auth && <Link onClick={closeMenu} className={styles['account']} to={'/wishlist'}>Wishlist</Link>}
+                    {auth && <Link onClick={closeMenu} className={styles['account']} to={'/orders'}>Previous Orders</Link>}
                     <Link onClick={closeMenu} to={'/shipping'}>Track Shipping</Link>
+                    {auth && <a className={styles['account']} onClick={()=> {handleLogout(); closeMenu();}}>Logout</a>}
                 </nav>
             </div>
             <div className={styles['actions']}>
@@ -64,7 +77,13 @@ const Navigation = ({cartCount}) => {
                       className={`material-symbols-outlined ${styles['icon']} ${search === SEARCH_VISIBLE && styles['hide-icon']}`}>shopping_cart
                     {cartCount ?
                         <div className={styles['cart-counter']}>{cartCount < 100 ? cartCount : "+"}</div> : ''}</Link>
-                <Link to={'login'} className={`material-symbols-outlined ${styles['account-icon']} ${styles['icon']}`}>person</Link>
+                <Link onClick={auth && handleDropDown} to={!auth && 'login'}
+                      className={`material-symbols-outlined ${styles['account-icon']} ${styles['icon']}`}>person</Link>
+                {auth && dropdown && <div className={styles['account-dropdown']}>
+                    <Link to={'/wishlist'}>Wishlist</Link>
+                    <Link to={'/orders'}>Orders</Link>
+                    <div onClick={handleLogout}>Logout</div>
+                </div>}
                 <div
                     onClick={() => setMenuActive(true)}
                     className={`material-symbols-outlined ${styles['icon']} ${styles['menu']} ${search === SEARCH_VISIBLE && styles['hide-icon']}`}>menu
