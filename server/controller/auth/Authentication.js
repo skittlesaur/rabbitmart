@@ -39,3 +39,13 @@ export const login = async (req, res) => {
         return res.status(400).json({message: e.message});
     }
 }
+
+export const verifyUser = async (req, res) => {
+    const {id} = req.body;
+    try {
+        const user = await Users.findById(id, {password: 0})
+        return res.status(200).json({...user?._doc});
+    } catch (e) {
+        return res.status(404).json({message: "User not found"});
+    }
+}
