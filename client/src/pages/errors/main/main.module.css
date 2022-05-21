@@ -1,0 +1,26 @@
+.wrapper {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    padding: 2em;
+    max-width: 800px;
+    margin: auto;
+}
+
+.code {
+    font-size: 8rem;
+    line-height: 8rem;
+    font-weight: 500;
+    color: var(--PRIMARY);
+}
+
+.message a {
+    transition: .2s all ease-in-out;
+}
+
+.message a:hover {
+    color: var(--PRIMARY);
+}
