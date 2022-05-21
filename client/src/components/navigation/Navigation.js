@@ -49,6 +49,7 @@ const Navigation = ({cartCount}) => {
                 </div>
                 <nav className={styles['nav']}>
                     <Link onClick={closeMenu} to={'/'}>Home</Link>
+                    <Link className={styles['account']} onClick={closeMenu} to={'/login'}>My Account</Link>
                     <Link onClick={closeMenu} to={'/products'}>Products</Link>
                     <Link onClick={closeMenu} to={'/orders'}>Previous Orders</Link>
                     <Link onClick={closeMenu} to={'/shipping'}>Track Shipping</Link>
@@ -63,6 +64,7 @@ const Navigation = ({cartCount}) => {
                       className={`material-symbols-outlined ${styles['icon']} ${search === SEARCH_VISIBLE && styles['hide-icon']}`}>shopping_cart
                     {cartCount ?
                         <div className={styles['cart-counter']}>{cartCount < 100 ? cartCount : "+"}</div> : ''}</Link>
+                <Link to={'login'} className={`material-symbols-outlined ${styles['account-icon']} ${styles['icon']}`}>person</Link>
                 <div
                     onClick={() => setMenuActive(true)}
                     className={`material-symbols-outlined ${styles['icon']} ${styles['menu']} ${search === SEARCH_VISIBLE && styles['hide-icon']}`}>menu
