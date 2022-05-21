@@ -148,7 +148,20 @@
     height: var(--SIZE);
 }
 
+.account-icon {
+    display: none;
+}
+
 @media screen and (min-width: 980px) {
+
+    .account-icon {
+        display: block;
+    }
+
+    .account {
+        display: none;
+    }
+
     .menu {
         display: none !important;
     }
