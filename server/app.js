@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import products from "./routes/products.js";
 
 const app = express();
 dotenv.config();
@@ -11,6 +12,7 @@ app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
+app.use('/products', products);
 
 app.get('/', (req, res) => {
     res.status(200).json({
