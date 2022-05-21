@@ -12,7 +12,9 @@ const Navigation = ({cartCount}) => {
     const [menuActive, setMenuActive] = useState(false);
     const [searchInput, setSearchInput] = useState("");
     const navigate = useNavigate();
-    const auth = !!localStorage.getItem('profile');
+    const user = JSON.parse(localStorage.getItem('profile'))?.user;
+    const auth = !!user;
+    const admin = auth && user.role === 'ADMIN';
     const [dropdown, setDropdown] = useState(false);
 
     const handleLogout = () => {
@@ -60,12 +62,17 @@ const Navigation = ({cartCount}) => {
                 </div>
                 <nav className={styles['nav']}>
                     <Link onClick={closeMenu} to={'/'}>Home</Link>
-                    {!auth && <Link className={styles['account']} onClick={closeMenu} to={'/login'}>Login/Sign Up</Link>}
+                    {!auth &&
+                        <Link className={styles['account']} onClick={closeMenu} to={'/login'}>Login/Sign Up</Link>}
                     <Link onClick={closeMenu} to={'/products'}>Products</Link>
                     {auth && <Link onClick={closeMenu} className={styles['account']} to={'/wishlist'}>Wishlist</Link>}
-                    {auth && <Link onClick={closeMenu} className={styles['account']} to={'/orders'}>Previous Orders</Link>}
+                    {auth &&
+                        <Link onClick={closeMenu} className={styles['account']} to={'/orders'}>Previous Orders</Link>}
                     <Link onClick={closeMenu} to={'/shipping'}>Track Shipping</Link>
-                    {auth && <a className={styles['account']} onClick={()=> {handleLogout(); closeMenu();}}>Logout</a>}
+                    {auth && <a className={styles['account']} onClick={() => {
+                        handleLogout();
+                        closeMenu();
+                    }}>Logout</a>}
                 </nav>
             </div>
             <div className={styles['actions']}>
@@ -82,6 +89,7 @@ const Navigation = ({cartCount}) => {
                 {auth && dropdown && <div className={styles['account-dropdown']}>
                     <Link to={'/wishlist'}>Wishlist</Link>
                     <Link to={'/orders'}>Orders</Link>
+                    {admin && <Link to={'/admin'}>Admin Panel</Link>}
                     <div onClick={handleLogout}>Logout</div>
                 </div>}
                 <div
