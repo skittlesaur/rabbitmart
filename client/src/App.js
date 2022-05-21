@@ -7,6 +7,10 @@ import CartPage from "./pages/cart/Cart";
 import {useEffect, useState} from "react";
 import Signup from "./pages/authentication/signup/Signup";
 import Login from "./pages/authentication/login/Login";
+import PrivateRoute from "./components/privete-route/PrivateRoute";
+import Wishlist from "./pages/wishlist/Wishlist";
+import Error401 from "./pages/errors/401/Error401";
+import Error404 from "./pages/errors/404/Error404";
 
 const cartInitialization = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -74,6 +78,9 @@ const App = () => {
                        element={<CartPage cart={cart} cartCount={cartCount} updateQuantity={updateQuantity}/>}/>
                 <Route path={'/signup'} element={<Signup/>}/>
                 <Route path={'/login'} element={<Login/>}/>
+                <Route path={'/wishlist'} element={<PrivateRoute component={<Wishlist/>}/>}/>
+                <Route path={'/401'} element={<Error401/>}/>
+                <Route path={'/*'} element={<Error404/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>

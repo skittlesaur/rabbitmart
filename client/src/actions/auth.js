@@ -7,6 +7,16 @@ export const authLogin = (email, password, onSuccess, onError) => async (dispatc
         dispatch({type: LOGIN, data: loginData});
         onSuccess();
     } catch (e) {
-        onError(e.response.data);
+        onError(e.response ? e.response.data : {message: "Server Error"});
+    }
+}
+
+export const verifyUser = (onSuccess, onError) => async () => {
+    console.log(1)
+    try {
+        const verificationData = await api.verify().then(res => res.data);
+        onSuccess(verificationData);
+    } catch (e) {
+        onError();
     }
 }
