@@ -166,3 +166,19 @@ img {
     'GRAD' 0,
     'opsz' 48
 }
+
+input {
+    font-size: .8rem;
+    padding: .5em 1em;
+    border-radius: 5px;
+    border: 1px solid var(--NEUTRAL_4);
+    outline: none;
+}
+
+input:focus-visible {
+    border: 2px solid var(--PRIMARY);
+}
+
+button {
+    border: none;
+}
