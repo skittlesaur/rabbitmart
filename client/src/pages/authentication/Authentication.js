@@ -8,7 +8,7 @@ const Authentication = ({data}) => {
 
     useEffect(() => {
         const profile = JSON.parse(localStorage.getItem('profile'));
-        const {user} = profile;
+        const user = profile ? profile.user : null;
 
         if (user)
             navigate('/');
