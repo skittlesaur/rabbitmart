@@ -12,3 +12,12 @@ export const validateCart = (cart, onSuccess, onError) => async (dispatch) => {
         onError(data);
     }
 }
+
+export const adminUpdateDatabase = (csv, mode, onSuccess, onError) => async () => {
+    try {
+        const updatedData = await api.adminUpdateDatabase(csv, mode).then(res => res.data);
+        onSuccess(updatedData);
+    } catch (e) {
+        onError(e);
+    }
+}

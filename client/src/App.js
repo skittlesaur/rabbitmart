@@ -12,6 +12,7 @@ import Wishlist from "./pages/wishlist/Wishlist";
 import Error401 from "./pages/errors/401/Error401";
 import Error404 from "./pages/errors/404/Error404";
 import Admin from "./pages/admin/default/Admin";
+import AdminUpdate from "./pages/admin/products/update/default/AdminUpdate";
 
 const cartInitialization = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -81,6 +82,7 @@ const App = () => {
                 <Route path={'/login'} element={<Login/>}/>
                 <Route path={'/wishlist'} element={<PrivateRoute component={<Wishlist/>}/>}/>
                 <Route path={'/admin'} element={<PrivateRoute role={'ADMIN'} component={<Admin/>}/>}/>
+                <Route path={'/admin/products/update'} element={<PrivateRoute role={'ADMIN'} component={<AdminUpdate/>}/>}/>
                 <Route path={'/401'} element={<Error401/>}/>
                 <Route path={'/*'} element={<Error404/>}/>
             </Routes>

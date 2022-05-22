@@ -15,3 +15,5 @@ export const validateCart = (cart) => API.post('/products/cart', {cart});
 
 export const authLogin = (email, password) => API.post('/auth/login', {email, password});
 export const verify = () => API.post('/auth/verify');
+
+export const adminUpdateDatabase = (csv, mode) => API.post(`/products/update`, {csv, mode});
