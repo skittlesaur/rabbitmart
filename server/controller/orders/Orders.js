@@ -6,7 +6,7 @@ export const createOrder = async (req, res) => {
 
 export const getOrder = async (req, res) => {
     try {
-        const requiredOrder = await Order.findById(req.params.id); //has to search for order_id so probably use query, same for the rest
+        const requiredOrder = await Order.find({ "order_id": req.params.id });
 
         res.status(200).json(requiredOrder);
 
@@ -18,12 +18,11 @@ export const getOrder = async (req, res) => {
 
 export const updateOrder = async (req, res) => {
     try {
-        const requiredOrder = await Order.findById(req.params.id);
+        const requiredOrder = await Order.find({ "order_id": req.params.id });
 
-        // if (!requiredOrder) return res.status(404).json( { message: 'Order not found'}); // checks if order exists
         const status = req.body.status;
 
-        const updatedOrder = await Order.findByIdAndUpdate(req.params.id, {
+        const updatedOrder = await Order.findOneAndUpdate({ "order_id": req.params.id } , {
             orderStatus: status,
         })
 
