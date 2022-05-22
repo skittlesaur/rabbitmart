@@ -1,37 +1,28 @@
 import ProductSchema from "../../model/Products.js";
 
+export const productsSearch = async (req, res) => {
+    try {
+        const products = await ProductSchema.find({ "name": { $regex: req.query.search, $options: "i" } });
+
+        const productsPaged = productsPagination(req.quey.page, products);
+
+        res.status(200).json(productsPaged);
+
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+
+    }
+}
 export const ShowProductsPerPage = async (req, res) =>{
     try {
         const allProductsJSON = await ProductSchema.find();
 
-        var products = [];
-        for(var i in allProductsJSON){
-            products.push(allProductsJSON[i]);
-        }
+        const products = productsPagination(req.query.page, allProductsJSON);
 
-        const productsSize = products.length;
-        const itemsPerPage = 2;
-        var desiredPage=0;
-        if(req.query.page){
-            desiredPage = parseInt(req.query.page) - 1;}
-
-        const firstElement = (desiredPage * itemsPerPage);
-        const lastElement = desiredPage * itemsPerPage + itemsPerPage;
-        if(desiredPage === 0 || firstElement >= productsSize){
-            
-            if(productsSize <= itemsPerPage)
-                res.status(200).json((products));
-            
-            else
-                res.status(200).json((products.slice(0,itemsPerPage)));
-                
-            return;
-        }
-        
-        res.status(200).json((products.slice(firstElement,lastElement)));
+        res.status(200).json(products);
         
     } catch (error) {
-        res.status(500).json(error.message);
+        res.status(500).json({ messasge: error.message });
     }
 }
 
@@ -44,7 +35,37 @@ export const PostProducts = async (req, res) =>{
         res.status(201).send(newProduct);
 
     } catch (error) {
-        res.status(409).json({message: error.message});
+        res.status(409).json({ message: error.message });
     }
     
+}
+
+const productsPagination = (page, productsJSON) => {
+    try {
+        var products = [];
+        for(var i in productsJSON){
+            products.push(productsJSON[i]);
+        }
+
+        const productsSize = products.length;
+        const itemsPerPage = 2;
+        var desiredPage=0;
+        if(page){
+            desiredPage = parseInt(page) - 1;}
+
+        const firstElement = (desiredPage * itemsPerPage);
+        const lastElement = desiredPage * itemsPerPage + itemsPerPage;
+        if(desiredPage === 0 || firstElement >= productsSize){
+            
+            if(productsSize <= itemsPerPage)
+                return(products);
+            
+            else
+                return(products.slice(0, itemsPerPage));
+        }
+        
+        return((products.slice(firstElement,lastElement)));
+    } catch (error) {
+        throw error;
+    }
 }
