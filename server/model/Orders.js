@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 
 const orderSchema = mongoose.Schema({
-    order_id: Number, //<== turn custom
+    order_id: {
+        type: String,
+        required: true,
+        unique: true 
+    },
     name: String,
     email: String,
     phone_number: String,
