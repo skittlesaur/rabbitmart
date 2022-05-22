@@ -1,5 +1,6 @@
 import Products from '../../model/Products.js';
 import jwt from 'jsonwebtoken';
+import CSVtoJSON from 'csvtojson';
 
 /**
  * Validates cart products before processing to purchasing
@@ -62,5 +63,56 @@ export const validateCart = async (req, res) => {
         return res.status(500).json({
             message: e.message
         });
+    }
+}
+
+export const updateProducts = async (req, res) => {
+    const {csv, mode} = req.body;
+
+    switch (mode) {
+        case "UPDATE":
+            return updateProductsById(csv, res);
+        case "REGENERATE":
+            return deleteAllAndUpload(csv, res);
+        default:
+            return res.status(400).json({message: "Invalid Mode"});
+    }
+}
+
+const updateProductsById = async (csv, res) => {
+    try {
+        const productsJSON = await CSVtoJSON().fromString(csv);
+        const updatedProducts = [];
+
+        for (const product of productsJSON) {
+            const {modifiedCount} = await Products.updateOne({product_id: product.product_id}, product);
+            if (modifiedCount)
+                updatedProducts.push(product);
+            else {
+                const item = await Products.findOne({product_id: product.product_id});
+                if (!item) {
+                    const newItem = await Products.create(product);
+                    updatedProducts.push(newItem);
+                }
+            }
+        }
+
+        res.status(200).json(updatedProducts);
+    } catch (e) {
+        res.status(400).json({message: e.message});
+    }
+}
+
+const deleteAllAndUpload = async (csv, res) => {
+    let fallback;
+    try {
+        const productsJSON = await CSVtoJSON().fromString(csv);
+        fallback = await Products.find();
+        await Products.deleteMany({});
+        const products = await Products.insertMany(productsJSON);
+        res.status(200).json(products);
+    } catch (e) {
+        await Products.insertMany(fallback);
+        res.status(400).json({message: e.message});
     }
 }
