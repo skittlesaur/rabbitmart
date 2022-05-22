@@ -1,4 +1,4 @@
-import {VALIDATE_CART, VALIDATE_CART_ERR} from "../constants/actions/products";
+import {UPDATE_DATABASE, VALIDATE_CART, VALIDATE_CART_ERR} from "../constants/actions/products";
 
 const reducer = (products = [], action) => {
     switch (action.type) {
@@ -6,6 +6,8 @@ const reducer = (products = [], action) => {
             return {...products, cart_validation: action.data};
         case VALIDATE_CART_ERR:
             return {...products, cart_validation: {valid: false, error: action.data}}
+        case UPDATE_DATABASE:
+            return {...products, updated: action.data};
         default:
             return products;
     }
