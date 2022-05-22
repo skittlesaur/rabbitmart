@@ -4,7 +4,7 @@ export const productsSearch = async (req, res) => {
     try {
         const products = await ProductSchema.find({ "name": { $regex: req.query.search, $options: "i" } });
 
-        const productsPaged = productsPagination(req.quey.page, products);
+        const productsPaged = productsPagination(req.query.page, products);
 
         res.status(200).json(productsPaged);
 
