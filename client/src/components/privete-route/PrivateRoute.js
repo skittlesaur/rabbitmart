@@ -11,7 +11,9 @@ const PrivateRoute = ({component, role}) => {
 
     useEffect(() => {
 
-        const onError = () => {
+        const onError = (e) => {
+            if (e.response?.data?.message === 'jwt expired')
+                localStorage.removeItem('profile');
             navigate('/login');
         }
 

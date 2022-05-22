@@ -12,11 +12,10 @@ export const authLogin = (email, password, onSuccess, onError) => async (dispatc
 }
 
 export const verifyUser = (onSuccess, onError) => async () => {
-    console.log(1)
     try {
         const verificationData = await api.verify().then(res => res.data);
         onSuccess(verificationData);
     } catch (e) {
-        onError();
+        onError(e);
     }
 }
