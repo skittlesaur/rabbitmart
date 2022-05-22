@@ -45,12 +45,15 @@
     gap: 1em;
 }
 
-.mode-title {
-    font-weight: 500;
-    font-size: 0.8rem;
+.mode > * {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.mode-title {
+    font-weight: 500;
+    font-size: 0.8rem;
 }
 
 .mode-btn {
