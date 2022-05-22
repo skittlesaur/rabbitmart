@@ -11,6 +11,7 @@ import PrivateRoute from "./components/privete-route/PrivateRoute";
 import Wishlist from "./pages/wishlist/Wishlist";
 import Error401 from "./pages/errors/401/Error401";
 import Error404 from "./pages/errors/404/Error404";
+import Admin from "./pages/admin/default/Admin";
 
 const cartInitialization = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -79,6 +80,7 @@ const App = () => {
                 <Route path={'/signup'} element={<Signup/>}/>
                 <Route path={'/login'} element={<Login/>}/>
                 <Route path={'/wishlist'} element={<PrivateRoute component={<Wishlist/>}/>}/>
+                <Route path={'/admin'} element={<PrivateRoute role={'ADMIN'} component={<Admin/>}/>}/>
                 <Route path={'/401'} element={<Error401/>}/>
                 <Route path={'/*'} element={<Error404/>}/>
             </Routes>
