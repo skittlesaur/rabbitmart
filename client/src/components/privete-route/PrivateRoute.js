@@ -16,7 +16,7 @@ const PrivateRoute = ({component, role}) => {
         }
 
         const onSuccess = (user) => {
-            if (role && role === user.role || !role)
+            if (!role || role === user.role)
                 return setAuth(true);
             navigate('/401');
         }
