@@ -1,5 +1,5 @@
 import * as api from '../api';
-import {VALIDATE_CART, VALIDATE_CART_ERR} from "../constants/actions/products";
+import {UPDATE_DATABASE, VALIDATE_CART, VALIDATE_CART_ERR} from "../constants/actions/products";
 
 export const validateCart = (cart, onSuccess, onError) => async (dispatch) => {
     try {
@@ -13,9 +13,10 @@ export const validateCart = (cart, onSuccess, onError) => async (dispatch) => {
     }
 }
 
-export const adminUpdateDatabase = (csv, mode, onSuccess, onError) => async () => {
+export const adminUpdateDatabase = (csv, mode, onSuccess, onError) => async (dispatch) => {
     try {
         const updatedData = await api.adminUpdateDatabase(csv, mode).then(res => res.data);
+        dispatch({type: UPDATE_DATABASE, data: updatedData});
         onSuccess(updatedData);
     } catch (e) {
         onError(e);

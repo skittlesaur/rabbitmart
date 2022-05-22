@@ -1,5 +1,5 @@
 import styles from './adminUpdate.module.css';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import Error from "../../../../../components/feedback/error/Error";
 import Loading from "../../../../../components/loading/Loading";
@@ -16,6 +16,7 @@ const AdminUpdate = () => {
     const [warning, setWarning] = useState("");
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         setData("");
@@ -60,6 +61,7 @@ const AdminUpdate = () => {
             setLoading(false);
             if (!updatedData.length)
                 return setWarning('No changes; database matches the csv file');
+            navigate('/admin/products/update/success');
         }
 
         const onError = (e) => {
