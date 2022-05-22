@@ -39,15 +39,18 @@
 
 .mode {
     align-self: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: .25fr 1fr 1fr;
+    align-items: stretch;
     gap: 1em;
 }
 
 .mode-title {
     font-weight: 500;
     font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .mode-btn {
