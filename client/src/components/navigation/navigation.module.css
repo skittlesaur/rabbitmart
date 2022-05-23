@@ -24,7 +24,7 @@
 
 .actions {
     flex-grow: 1;
-    color: var(--RABBIT_YELLO);
+    color: var(--RABBIT_YELLOW);
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -35,6 +35,8 @@
     cursor: pointer;
     transition: 0.2s ease-out all;
     visibility: visible;
+    position: relative;
+    z-index: 1;
 }
 
 .actions > .icon:hover {
@@ -86,6 +88,7 @@
     gap: 3em;
     transform: translateX(-110%);
     transition: .3s all ease-out;
+    z-index: 2;
 }
 
 .nav {
@@ -127,7 +130,64 @@
     transform: translateX(0);
 }
 
+.cart-counter {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--PRIMARY_ALPHA_50);
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .8rem;
+    font-weight: 500;
+    padding: .5em;
+    --SIZE: 1.5em;
+    width: var(--SIZE);
+    height: var(--SIZE);
+}
+
+.account-icon {
+    display: none;
+}
+
+.account-dropdown {
+    position: fixed;
+    top: 3.5em;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    box-shadow: 2px 3px 8px rgba(234, 234, 234, 0.5);
+    padding: 1em 2em;
+    border-radius: 5px;
+    width: 10em;
+    color: black;
+    gap: 1em;
+}
+
+.account-dropdown > * {
+    border-bottom: 1px solid var(--NEUTRAL_2);
+    text-align: center;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    font-size: .9rem;
+}
+
+.account-dropdown >*:hover{
+    background: var(--NEUTRAL_1);
+}
+
 @media screen and (min-width: 980px) {
+
+    .account-icon {
+        display: block;
+    }
+
+    .account {
+        display: none;
+    }
+
     .menu {
         display: none !important;
     }
@@ -162,7 +222,7 @@
     }
 
     .nav a:hover {
-        color: var(--RABBIT_YELLO);
+        color: var(--RABBIT_YELLOW);
     }
 
     .close-menu {

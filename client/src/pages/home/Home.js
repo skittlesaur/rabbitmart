@@ -8,7 +8,7 @@ import ReliableIcon from '../../shared/assets/why/reliable.png';
 import PricesIcon from '../../shared/assets/why/prices.png';
 import DummyData from './DummyResponse.json';
 
-const Home = () => {
+const Home = ({addProductToCart}) => {
     const products = DummyData;
 
     return (
@@ -40,7 +40,7 @@ const Home = () => {
                                 <Link to={`/products/${item.category}`}>{item.category}</Link>
                             </div>
                             <div className={styles['products-wrapper']}>
-                                {item.items.map((product, j) => <ProductCard product={product} key={`${i}${j}`}/>)}
+                                {item.items.map((product, j) => <ProductCard addProductToCart={addProductToCart} product={product} key={`${i}${j}`}/>)}
                             </div>
                         </div>
                     )}

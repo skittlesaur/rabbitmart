@@ -1,0 +1,13 @@
+.wrapper {
+    box-shadow: 0 2px 5px var(--NEUTRAL_2);
+    padding: .5em 1em;
+    text-align: center;
+    font-size: .8rem;
+    border-radius: 5px;
+    position: fixed;
+    z-index: 88;
+    top: 7em;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(80%, 50em);
+}
