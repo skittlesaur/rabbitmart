@@ -14,7 +14,7 @@ app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
-app.use('/orders', orderRoutes);
+app.use('/orders', orders);
 app.use('/products', products);
 app.use('/auth', auth);
 
