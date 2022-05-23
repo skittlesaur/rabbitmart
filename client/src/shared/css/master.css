@@ -3,7 +3,8 @@
 :root {
     --PRIMARY: #00b106;
     --PRIMARY_ALPHA_50: rgba(26, 224, 33, 0.50);
-    --RABBIT_YELLO: #e0ff16;
+    --RABBIT_YELLOW: #e0ff16;
+    --RABBIT_YELLOW_ALPHA_50: rgba(224, 255, 22, 0.5);
 
     --NEUTRAL_0: #f6f6f6;
     --NEUTRAL_1: #eaeaea;
@@ -78,6 +79,7 @@ section {
 
 .heading {
     text-align: center;
+    align-self: center;
 }
 
 .heading2 {
@@ -150,6 +152,7 @@ img {
     align-items: center;
     justify-content: center;
     transition: all .2s ease-in-out;
+    cursor: pointer;
 }
 
 .btn1:hover {
@@ -162,4 +165,20 @@ img {
     'wght' 600,
     'GRAD' 0,
     'opsz' 48
+}
+
+input {
+    font-size: .8rem;
+    padding: .5em 1em;
+    border-radius: 5px;
+    border: 1px solid var(--NEUTRAL_4);
+    outline: none;
+}
+
+input:focus-visible {
+    border: 2px solid var(--PRIMARY);
+}
+
+button {
+    border: none;
 }
