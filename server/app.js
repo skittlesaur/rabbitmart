@@ -5,8 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import products from "./routes/products.js";
 import auth from "./routes/auth.js";
-
-import orderRoutes from './routes/orders.js';
+import orders from './routes/orders.js';
 
 const app = express();
 dotenv.config();
@@ -15,7 +14,7 @@ app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
-app.use('/orders', orderRoutes);
+app.use('/orders', orders);
 app.use('/products', products);
 app.use('/auth', auth);
 
