@@ -1,10 +1,12 @@
 import express from "express";
-import {updateProducts, validateCart} from "../controller/products/Products.js";
-import auth from "../middleware/auth.js";
+
+import { PostProducts, ShowProductsPerPage, productsSearch, validateCart } from '../controller/products/Products.js';
 
 const router = express.Router();
 
+router.get('/search', productsSearch);
+router.get('/',ShowProductsPerPage);
+router.post('/',PostProducts);
 router.post('/cart', validateCart);
-router.post('/update', auth, updateProducts)
 
 export default router;

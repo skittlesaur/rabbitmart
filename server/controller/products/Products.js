@@ -1,6 +1,75 @@
 import Products from '../../model/Products.js';
 import jwt from 'jsonwebtoken';
-import CSVtoJSON from 'csvtojson';
+
+export const productsSearch = async (req, res) => {
+    try {
+        const products = await Products.find({ "name": { $regex: req.query.search, $options: "i" } });
+
+        const productsPaged = productsPagination(req.query.page, products);
+
+        res.status(200).json(productsPaged);
+
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+
+    }
+}
+
+export const ShowProductsPerPage = async (req, res) =>{
+    try {
+        const allProductsJSON = await Products.find();
+
+        const products = productsPagination(req.query.page, allProductsJSON);
+
+        res.status(200).json(products);
+        
+    } catch (error) {
+        res.status(500).json({ messasge: error.message });
+    }
+}
+
+export const PostProducts = async (req, res) =>{
+    const product = req.body;
+    const newProduct = new Products(product);
+    try {
+        await newProduct.save();
+        res.status(201).send(newProduct);
+
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
+    
+}
+
+const productsPagination = (page, productsJSON) => {
+    try {
+        var products = [];
+        for(var i in productsJSON){
+            products.push(productsJSON[i]);
+        }
+
+        const productsSize = products.length;
+        const itemsPerPage = 2;
+        var desiredPage=0;
+        if(page){
+            desiredPage = parseInt(page) - 1;}
+
+        const firstElement = (desiredPage * itemsPerPage);
+        const lastElement = desiredPage * itemsPerPage + itemsPerPage;
+        if(desiredPage === 0 || firstElement >= productsSize){
+            
+            if(productsSize <= itemsPerPage)
+                return(products);
+            
+            else
+                return(products.slice(0, itemsPerPage));
+        }
+        
+        return((products.slice(firstElement,lastElement)));
+    } catch (error) {
+        throw error;
+    }
+}
 
 /**
  * Validates cart products before processing to purchasing
@@ -63,56 +132,5 @@ export const validateCart = async (req, res) => {
         return res.status(500).json({
             message: e.message
         });
-    }
-}
-
-export const updateProducts = async (req, res) => {
-    const {csv, mode} = req.body;
-
-    switch (mode) {
-        case "UPDATE":
-            return updateProductsById(csv, res);
-        case "REGENERATE":
-            return deleteAllAndUpload(csv, res);
-        default:
-            return res.status(400).json({message: "Invalid Mode"});
-    }
-}
-
-const updateProductsById = async (csv, res) => {
-    try {
-        const productsJSON = await CSVtoJSON().fromString(csv);
-        const updatedProducts = [];
-
-        for (const product of productsJSON) {
-            const {modifiedCount} = await Products.updateOne({product_id: product.product_id}, product);
-            if (modifiedCount)
-                updatedProducts.push(product);
-            else {
-                const item = await Products.findOne({product_id: product.product_id});
-                if (!item) {
-                    const newItem = await Products.create(product);
-                    updatedProducts.push(newItem);
-                }
-            }
-        }
-
-        res.status(200).json(updatedProducts);
-    } catch (e) {
-        res.status(400).json({message: e.message});
-    }
-}
-
-const deleteAllAndUpload = async (csv, res) => {
-    let fallback;
-    try {
-        const productsJSON = await CSVtoJSON().fromString(csv);
-        fallback = await Products.find();
-        await Products.deleteMany({});
-        const products = await Products.insertMany(productsJSON);
-        res.status(200).json(products);
-    } catch (e) {
-        await Products.insertMany(fallback);
-        res.status(400).json({message: e.message});
     }
 }
