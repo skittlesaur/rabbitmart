@@ -1,0 +1,83 @@
+.wrapper {
+    padding: 4em 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 4em;
+    min-height: 80vh;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.action {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.note {
+    font-weight: 500;
+}
+
+.update {
+    align-self: center;
+}
+
+.format {
+    align-self: center;
+    font-size: .8rem;
+    text-align: center;
+    transition: all .2s ease-in-out;
+}
+
+.format:hover {
+    color: var(--PRIMARY);
+}
+
+.mode {
+    align-self: center;
+    display: grid;
+    grid-template-columns: .25fr 1fr 1fr;
+    align-items: stretch;
+    gap: 1em;
+}
+
+.mode > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mode-title {
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+.mode-btn {
+    font-size: .8rem;
+    line-height: 1rem;
+    text-align: center;
+    border-radius: 5px;
+    padding: .5em 1em;
+    border: 1px solid var(--NEUTRAL_2);
+    cursor: pointer;
+    transition: .2s all ease-in-out;
+}
+
+.mode-btn:hover {
+    background: var(--NEUTRAL_1);
+}
+
+.active {
+    border: 2px solid var(--PRIMARY);
+}
+
+@media screen and (min-width: 800px) {
+    .wrapper {
+        max-width: 800px;
+        margin: auto;
+    }
+}
