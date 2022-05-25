@@ -17,16 +17,21 @@ export const productsSearch = async (req, res) => {
 
 export const ShowProductsPerPage = async (req, res) =>{
     try {
-        var products = await Products.find();
+        let products = [];
 
         const itemsPerPage = 2;
-        var numberOfPages = Math.ceil( products.length / itemsPerPage );
+        
         // If there is category: just filter them by the category,
         // then do the pagination on it.
         if(req.query.category){
-            products = ShowProductsPerCategory(req.query.category, products);
+            products =await ShowProductsPerCategory(req.query.category, products);
         }
+        else
+            products = await Products.find();
+        let numberOfPages = Math.ceil( products.length / itemsPerPage );
+        // in both cases you have to paginate the products
         products = productsPagination(req.query.page, products, itemsPerPage);
+        
         
         res.status(200).json({total_pages: numberOfPages,products: products});
         
@@ -38,8 +43,7 @@ export const ShowProductsPerPage = async (req, res) =>{
 const ShowProductsPerCategory =async (category, products) => {
     try {
         
-        var products =await Products.find({ "category": {$eq: category} });
-        console.log(products);
+        products =await Products.find({ "category": {$eq: category} });
         return products;
         
     } catch (error) {
@@ -72,17 +76,16 @@ function GetSortOrder(prop) {
 
 export const ProductsRecommendations =async (req, res) => {
     try {
-        var products =await Products.find();
+        let products =await Products.find();
         products.sort(GetSortOrder("category"));
         const limit = 5;
-        var lastChosen = "";
-        var lastCnt = 0;
-        var result = [];
+        let lastChosen = "";
+        let lastCnt = 0;
+        let result = [];
 
-        for(var p in products){
+        for(let p in products){
             p = products[p];
             if(lastCnt == limit){
-                console.log(lastChosen + p.category);
                 if(lastChosen != p.category){
                 lastChosen = p.category;
                 lastCnt=1;
@@ -95,8 +98,6 @@ export const ProductsRecommendations =async (req, res) => {
                     lastChosen = p.category;
                 }
                 result.push(p);
-                console.log(p.category);
-                
             }
 
         }
@@ -108,10 +109,8 @@ export const ProductsRecommendations =async (req, res) => {
 
 const productsPagination = (page, products, itemsPerPage) => {
     try {
-        
-        products = Object.keys(products).map((key) => [Number(key), obj[key]]);
         const productsSize = products.length;
-        var desiredPage=0;
+        let desiredPage=0;
         if(page){
             desiredPage = parseInt(page) - 1;}
 
