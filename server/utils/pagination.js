@@ -8,13 +8,13 @@ const Pagination = (page, JSON) => {
         const arraySize = array.length;
         const itemsPerPage = 2;
         var desiredPage=0;
-        if(page){
+        if(page & page != 0){
             desiredPage = parseInt(page) - 1;}
 
         const firstElement = (desiredPage * itemsPerPage);
         const lastElement = desiredPage * itemsPerPage + itemsPerPage;
         if(desiredPage === 0 || firstElement >= arraySize){
-            
+
             if(arraySize <= itemsPerPage)
                 return(array);
             
