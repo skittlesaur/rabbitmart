@@ -18,7 +18,7 @@ const orderSchema = mongoose.Schema({
         floor: String,
         apartment_number: String
     },
-    orderStatus: {
+    status: {
         type: String,
         enum: ['CREATED', 'PROCESSING', 'FULFILLED', 'CANCELLED'],
         default: 'CREATED'
