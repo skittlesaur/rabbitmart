@@ -4,9 +4,9 @@ import { PostProducts, ShowProductsPerPage, productsSearch, validateCart } from 
 
 const router = express.Router();
 
-router.get('/search', productsSearch);
 router.get('/',ShowProductsPerPage);
 router.post('/',PostProducts);
+router.get('/search', productsSearch);
 router.post('/cart', validateCart);
 
 export default router;
