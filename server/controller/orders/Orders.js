@@ -1,5 +1,6 @@
 import Order from "../../model/Orders.js";
 import Users from "../../model/Users.js";
+import Pagination from "../../utils/pagination.js";
 
 export const getOrder = async (req, res) => {
     try {
@@ -17,6 +18,30 @@ export const getOrder = async (req, res) => {
     }
 }
 
+export const getAllOrders = async (req, res) => {
+    try {
+
+        const id = req.body.id;
+        const user = await Users.findById(id, { password: 0 });
+
+        if(!user){
+            return res.status(404).json({ message: "User does not exist "});
+        }
+
+        if(user.role != 'ADMIN'){
+            return res.status(401).json({ message: "Unauthorized user" });
+        }
+
+        const orders = await Order.find().sort({ ordered_at: -1 });
+        const ordersPaged = Pagination(req.query.page, orders);
+
+        res.status(200).json(ordersPaged);
+
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+} 
+
 export const updateOrder = async (req, res) => {
     try {
 
@@ -29,8 +54,8 @@ export const updateOrder = async (req, res) => {
             return res.status(404).json({ message: "User does not exist "});
         }
 
-        if(!user.role == "ADMIN"){
-            res.status(401).json({ message: "Unauthorized user" })
+        if(user.role != "ADMIN"){
+            return res.status(401).json({ message: "Unauthorized user" });
         }
         
 
@@ -39,7 +64,7 @@ export const updateOrder = async (req, res) => {
         }
 
         const updatedOrder = await Order.findOneAndUpdate({ "order_id": req.params.id } , {
-            order: orderStatus,
+            status: orderStatus,
         });
 
         if(!updatedOrder){
