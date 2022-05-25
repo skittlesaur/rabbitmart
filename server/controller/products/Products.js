@@ -13,7 +13,6 @@ export const productsSearch = async (req, res) => {
 
     } catch (error) {
         res.status(404).json({message: error.message});
-
     }
 }
 
@@ -25,27 +24,26 @@ export const ShowProductsPerPage = async (req, res) => {
 
         // If there is category: just filter them by the category,
         // then do the pagination on it.
-        if(req.query.category){
-            products =await ShowProductsPerCategory(req.query.category, products);
-        }
-        else
+        if (req.query.category) {
+            products = await ShowProductsPerCategory(req.query.category, products);
+        } else
             products = await Products.find();
-        let numberOfPages = Math.ceil( products.length / itemsPerPage );
+        const numberOfPages = Math.ceil(products.length / itemsPerPage);
         // in both cases you have to paginate the products
-        products = productsPagination(req.query.page, products, itemsPerPage);
+        products = Pagination(req.query.page, products, itemsPerPage);
 
 
-        res.status(200).json({total_pages: numberOfPages,products: products});
-        
+        res.status(200).json({total_pages: numberOfPages, products: products});
+
     } catch (error) {
         res.status(500).json({messasge: error.message});
     }
 }
 
-const ShowProductsPerCategory =async (category, products) => {
+const ShowProductsPerCategory = async (category, products) => {
     try {
 
-        products =await Products.find({ "category": {$eq: category} });
+        products = await Products.find({"category": {$eq: category}});
         return products;
 
     } catch (error) {
@@ -67,7 +65,7 @@ export const PostProducts = async (req, res) => {
 }
 
 function GetSortOrder(prop) {
-    return function(a, b) {
+    return function (a, b) {
         if (a[prop] > b[prop]) {
             return 1;
         } else if (a[prop] < b[prop]) {
@@ -77,26 +75,26 @@ function GetSortOrder(prop) {
     }
 }
 
-export const ProductsRecommendations =async (req, res) => {
+export const ProductsRecommendations = async (req, res) => {
     try {
-        let products =await Products.find();
+        let products = await Products.find();
         products.sort(GetSortOrder("category"));
         const limit = 5;
         let lastChosen = "";
         let lastCnt = 0;
         let result = [];
 
-        for(let p in products){
+        for (let p in products) {
             p = products[p];
-            if(lastCnt == limit){
-                if(lastChosen != p.category){
+            if (lastCnt === limit) {
+                if (lastChosen !== p.category) {
                     lastChosen = p.category;
-                    lastCnt=1;
-                    result.push(p);}
-            }
-            else{
+                    lastCnt = 1;
+                    result.push(p);
+                }
+            } else {
                 lastCnt = lastCnt + 1;
-                if(lastChosen != p.category){
+                if (lastChosen !== p.category) {
                     lastCnt = 1;
                     lastChosen = p.category;
                 }
@@ -106,7 +104,7 @@ export const ProductsRecommendations =async (req, res) => {
         }
         res.status(200).send(result);
     } catch (error) {
-        res.status(500).json({ messasge: error.message });
+        res.status(500).json({messasge: error.message});
     }
 }
 
