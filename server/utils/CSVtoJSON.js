@@ -6,6 +6,8 @@ const convert = (csv) => {
 
     for (let i = 1; i < lines.length; i++) {
         const line = lines[i];
+        if (!line)
+            continue;
         let obj = {};
         const lineArray = line.split(",").map(h => h.replace(/\r/, ''));
 
