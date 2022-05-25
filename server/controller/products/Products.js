@@ -36,7 +36,7 @@ export const ShowProductsPerPage = async (req, res) => {
         res.status(200).json({total_pages: numberOfPages, products: products});
 
     } catch (error) {
-        res.status(500).json({messasge: error.message});
+        res.status(500).json({message: error.message});
     }
 }
 
@@ -104,7 +104,7 @@ export const ProductsRecommendations = async (req, res) => {
         }
         res.status(200).send(result);
     } catch (error) {
-        res.status(500).json({messasge: error.message});
+        res.status(500).json({message: error.message});
     }
 }
 
@@ -145,7 +145,7 @@ export const validateCart = async (req, res) => {
                     product_id: product._id
                 });
 
-            // calculate total price from the databse
+            // calculate total price from the database
             totalPrice += product.price * cartProduct.quantity;
 
             // add products ids to the `products` array
