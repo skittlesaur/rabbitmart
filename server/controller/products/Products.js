@@ -1,26 +1,28 @@
 import Products from '../../model/Products.js';
 import jwt from 'jsonwebtoken';
+import Pagination from '../../utils/pagination.js';
+import CSVtoJSON from "../../utils/CSVtoJSON.js";
 
 export const productsSearch = async (req, res) => {
     try {
-        const products = await Products.find({ "name": { $regex: req.query.search, $options: "i" } });
+        const products = await Products.find({"name": {$regex: req.query.search, $options: "i"}});
 
-        const productsPaged = productsPagination(req.query.page, products);
+        const productsPaged = Pagination(req.query.page, products);
 
         res.status(200).json(productsPaged);
 
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        res.status(404).json({message: error.message});
 
     }
 }
 
-export const ShowProductsPerPage = async (req, res) =>{
+export const ShowProductsPerPage = async (req, res) => {
     try {
         let products = [];
 
         const itemsPerPage = 2;
-        
+
         // If there is category: just filter them by the category,
         // then do the pagination on it.
         if(req.query.category){
@@ -31,26 +33,27 @@ export const ShowProductsPerPage = async (req, res) =>{
         let numberOfPages = Math.ceil( products.length / itemsPerPage );
         // in both cases you have to paginate the products
         products = productsPagination(req.query.page, products, itemsPerPage);
-        
-        
+
+
         res.status(200).json({total_pages: numberOfPages,products: products});
         
     } catch (error) {
-        res.status(500).json({ messasge: error.message });
+        res.status(500).json({messasge: error.message});
     }
 }
 
 const ShowProductsPerCategory =async (category, products) => {
     try {
-        
+
         products =await Products.find({ "category": {$eq: category} });
         return products;
-        
+
     } catch (error) {
         throw error;
     }
 }
-export const PostProducts = async (req, res) =>{
+
+export const PostProducts = async (req, res) => {
     const product = req.body;
     const newProduct = new Products(product);
     try {
@@ -58,20 +61,20 @@ export const PostProducts = async (req, res) =>{
         res.status(201).send(newProduct);
 
     } catch (error) {
-        res.status(409).json({ message: error.message });
+        res.status(409).json({message: error.message});
     }
-    
+
 }
 
-function GetSortOrder(prop) {    
-    return function(a, b) {    
-        if (a[prop] > b[prop]) {    
-            return 1;    
-        } else if (a[prop] < b[prop]) {    
-            return -1;    
-        }    
-        return 0;    
-    }    
+function GetSortOrder(prop) {
+    return function(a, b) {
+        if (a[prop] > b[prop]) {
+            return 1;
+        } else if (a[prop] < b[prop]) {
+            return -1;
+        }
+        return 0;
+    }
 }
 
 export const ProductsRecommendations =async (req, res) => {
@@ -87,9 +90,9 @@ export const ProductsRecommendations =async (req, res) => {
             p = products[p];
             if(lastCnt == limit){
                 if(lastChosen != p.category){
-                lastChosen = p.category;
-                lastCnt=1;
-                result.push(p);}
+                    lastChosen = p.category;
+                    lastCnt=1;
+                    result.push(p);}
             }
             else{
                 lastCnt = lastCnt + 1;
@@ -104,30 +107,6 @@ export const ProductsRecommendations =async (req, res) => {
         res.status(200).send(result);
     } catch (error) {
         res.status(500).json({ messasge: error.message });
-    }
-}
-
-const productsPagination = (page, products, itemsPerPage) => {
-    try {
-        const productsSize = products.length;
-        let desiredPage=0;
-        if(page){
-            desiredPage = parseInt(page) - 1;}
-
-        const firstElement = (desiredPage * itemsPerPage);
-        const lastElement = desiredPage * itemsPerPage + itemsPerPage;
-        if(desiredPage === 0 || firstElement >= productsSize){
-            
-            if(productsSize <= itemsPerPage)
-                return(products);
-            
-            else
-                return((products).slice(0, itemsPerPage));
-        }
-        
-        return(((products).slice(firstElement,lastElement)));
-    } catch (error) {
-        throw error;
     }
 }
 
@@ -193,4 +172,53 @@ export const validateCart = async (req, res) => {
             message: e.message
         });
     }
+}
+
+export const adminUpdateProducts = async (req, res) => {
+    const {csv, mode} = req.body;
+
+    if (!['UPDATE', 'REGENERATE'].includes(mode))
+        return res.status(400).json({message: " Unknown mode"});
+
+    const productsJson = CSVtoJSON(csv);
+
+    try {
+        if (mode === "UPDATE") {
+            const updatedProducts = await updateProducts(productsJson);
+            return res.status(200).json(updatedProducts);
+        }
+
+        if (mode === 'REGENERATE') {
+            const updatedProducts = await regenerateDatabase(productsJson);
+            return res.status(200).json(updatedProducts);
+        }
+
+    } catch (e) {
+        res.status(400).json({message: e.message});
+    }
+}
+
+const updateProducts = async (products) => {
+    const updated = [];
+
+    for (const product of products) {
+        const res = await Products.updateOne({product_id: product.product_id}, product);
+
+        // if the product was updated push it to the array
+        if (res.modifiedCount !== 0)
+            updated.push(product);
+        // if the product doesn't exist in the database, add it
+        else if (res.matchedCount === 0) {
+            await Products.create(product);
+            updated.push(product);
+        }
+    }
+
+    return updated;
+}
+
+const regenerateDatabase = async (products) => {
+    await Products.deleteMany();
+    await Products.insertMany(products);
+    return products;
 }

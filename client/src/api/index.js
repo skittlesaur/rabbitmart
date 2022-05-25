@@ -19,4 +19,4 @@ export const verify = () => API.post('/auth/verify');
 export const fetchOrder = (id) => API.get(`/orders/${id}`);
 export const updateOrder = (id, status) => API.patch(`/orders/${id}`, {status});
 
-export const adminUpdateDatabase = (csv, mode) => API.post(`/products/update`, {csv, mode});
+export const adminUpdateDatabase = (csv, mode) => API.patch(`/products`, {csv, mode});
