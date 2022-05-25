@@ -59,26 +59,48 @@ export const PostProducts = async (req, res) =>{
     
 }
 
+function GetSortOrder(prop) {    
+    return function(a, b) {    
+        if (a[prop] > b[prop]) {    
+            return 1;    
+        } else if (a[prop] < b[prop]) {    
+            return -1;    
+        }    
+        return 0;    
+    }    
+}
+
 export const ProductsRecommendations =async (req, res) => {
     try {
-        const products = Products.find().sort({"category" : 1});
-        console.log(products);
+        var products =await Products.find();
+        products.sort(GetSortOrder("category"));
         const limit = 5;
         var lastChosen = "";
         var lastCnt = 0;
         var result = [];
 
         for(var p in products){
+            p = products[p];
             if(lastCnt == limit){
+                console.log(lastChosen + p.category);
                 if(lastChosen != p.category){
                 lastChosen = p.category;
                 lastCnt=1;
                 result.push(p);}
             }
             else{
+                lastCnt = lastCnt + 1;
+                if(lastChosen != p.category){
+                    lastCnt = 1;
+                    lastChosen = p.category;
+                }
                 result.push(p);
+                console.log(p.category);
+                
             }
+
         }
+        res.status(200).send(result);
     } catch (error) {
         res.status(500).json({ messasge: error.message });
     }
