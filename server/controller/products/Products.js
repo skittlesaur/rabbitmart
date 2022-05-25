@@ -1,35 +1,36 @@
 import Products from '../../model/Products.js';
 import jwt from 'jsonwebtoken';
 import Pagination from '../../utils/pagination.js';
+import CSVtoJSON from "../../utils/CSVtoJSON.js";
 
 export const productsSearch = async (req, res) => {
     try {
-        const products = await Products.find({ "name": { $regex: req.query.search, $options: "i" } });
+        const products = await Products.find({"name": {$regex: req.query.search, $options: "i"}});
 
         const productsPaged = Pagination(req.query.page, products);
 
         res.status(200).json(productsPaged);
 
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        res.status(404).json({message: error.message});
 
     }
 }
 
-export const ShowProductsPerPage = async (req, res) =>{
+export const ShowProductsPerPage = async (req, res) => {
     try {
         const allProductsJSON = await Products.find();
 
         const products = Pagination(req.query.page, allProductsJSON);
 
         res.status(200).json(products);
-        
+
     } catch (error) {
-        res.status(500).json({ messasge: error.message });
+        res.status(500).json({messasge: error.message});
     }
 }
 
-export const PostProducts = async (req, res) =>{
+export const PostProducts = async (req, res) => {
     const product = req.body;
     const newProduct = new Products(product);
     try {
@@ -37,9 +38,9 @@ export const PostProducts = async (req, res) =>{
         res.status(201).send(newProduct);
 
     } catch (error) {
-        res.status(409).json({ message: error.message });
+        res.status(409).json({message: error.message});
     }
-    
+
 }
 
 /**
@@ -104,4 +105,53 @@ export const validateCart = async (req, res) => {
             message: e.message
         });
     }
+}
+
+export const adminUpdateProducts = async (req, res) => {
+    const {csv, mode} = req.body;
+
+    if (!['UPDATE', 'REGENERATE'].includes(mode))
+        return res.status(400).json({message: " Unknown mode"});
+
+    const productsJson = CSVtoJSON(csv);
+
+    try {
+        if (mode === "UPDATE") {
+            const updatedProducts = await updateProducts(productsJson);
+            return res.status(200).json(updatedProducts);
+        }
+
+        if (mode === 'REGENERATE') {
+            const updatedProducts = await regenerateDatabase(productsJson);
+            return res.status(200).json(updatedProducts);
+        }
+
+    } catch (e) {
+        res.status(400).json({message: e.message});
+    }
+}
+
+const updateProducts = async (products) => {
+    const updated = [];
+
+    for (const product of products) {
+        const res = await Products.updateOne({product_id: product.product_id}, product);
+
+        // if the product was updated push it to the array
+        if (res.modifiedCount !== 0)
+            updated.push(product);
+        // if the product doesn't exist in the database, add it
+        else if (res.matchedCount === 0) {
+            await Products.create(product);
+            updated.push(product);
+        }
+    }
+
+    return updated;
+}
+
+const regenerateDatabase = async (products) => {
+    await Products.deleteMany();
+    await Products.insertMany(products);
+    return products;
 }
