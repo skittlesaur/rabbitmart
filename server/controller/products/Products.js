@@ -1,12 +1,13 @@
 import Products from '../../model/Products.js';
 import jwt from 'jsonwebtoken';
+import Pagination from '../../utils/pagination.js';
 import CSVtoJSON from "../../utils/CSVtoJSON.js";
 
 export const productsSearch = async (req, res) => {
     try {
         const products = await Products.find({"name": {$regex: req.query.search, $options: "i"}});
 
-        const productsPaged = productsPagination(req.query.page, products);
+        const productsPaged = Pagination(req.query.page, products);
 
         res.status(200).json(productsPaged);
 
@@ -20,7 +21,7 @@ export const ShowProductsPerPage = async (req, res) => {
     try {
         const allProductsJSON = await Products.find();
 
-        const products = productsPagination(req.query.page, allProductsJSON);
+        const products = Pagination(req.query.page, allProductsJSON);
 
         res.status(200).json(products);
 
@@ -40,37 +41,6 @@ export const PostProducts = async (req, res) => {
         res.status(409).json({message: error.message});
     }
 
-}
-
-const productsPagination = (page, productsJSON) => {
-    try {
-        var products = [];
-        for (var i in productsJSON) {
-            products.push(productsJSON[i]);
-        }
-
-        const productsSize = products.length;
-        const itemsPerPage = 2;
-        var desiredPage = 0;
-        if (page) {
-            desiredPage = parseInt(page) - 1;
-        }
-
-        const firstElement = (desiredPage * itemsPerPage);
-        const lastElement = desiredPage * itemsPerPage + itemsPerPage;
-        if (desiredPage === 0 || firstElement >= productsSize) {
-
-            if (productsSize <= itemsPerPage)
-                return (products);
-
-            else
-                return (products.slice(0, itemsPerPage));
-        }
-
-        return ((products.slice(firstElement, lastElement)));
-    } catch (error) {
-        throw error;
-    }
 }
 
 /**
