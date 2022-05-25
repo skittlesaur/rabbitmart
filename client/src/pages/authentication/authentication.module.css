@@ -1,0 +1,23 @@
+.wrapper {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../../shared/assets/authentication/background.png");
+    background-size: min(130%, 50em);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    width: min(80%, 30em);
+    padding: 2em 3em;
+    max-height: 80%;
+    overflow-y: auto;
+    border-radius: 5px;
+    box-shadow: 3px 3px 6px var(--NEUTRAL_2);
+}

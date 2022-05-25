@@ -3,7 +3,8 @@
 :root {
     --PRIMARY: #00b106;
     --PRIMARY_ALPHA_50: rgba(26, 224, 33, 0.50);
-    --RABBIT_YELLO: #e0ff16;
+    --RABBIT_YELLOW: #e0ff16;
+    --RABBIT_YELLOW_ALPHA_50: rgba(224, 255, 22, 0.5);
 
     --NEUTRAL_0: #f6f6f6;
     --NEUTRAL_1: #eaeaea;
@@ -78,6 +79,7 @@ section {
 
 .heading {
     text-align: center;
+    align-self: center;
 }
 
 .heading2 {
@@ -150,10 +152,57 @@ img {
     align-items: center;
     justify-content: center;
     transition: all .2s ease-in-out;
+    cursor: pointer;
 }
 
 .btn1:hover {
     transform: scale(1.05);
+}
+
+.btn2 {
+    color: var(--PRIMARY);
+    font-weight: 500;
+    border: 2px var(--PRIMARY) solid;
+    padding: .5em 1em;
+    border-radius: 5px;
+    transition: all .16s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    min-width: 10em;
+}
+
+.btn2:after {
+    content: '';
+    position: absolute;
+    background: white;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.btn2:before {
+    content: '';
+    position: absolute;
+    background: var(--PRIMARY);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    transition: all .15s ease-in-out;
+    z-index: -1;
+}
+
+.btn2:hover {
+    color: white;
+}
+
+.btn2:hover:before {
+    height: 100%;
+    top: 0;
 }
 
 .material-symbols-outlined {
@@ -162,4 +211,32 @@ img {
     'wght' 600,
     'GRAD' 0,
     'opsz' 48
+}
+
+input, select, option {
+    font-size: .8rem;
+    padding: .5em 1em;
+    border-radius: 5px;
+    border: 1px solid var(--NEUTRAL_4);
+    outline: none;
+}
+
+input:focus-visible {
+    border: 2px solid var(--PRIMARY);
+}
+
+button {
+    border: none;
+}
+
+.warning-box {
+    background: #ffefd1;
+    padding: .5em 1em;
+    border: 1px solid black;
+    font-size: .9rem;
+    line-height: 1.25rem;
+}
+
+.warning-box .warning {
+    font-weight: 500;
 }

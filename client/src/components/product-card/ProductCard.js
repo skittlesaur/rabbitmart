@@ -1,6 +1,6 @@
 import styles from './productCard.module.css';
 
-const ProductCard = ({product}) => {
+const ProductCard = ({product, addProductToCart}) => {
     return (
         <div className={styles['wrapper']}>
             <div className={styles['image-wrapper']}>
@@ -13,7 +13,7 @@ const ProductCard = ({product}) => {
                         <p className={styles['weight']}>{product.weight}{product.measurement}</p>
                         <p className={styles['price']}>{Number(product.price).toFixed(2)} EGP</p>
                     </div>
-                    <div className={styles['add-to-cart']}>Add to Cart</div>
+                    <div onClick={() => addProductToCart(product)} className={styles['add-to-cart']}>Add to Cart</div>
                 </div>
             </div>
         </div>
