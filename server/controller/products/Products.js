@@ -59,8 +59,29 @@ export const PostProducts = async (req, res) =>{
     
 }
 
-const ProductsRecommendations = (req, res) => {
+export const ProductsRecommendations =async (req, res) => {
+    try {
+        const products = Products.find().sort({"category" : 1});
+        console.log(products);
+        const limit = 5;
+        var lastChosen = "";
+        var lastCnt = 0;
+        var result = [];
 
+        for(var p in products){
+            if(lastCnt == limit){
+                if(lastChosen != p.category){
+                lastChosen = p.category;
+                lastCnt=1;
+                result.push(p);}
+            }
+            else{
+                result.push(p);
+            }
+        }
+    } catch (error) {
+        res.status(500).json({ messasge: error.message });
+    }
 }
 
 const productsPagination = (page, products, itemsPerPage) => {
