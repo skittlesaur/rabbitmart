@@ -17,17 +17,35 @@ export const productsSearch = async (req, res) => {
 
 export const ShowProductsPerPage = async (req, res) =>{
     try {
-        const products = await Products.find();
+        var products = await Products.find();
 
-        products = productsPagination(req.query.page, products);
-
-        res.status(200).json(products);
+        const itemsPerPage = 2;
+        var numberOfPages = Math.ceil( products.length / itemsPerPage );
+        // If there is category: just filter them by the category,
+        // then do the pagination on it.
+        if(req.query.category){
+            products = ShowProductsPerCategory(req.query.category, products);
+        }
+        products = productsPagination(req.query.page, products, itemsPerPage);
+        
+        res.status(200).json({total_pages: numberOfPages,products: products});
         
     } catch (error) {
         res.status(500).json({ messasge: error.message });
     }
 }
 
+const ShowProductsPerCategory =async (category, products) => {
+    try {
+        
+        var products =await Products.find({ "category": {$eq: category} });
+        console.log(products);
+        return products;
+        
+    } catch (error) {
+        throw error;
+    }
+}
 export const PostProducts = async (req, res) =>{
     const product = req.body;
     const newProduct = new Products(product);
@@ -41,10 +59,15 @@ export const PostProducts = async (req, res) =>{
     
 }
 
-const productsPagination = (page, products) => {
+const ProductsRecommendations = (req, res) => {
+
+}
+
+const productsPagination = (page, products, itemsPerPage) => {
     try {
+        
+        products = Object.keys(products).map((key) => [Number(key), obj[key]]);
         const productsSize = products.length;
-        const itemsPerPage = 20;
         var desiredPage=0;
         if(page){
             desiredPage = parseInt(page) - 1;}
@@ -57,10 +80,10 @@ const productsPagination = (page, products) => {
                 return(products);
             
             else
-                return(products.slice(0, itemsPerPage));
+                return((products).slice(0, itemsPerPage));
         }
         
-        return((products.slice(firstElement,lastElement)));
+        return(((products).slice(firstElement,lastElement)));
     } catch (error) {
         throw error;
     }
