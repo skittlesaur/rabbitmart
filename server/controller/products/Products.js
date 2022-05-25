@@ -17,9 +17,9 @@ export const productsSearch = async (req, res) => {
 
 export const ShowProductsPerPage = async (req, res) =>{
     try {
-        const allProductsJSON = await Products.find();
+        const products = await Products.find();
 
-        const products = productsPagination(req.query.page, allProductsJSON);
+        products = productsPagination(req.query.page, products);
 
         res.status(200).json(products);
         
@@ -41,15 +41,10 @@ export const PostProducts = async (req, res) =>{
     
 }
 
-const productsPagination = (page, productsJSON) => {
+const productsPagination = (page, products) => {
     try {
-        var products = [];
-        for(var i in productsJSON){
-            products.push(productsJSON[i]);
-        }
-
         const productsSize = products.length;
-        const itemsPerPage = 2;
+        const itemsPerPage = 20;
         var desiredPage=0;
         if(page){
             desiredPage = parseInt(page) - 1;}
