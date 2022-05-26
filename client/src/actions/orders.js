@@ -3,7 +3,7 @@ import * as api from '../api/index';
 export const fetchOrder = (id, onSuccess, onError) => async () => {
     try {
         const orderData = await api.fetchOrder(id);
-        onSuccess(orderData.data[0]);
+        onSuccess(orderData.data);
     } catch (e) {
         onError(e.response.data);
     }
