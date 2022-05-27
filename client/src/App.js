@@ -15,6 +15,7 @@ import Admin from "./pages/admin/default/Admin";
 import AdminUpdate from "./pages/admin/products/update/default/AdminUpdate";
 import AdminUpdateSuccess from "./pages/admin/products/update/success/AdminUpdateSuccess";
 import AdminUpdateOrder from "./pages/admin/orders/update/AdminUpdateOrder";
+import ScrollToTop from "./components/scroll-to-top/ScrollToTop";
 
 const cartInitialization = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -75,6 +76,7 @@ const App = () => {
 
     return (
         <BrowserRouter>
+            <ScrollToTop/>
             <Navigation cartCount={cartCount}/>
             <Routes>
                 <Route path={'/'} element={<Home addProductToCart={addProductToCart}/>}/>
@@ -84,9 +86,12 @@ const App = () => {
                 <Route path={'/login'} element={<Login/>}/>
                 <Route path={'/wishlist'} element={<PrivateRoute component={<Wishlist/>}/>}/>
                 <Route path={'/admin'} element={<PrivateRoute role={'ADMIN'} component={<Admin/>}/>}/>
-                <Route path={'/admin/orders/update'} element={<PrivateRoute role={'ADMIN'} component={<AdminUpdateOrder/>}/>}/>
-                <Route path={'/admin/products/update'} element={<PrivateRoute role={'ADMIN'} component={<AdminUpdate/>}/>}/>
-                <Route path={'/admin/products/update/success'} element={<PrivateRoute role={'ADMIN'} component={<AdminUpdateSuccess/>}/>}/>
+                <Route path={'/admin/orders/update'}
+                       element={<PrivateRoute role={'ADMIN'} component={<AdminUpdateOrder/>}/>}/>
+                <Route path={'/admin/products/update'}
+                       element={<PrivateRoute role={'ADMIN'} component={<AdminUpdate/>}/>}/>
+                <Route path={'/admin/products/update/success'}
+                       element={<PrivateRoute role={'ADMIN'} component={<AdminUpdateSuccess/>}/>}/>
                 <Route path={'/401'} element={<Error401/>}/>
                 <Route path={'/*'} element={<Error404/>}/>
             </Routes>
