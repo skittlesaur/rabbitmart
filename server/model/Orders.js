@@ -4,11 +4,14 @@ const orderSchema = mongoose.Schema({
     order_id: {
         type: String,
         required: true,
-        unique: true 
+        unique: true
     },
-    name: String,
-    email: String,
-    phone_number: String,
+    name: {
+        first: String,
+        last: String
+    },
+    email: {type: String, required: true},
+    phone_number: {type: String, required: true},
     address: {
         country: String,
         city: String,
@@ -26,8 +29,8 @@ const orderSchema = mongoose.Schema({
         enum: ['CREATED', 'PROCESSING', 'FULFILLED', 'CANCELLED'],
         default: 'CREATED'
     },
-    products: { type: Array }
-
+    products: {type: Array, required: true},
+    total: {type: Number, required: true}
 });
 
 const Order = mongoose.model('Order', orderSchema);
