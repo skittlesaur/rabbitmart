@@ -86,10 +86,10 @@ const Navigation = ({cartCount}) => {
                         <Link onClick={closeMenu} className={styles['account']} to={'/orders'}>Previous Orders</Link>}
                     <Link onClick={closeMenu} to={'/shipping'}>Track Shipping</Link>
                     {admin && <Link onClick={closeMenu} className={styles['account']} to={'/admin'}>Admin Panel</Link>}
-                    {auth && <a className={styles['account']} onClick={() => {
+                    {auth && <div className={styles['account']} onClick={() => {
                         handleLogout();
                         closeMenu();
-                    }}>Logout</a>}
+                    }}>Logout</div>}
                 </nav>
             </div>
             <div className={styles['actions']}>
