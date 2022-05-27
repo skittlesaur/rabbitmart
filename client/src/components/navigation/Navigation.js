@@ -1,7 +1,7 @@
 import styles from './navigation.module.css';
 import Logo from '../../shared/assets/logo.png';
 import {Link} from "react-router-dom";
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {SEARCH_HIDDEN, SEARCH_VISIBLE} from "./constants/search";
 import {useNavigate} from "react-router-dom";
 
@@ -11,6 +11,7 @@ const Navigation = ({cartCount}) => {
     const [search, setSearch] = useState(SEARCH_HIDDEN);
     const [menuActive, setMenuActive] = useState(false);
     const [searchInput, setSearchInput] = useState("");
+    const searchElement = useRef();
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('profile'))?.user;
     const auth = !!user;
@@ -31,7 +32,9 @@ const Navigation = ({cartCount}) => {
 
         if (width < 980 && search === SEARCH_HIDDEN) {
             setSearch(SEARCH_VISIBLE);
+            searchElement.current.focus();
         } else {
+            searchElement.current.blur();
             navigate(`/products?search=${searchInput}`);
             setSearch(SEARCH_HIDDEN);
             setSearchInput('');
@@ -77,8 +80,11 @@ const Navigation = ({cartCount}) => {
                 </nav>
             </div>
             <div className={styles['actions']}>
-                <input onChange={(e) => setSearchInput(e.target.value)} value={searchInput}
+                <input onChange={(e) => setSearchInput(e.target.value)}
+                       onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                       value={searchInput}
                        placeholder={'Search'}
+                       ref={searchElement}
                        className={`${styles['search']} ${search === SEARCH_VISIBLE && styles['search-active']}`}/>
                 <div onClick={handleSearch} className={`material-symbols-outlined ${styles['icon']}`}>search</div>
                 <Link to={'/cart'}

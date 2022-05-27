@@ -2,17 +2,18 @@
     position: sticky;
     top: 0;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     background: var(--PRIMARY);
     box-shadow: 0 0 8px var(--PRIMARY);
     z-index: 105;
     padding: 1em 2em;
     gap: 1em;
+    align-items: center;
 }
 
 .logo {
+    justify-self: start;
     width: auto;
     height: 1.2em;
     flex-shrink: 0;
@@ -23,7 +24,7 @@
 }
 
 .actions {
-    flex-grow: 1;
+    justify-self: end;
     color: var(--RABBIT_YELLOW);
     display: flex;
     align-items: center;
@@ -233,6 +234,11 @@
 @media screen and (min-width: 1024px) {
     .wrapper {
         padding: 1em 8em;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .nav-wrapper{
+        justify-self: center;
     }
 
     .nav {
