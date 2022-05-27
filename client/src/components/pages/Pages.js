@@ -4,7 +4,7 @@ const Pages = ({max, current = 1, onPageClick}) => {
     return (
         <div className={styles['wrapper']}>
             {Array.from({length: max}, (_, i) => i + 1).map((i) =>
-                <div className={`${styles['page']} ${current===i && styles['active']}`} onClick={() => onPageClick(i)}>{i}</div>
+                <div key={i} className={`${styles['page']} ${current===i && styles['active']}`} onClick={() => onPageClick(i)}>{i}</div>
             )}
         </div>
     );
