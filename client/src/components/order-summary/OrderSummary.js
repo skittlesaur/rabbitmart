@@ -5,8 +5,8 @@ const OrderSummary = ({order}) => {
         <div className={styles['wrapper']}>
             <div className={styles['header']}>
                 <div className={styles['left-wrapper']}>
-                    <div clas   sName={styles['customer']}>{order.name.first} {order.name.last}</div>
-                    <div className={styles['order-txt']}>Order</div>
+                    <div className={styles['customer-first']}>{order.name.first}</div>
+                    <div className={styles['customer']}>{order.name.last}</div>
                 </div>
                 <div className={styles['id']}>#{order.order_id}</div>
             </div>

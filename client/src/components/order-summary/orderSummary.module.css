@@ -15,7 +15,7 @@
     border-bottom: 1px solid var(--NEUTRAL_5);
 }
 
-.customer, .order-txt {
+.customer, .customer-first {
     font-size: 2rem;
     line-height: 2rem;
 }
@@ -24,7 +24,7 @@
     font-weight: 500;
 }
 
-.order-txt {
+.customer-first {
     display: flex;
     align-items: flex-end;
 }
