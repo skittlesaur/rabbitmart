@@ -9,7 +9,7 @@
 .btns {
     align-self: center;
     display: flex;
-    gap: 2em;
+    gap: 1em;
 }
 
 @media screen and (min-width: 800px) {

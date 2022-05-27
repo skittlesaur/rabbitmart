@@ -153,6 +153,8 @@ img {
     justify-content: center;
     transition: all .2s ease-in-out;
     cursor: pointer;
+    text-align: center;
+    font-weight: 500;
 }
 
 .btn1:hover {
