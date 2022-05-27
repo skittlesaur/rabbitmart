@@ -1,7 +1,7 @@
 import styles from './navigation.module.css';
 import Logo from '../../shared/assets/logo.png';
 import {Link} from "react-router-dom";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {SEARCH_HIDDEN, SEARCH_VISIBLE} from "./constants/search";
 import {useNavigate} from "react-router-dom";
 
@@ -17,6 +17,10 @@ const Navigation = ({cartCount}) => {
     const auth = !!user;
     const admin = auth && user.role === 'ADMIN';
     const [dropdown, setDropdown] = useState(false);
+
+    useEffect(() => {
+        setDropdown(false);
+    }, [navigate])
 
     const handleLogout = () => {
         localStorage.removeItem('profile');
