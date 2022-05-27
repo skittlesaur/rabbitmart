@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {useEffect, useRef, useState} from "react";
 import {SEARCH_HIDDEN, SEARCH_VISIBLE} from "./constants/search";
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 
 const Navigation = ({cartCount}) => {
@@ -13,7 +14,7 @@ const Navigation = ({cartCount}) => {
     const [searchInput, setSearchInput] = useState("");
     const searchElement = useRef();
     const navigate = useNavigate();
-    const user = JSON.parse(localStorage.getItem('profile'))?.user;
+    const user = useSelector(state => state.authentication.profile?.user);
     const auth = !!user;
     const admin = auth && user.role === 'ADMIN';
     const [dropdown, setDropdown] = useState(false);
