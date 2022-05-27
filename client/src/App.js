@@ -17,6 +17,7 @@ import AdminUpdateSuccess from "./pages/admin/products/update/success/AdminUpdat
 import AdminUpdateOrder from "./pages/admin/orders/update/AdminUpdateOrder";
 import ScrollToTop from "./components/scroll-to-top/ScrollToTop";
 import AdminOrders from "./pages/admin/orders/default/AdminOrders";
+import AdminViewOrder from "./pages/admin/orders/id/AdminViewOrder";
 
 const cartInitialization = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -95,6 +96,8 @@ const App = () => {
                        element={<PrivateRoute role={'ADMIN'} component={<AdminUpdate/>}/>}/>
                 <Route path={'/admin/products/update/success'}
                        element={<PrivateRoute role={'ADMIN'} component={<AdminUpdateSuccess/>}/>}/>
+                <Route path={'/admin/orders/:id'}
+                       element={<PrivateRoute role={'ADMIN'} component={<AdminViewOrder/>}/>}/>
                 <Route path={'/401'} element={<Error401/>}/>
                 <Route path={'/*'} element={<Error404/>}/>
             </Routes>

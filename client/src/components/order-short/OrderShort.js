@@ -1,7 +1,7 @@
 import styles from './orderShort.module.css';
 import {Link} from "react-router-dom";
 
-const OrderShort = ({order}) => {
+const OrderShort = ({order, orderPage = ''}) => {
 
     const formatStatus = () => {
         const st = order.status;
@@ -9,13 +9,14 @@ const OrderShort = ({order}) => {
     }
 
     return (
-        <div className={styles['wrapper']}>
+        <Link to={orderPage + `${order.order_id}`} className={styles['wrapper']}>
             <div className={styles['id']}>{order.order_id}</div>
             <div className={styles['name']}>{order.name.first} {order.name.last}</div>
             <div className={styles['items']}>{order.products.length}</div>
             <div className={styles['total']}>{order.total.toFixed(2)}</div>
-            <Link to={`/admin/orders/update?id=${order.order_id}`} className={`${styles['status']} ${styles[order.status]}`}>{formatStatus()}</Link>
-        </div>
+            <Link to={`/admin/orders/update?id=${order.order_id}`}
+                  className={`${styles['status']} ${styles[order.status]}`}>{formatStatus()}</Link>
+        </Link>
     );
 }
 
