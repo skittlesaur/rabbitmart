@@ -34,7 +34,7 @@ const ProductCard = ({product, addProductToCart}) => {
     }
 
     return (
-        <div ref={wrapperRef} className={styles['wrapper']}>
+        <div ref={wrapperRef} className={`${styles['wrapper']} ${!product.stock && styles['out-of-stock']}`}>
             {addToCart &&
                 <motion.img initial={{
                     x: getXi(),
@@ -65,7 +65,9 @@ const ProductCard = ({product, addProductToCart}) => {
                         <p className={styles['weight']}>{product.weight}{product.measurement}</p>
                         <p className={styles['price']}>{Number(product.price).toFixed(2)} EGP</p>
                     </div>
-                    <div onClick={handleAddToCart} className={styles['add-to-cart']}>Add to Cart</div>
+                    {product.stock ?
+                        <div onClick={handleAddToCart} className={styles['add-to-cart']}>Add to Cart</div> :
+                        <div className={styles['unavailable']}>Out of Stock</div>}
                 </div>
             </div>
         </div>

@@ -84,3 +84,18 @@
     border-radius: 20px;
     border: 1px solid var(--NEUTRAL_5);
 }
+
+.unavailable {
+    cursor: default;
+    text-align: center;
+    margin-top: .5em;
+    font-size: 0.9rem;
+    padding: .5em 1em;
+    color: var(--NEUTRAL_4);
+    border: 1px solid var(--NEUTRAL_4);
+    border-radius: 10px;
+}
+
+.out-of-stock {
+    filter: grayscale(1);
+}
