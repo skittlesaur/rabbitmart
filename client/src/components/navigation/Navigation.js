@@ -57,6 +57,15 @@ const Navigation = ({cartCount}) => {
         setMenuActive(false);
     }
 
+    const handleHideMenu = (e) => {
+        e.target.style = 'display:none';
+        const target = document.elementFromPoint(e.clientX, e.clientY);
+        if (target)
+            target.click();
+        e.target.style = '';
+        setDropdown(false);
+    }
+
     return (
         <div className={styles['wrapper']}>
             {search === SEARCH_VISIBLE && <div onClick={(e) => handleClose(e)} className={styles['hide-search']}/>}
@@ -98,6 +107,8 @@ const Navigation = ({cartCount}) => {
                 <Link onClick={auth && handleDropDown} to={!auth && 'login'}
                       className={`material-symbols-outlined ${styles['account-icon']} ${styles['icon']}`}>person</Link>
                 {auth && dropdown && <div className={styles['account-dropdown']}>
+                    <div onClick={(e) => handleHideMenu(e)}
+                         className={styles['hide-dropdown']}/>
                     <Link to={'/wishlist'}>Wishlist</Link>
                     <Link to={'/orders'}>Orders</Link>
                     {admin && <Link to={'/admin'}>Admin Panel</Link>}
