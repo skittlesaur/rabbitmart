@@ -77,7 +77,9 @@ const Navigation = ({cartCount}) => {
                 </nav>
             </div>
             <div className={styles['actions']}>
-                <input onChange={(e) => setSearchInput(e.target.value)} value={searchInput}
+                <input onChange={(e) => setSearchInput(e.target.value)}
+                       onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                       value={searchInput}
                        placeholder={'Search'}
                        className={`${styles['search']} ${search === SEARCH_VISIBLE && styles['search-active']}`}/>
                 <div onClick={handleSearch} className={`material-symbols-outlined ${styles['icon']}`}>search</div>
