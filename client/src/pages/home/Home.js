@@ -7,6 +7,7 @@ import DeliveryIcon from '../../shared/assets/why/delivery.png';
 import ReliableIcon from '../../shared/assets/why/reliable.png';
 import PricesIcon from '../../shared/assets/why/prices.png';
 import DummyData from './DummyResponse.json';
+import {motion} from 'framer-motion';
 
 const Home = ({addProductToCart}) => {
     const products = DummyData;
@@ -20,7 +21,8 @@ const Home = ({addProductToCart}) => {
                     <Link className={'btn1'} to={'products'}>Shop Now</Link>
                 </div>
                 <div className={styles['delivery']}>
-                    <img src={DeliveryImg} alt={'Delivery'}/>
+                    <motion.img drag dragConstraints={{top: 0, right: 0, bottom: 0, left: 0}} src={DeliveryImg}
+                                alt={'Delivery'}/>
                 </div>
             </div>
             <section>
@@ -40,7 +42,8 @@ const Home = ({addProductToCart}) => {
                                 <Link to={`/products/${item.category}`}>{item.category}</Link>
                             </div>
                             <div className={styles['products-wrapper']}>
-                                {item.items.map((product, j) => <ProductCard addProductToCart={addProductToCart} product={product} key={`${i}${j}`}/>)}
+                                {item.items.map((product, j) => <ProductCard addProductToCart={addProductToCart}
+                                                                             product={product} key={`${i}${j}`}/>)}
                             </div>
                         </div>
                     )}
