@@ -1,7 +1,7 @@
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {verifyUser} from "../../actions/auth";
+import {logout, verifyUser} from "../../actions/auth";
 import Loading from "../loading/Loading";
 
 const PrivateRoute = ({component, role}) => {
@@ -11,9 +11,8 @@ const PrivateRoute = ({component, role}) => {
 
     useEffect(() => {
 
-        const onError = (e) => {
-            if (e.response?.data?.message === 'jwt expired')
-                localStorage.removeItem('profile');
+        const onError = () => {
+            dispatch(logout);
             navigate('/login');
         }
 

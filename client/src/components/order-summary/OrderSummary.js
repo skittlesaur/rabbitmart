@@ -5,7 +5,7 @@ const OrderSummary = ({order}) => {
         <div className={styles['wrapper']}>
             <div className={styles['header']}>
                 <div className={styles['left-wrapper']}>
-                    <div className={styles['customer']}>{order.name}</div>
+                    <div clas   sName={styles['customer']}>{order.name.first} {order.name.last}</div>
                     <div className={styles['order-txt']}>Order</div>
                 </div>
                 <div className={styles['id']}>#{order.order_id}</div>
@@ -16,7 +16,7 @@ const OrderSummary = ({order}) => {
                         <div className={styles['product-img']}>
                             <img src={product.image} alt={product.name}/>
                         </div>
-                        <div className={styles['quantity']}>{product.price}EGP x{product.quantity}</div>
+                        <div className={styles['quantity']}>{product.price}EGP x{product.quantity || 1}</div>
                         <div className={styles['product-name']}>{product.name}</div>
                     </div>
                 )}

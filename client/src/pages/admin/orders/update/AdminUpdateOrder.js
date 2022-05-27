@@ -8,6 +8,8 @@ import OrderSummary from "../../../../components/order-summary/OrderSummary";
 import SuccessImage from '../../../../shared/assets/state/success.png';
 import WarningImage from '../../../../shared/assets/state/warning.png';
 import Error from "../../../../components/feedback/error/Error";
+import {useLocation} from "react-router-dom";
+import {useEffect} from "react";
 
 const INPUT = 0;
 const ORDER_VIEW = 1;
@@ -25,6 +27,16 @@ const AdminUpdateOrder = () => {
     const [error, setError] = useState("");
     const dispatch = useDispatch();
     const options = ['CREATED', 'PROCESSING', 'FULFILLED', 'CANCELLED'];
+    const location = useLocation();
+
+    useEffect(() => {
+        const query = new URLSearchParams(location.search);
+        const id = query.get('id');
+
+        if (id) {
+            setId(id);
+        }
+    }, [location.search])
 
     const handleFind = () => {
         setLoading(true);
@@ -72,6 +84,10 @@ const AdminUpdateOrder = () => {
         setLoading(false);
     }
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [state])
+
     return (
         <div className={styles['wrapper']}>
             {error && <Error error={error} setError={setError}/>}
@@ -81,8 +97,10 @@ const AdminUpdateOrder = () => {
             <div className={'heading'}>
                 <h1>Update Order Status</h1>
             </div>
-            {(state === INPUT || state === ORDER_VIEW) && <div className={'warning-box'}><span className={'warning'}>Warning:</span> The order status cannot be rolled back to a previous
-                state after it has been modified.</div>}
+            {(state === INPUT || state === ORDER_VIEW) &&
+                <div className={'warning-box'}><span className={'warning'}>Warning:</span> The order status cannot be
+                    rolled back to a previous
+                    state after it has been modified.</div>}
             {state === INPUT &&
                 <div className={styles['wrapper2']}>
                     <input className={styles['input']} onChange={(e) => setId(e.target.value.toUpperCase())} value={id}

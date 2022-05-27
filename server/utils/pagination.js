@@ -1,4 +1,4 @@
-const Pagination = (page, JSON) => {
+const Pagination = (page, JSON, itemsPerPage = 20) => {
     try {
         const array = [];
         for (const i in JSON) {
@@ -6,7 +6,6 @@ const Pagination = (page, JSON) => {
         }
 
         const arraySize = array.length;
-        const itemsPerPage = 2;
         let desiredPage = 0;
         if (page && page !== 0) {
             desiredPage = parseInt(page) - 1;
