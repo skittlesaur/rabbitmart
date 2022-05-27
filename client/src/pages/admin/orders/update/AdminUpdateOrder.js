@@ -8,6 +8,8 @@ import OrderSummary from "../../../../components/order-summary/OrderSummary";
 import SuccessImage from '../../../../shared/assets/state/success.png';
 import WarningImage from '../../../../shared/assets/state/warning.png';
 import Error from "../../../../components/feedback/error/Error";
+import {useLocation} from "react-router-dom";
+import {useEffect} from "react";
 
 const INPUT = 0;
 const ORDER_VIEW = 1;
@@ -25,6 +27,16 @@ const AdminUpdateOrder = () => {
     const [error, setError] = useState("");
     const dispatch = useDispatch();
     const options = ['CREATED', 'PROCESSING', 'FULFILLED', 'CANCELLED'];
+    const location = useLocation();
+
+    useEffect(() => {
+        const query = new URLSearchParams(location.search);
+        const id = query.get('id');
+
+        if(id){
+            setId(id);
+        }
+    }, [location.search])
 
     const handleFind = () => {
         setLoading(true);
