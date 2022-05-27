@@ -6,6 +6,7 @@
     gap: .5em;
     transition: all .3s ease-out;
     padding: .25em 1em;
+    cursor: pointer;
 }
 
 .wrapper div {
@@ -35,6 +36,7 @@
     font-weight: 500;
     padding: .1em .5em;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .CREATED {
