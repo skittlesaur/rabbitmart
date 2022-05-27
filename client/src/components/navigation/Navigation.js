@@ -1,7 +1,7 @@
 import styles from './navigation.module.css';
 import Logo from '../../shared/assets/logo.png';
 import {Link} from "react-router-dom";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {SEARCH_HIDDEN, SEARCH_VISIBLE} from "./constants/search";
 import {useNavigate} from "react-router-dom";
 
@@ -17,6 +17,10 @@ const Navigation = ({cartCount}) => {
     const auth = !!user;
     const admin = auth && user.role === 'ADMIN';
     const [dropdown, setDropdown] = useState(false);
+
+    useEffect(() => {
+        setDropdown(false);
+    }, [navigate])
 
     const handleLogout = () => {
         localStorage.removeItem('profile');
@@ -53,6 +57,15 @@ const Navigation = ({cartCount}) => {
         setMenuActive(false);
     }
 
+    const handleHideMenu = (e) => {
+        e.target.style = 'display:none';
+        const target = document.elementFromPoint(e.clientX, e.clientY);
+        if (target)
+            target.click();
+        e.target.style = '';
+        setDropdown(false);
+    }
+
     return (
         <div className={styles['wrapper']}>
             {search === SEARCH_VISIBLE && <div onClick={(e) => handleClose(e)} className={styles['hide-search']}/>}
@@ -73,10 +86,10 @@ const Navigation = ({cartCount}) => {
                         <Link onClick={closeMenu} className={styles['account']} to={'/orders'}>Previous Orders</Link>}
                     <Link onClick={closeMenu} to={'/shipping'}>Track Shipping</Link>
                     {admin && <Link onClick={closeMenu} className={styles['account']} to={'/admin'}>Admin Panel</Link>}
-                    {auth && <a className={styles['account']} onClick={() => {
+                    {auth && <div className={styles['account']} onClick={() => {
                         handleLogout();
                         closeMenu();
-                    }}>Logout</a>}
+                    }}>Logout</div>}
                 </nav>
             </div>
             <div className={styles['actions']}>
@@ -94,6 +107,8 @@ const Navigation = ({cartCount}) => {
                 <Link onClick={auth && handleDropDown} to={!auth && 'login'}
                       className={`material-symbols-outlined ${styles['account-icon']} ${styles['icon']}`}>person</Link>
                 {auth && dropdown && <div className={styles['account-dropdown']}>
+                    <div onClick={(e) => handleHideMenu(e)}
+                         className={styles['hide-dropdown']}/>
                     <Link to={'/wishlist'}>Wishlist</Link>
                     <Link to={'/orders'}>Orders</Link>
                     {admin && <Link to={'/admin'}>Admin Panel</Link>}

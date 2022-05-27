@@ -175,8 +175,23 @@
     font-size: .9rem;
 }
 
-.account-dropdown >*:hover{
+.account-dropdown > *:hover {
     background: var(--NEUTRAL_1);
+}
+
+.hide-dropdown {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+    cursor: default;
+    opacity: 0;
+}
+
+.hide-dropdown:hover{
+    background: none;
 }
 
 @media screen and (min-width: 980px) {
@@ -237,7 +252,7 @@
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .nav-wrapper{
+    .nav-wrapper {
         justify-self: center;
     }
 
