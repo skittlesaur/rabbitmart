@@ -4,7 +4,8 @@ import {Link} from "react-router-dom";
 import {useEffect, useRef, useState} from "react";
 import {SEARCH_HIDDEN, SEARCH_VISIBLE} from "./constants/search";
 import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {logout} from "../../actions/auth";
 
 
 const Navigation = ({cartCount}) => {
@@ -14,18 +15,19 @@ const Navigation = ({cartCount}) => {
     const [searchInput, setSearchInput] = useState("");
     const searchElement = useRef();
     const navigate = useNavigate();
-    const user = useSelector(state => state.authentication.profile?.user);
+    const user = useSelector(state => state.authentication.user);
     const auth = !!user;
     const admin = auth && user.role === 'ADMIN';
     const [dropdown, setDropdown] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setDropdown(false);
     }, [navigate])
 
     const handleLogout = () => {
-        localStorage.removeItem('profile');
-        navigate('/');
+        dispatch(logout);
+        navigate('/login');
     }
 
     const handleDropDown = () => {
