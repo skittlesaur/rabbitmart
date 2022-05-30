@@ -11,6 +11,7 @@ API.interceptors.request.use((req) => {
     return req;
 });
 
+export const postProduct = (product) => API.post(`/products`, product);
 export const validateCart = (cart) => API.post('/products/cart', {cart});
 
 export const authLogin = (email, password) => API.post('/auth/login', {email, password});

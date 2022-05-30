@@ -1,6 +1,16 @@
 import * as api from '../api';
 import {UPDATE_DATABASE, VALIDATE_CART, VALIDATE_CART_ERR} from "../constants/actions/products";
 
+export const postProduct = (product, onSuccess, onError) => async () => {
+    try {
+        const data = await api.postProduct(product).then(res => res.data);
+        onSuccess(data);
+    } catch (e) {
+        console.log(e);
+        onError(e);
+    }
+}
+
 export const validateCart = (cart, onSuccess, onError) => async (dispatch) => {
     try {
         const cartData = await api.validateCart(cart).then(res => res.data);
