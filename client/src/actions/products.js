@@ -6,8 +6,8 @@ export const postProduct = (product, onSuccess, onError) => async () => {
         const data = await api.postProduct(product).then(res => res.data);
         onSuccess(data);
     } catch (e) {
-        console.log(e);
-        onError(e);
+        const {data} = e.response;
+        onError(data);
     }
 }
 
