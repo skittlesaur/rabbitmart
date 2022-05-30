@@ -12,7 +12,7 @@ import auth from "../middleware/auth.js";
 const router = express.Router();
 
 router.get('/', ShowProductsPerPage);
-router.post('/', PostProducts);
+router.post('/', auth, PostProducts);
 router.patch('/', auth, adminUpdateProducts)
 router.get('/search', productsSearch);
 router.post('/cart', validateCart);
