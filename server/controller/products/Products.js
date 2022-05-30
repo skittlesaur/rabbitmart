@@ -77,34 +77,43 @@ function GetSortOrder(prop) {
 
 export const ProductsRecommendations = async (req, res) => {
     try {
-        let products = await Products.find();
-        products.sort(GetSortOrder("category"));
-        const limit = 5;
-        let lastChosen = "";
-        let lastCnt = 0;
-        let result = [];
-
-        for (let p in products) {
-            p = products[p];
-            if (lastCnt === limit) {
-                if (lastChosen !== p.category) {
-                    lastChosen = p.category;
-                    lastCnt = 1;
-                    result.push(p);
-                }
-            } else {
-                lastCnt = lastCnt + 1;
-                if (lastChosen !== p.category) {
-                    lastCnt = 1;
-                    lastChosen = p.category;
-                }
-                result.push(p);
-            }
-
+        // get 2 different random categories from the database
+        let categories = await Products.aggregate([
+            {$sample: {size: 2}},
+            {$project: {category: 1, _id: 0}}
+        ]);
+        // if the categories are the same, get another two
+        while(categories[0].category === categories[1].category) {
+            categories = await Products.aggregate([
+                {$sample: {size: 2}},
+                {$project: {category: 1, _id: 0}}
+            ]);
         }
-        res.status(200).send(result);
-    } catch (error) {
-        res.status(500).json({message: error.message});
+        let products={};
+        
+        // get the first category products
+        let productscategory1 = 
+        await Products.aggregate([
+            {$match: {category: categories[0].category}},
+            {$sample: {size: 5}},
+            {$match: {stock: {$gt: 0}}}
+        ]);
+
+        // get the second category products
+        let productscategory2 = 
+        await Products.aggregate([
+            {$match: {category: categories[1].category}},
+            {$sample: {size: 5}},
+            {$match: {stock: {$gt: 0}}}
+        ]);
+
+        products[categories[0].category] = productscategory1;
+        products[categories[1].category] = productscategory2;
+
+        res.status(200).json(products);
+    }
+    catch (error) {
+        res.status(400).json({message: error.message});
     }
 }
 
