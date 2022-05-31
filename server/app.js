@@ -6,9 +6,13 @@ import dotenv from 'dotenv';
 import products from "./routes/products.js";
 import auth from "./routes/auth.js";
 import orders from './routes/orders.js';
+import notifications from "./routes/notifications.js";
+import sgMail from '@sendgrid/mail';
 
 const app = express();
 dotenv.config();
+
+sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -17,6 +21,7 @@ app.use(cors());
 app.use('/orders', orders);
 app.use('/products', products);
 app.use('/auth', auth);
+app.use('/notifications', notifications);
 
 app.get('/', (req, res) => {
     res.status(200).json({
