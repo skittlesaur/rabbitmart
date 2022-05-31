@@ -6,6 +6,7 @@
     border-radius: 10px;
     overflow: hidden;
     height: 25em;
+    position: relative;
 }
 
 .image-wrapper {
