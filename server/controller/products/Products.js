@@ -120,34 +120,34 @@ export const validateCart = async (req, res) => {
     try {
         for (const cartProduct of cart) {
             // get the product from database by id
-            const product = await Products.findById(cartProduct._id.$oid);
+            const product = await Products.findOne({product_id: cartProduct.product_id});
 
             // 404 - the product doesn't exist in the database
             if (!product)
                 return res.status(404).json({
                     message: `${cartProduct.name} was not found in the database`,
-                    product_id: cartProduct._id.$oid,
+                    product_id: cartProduct.product_id,
                 });
 
             // 400 - the product is out of stock
             if (!product.stock)
                 return res.status(400).json({
                     message: `${product.name} is out of stock`,
-                    product_id: product._id
+                    product_id: product.product_id
                 });
 
             // 400 - product stock is not enough for purchase
             if (product.stock < cartProduct.quantity)
                 return res.status(400).json({
                     message: `Not enough stock for ${product.name} to complete the purchase. Requested items: ${cartProduct.quantity}`,
-                    product_id: product._id
+                    product_id: product.product_id
                 });
 
             // calculate total price from the database
             totalPrice += product.price * cartProduct.quantity;
 
             // add products ids to the `products` array
-            products.push(product._id);
+            products.push(product.product_id);
         }
 
         // generate validation/checkout token
