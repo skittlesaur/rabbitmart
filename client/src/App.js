@@ -27,7 +27,7 @@ const App = () => {
     const [cart, setCart] = useState(cartInitialization);
 
     const addProductToCart = (product) => {
-        const productIndex = cart.findIndex((cartProduct) => cartProduct._id.$oid === product._id.$oid);
+        const productIndex = cart.findIndex((cartProduct) => cartProduct.product_id === product.product_id);
 
         if (productIndex >= 0) {
             const updatedData = {...cart[productIndex], quantity: cart[productIndex].quantity + 1};
@@ -40,13 +40,13 @@ const App = () => {
     }
 
     const removeProductFromCart = (product) => {
-        const productIndex = cart.findIndex((cartProduct) => cartProduct._id.$oid === product._id.$oid);
+        const productIndex = cart.findIndex((cartProduct) => cartProduct.product_id === product.product_id);
 
         if (productIndex === -1)
             return;
 
         if (cart[productIndex].quantity === 1) {
-            const newArr = cart.filter((cartItem) => cartItem._id.$oid !== product._id.$oid);
+            const newArr = cart.filter((cartItem) => cartItem.product_id !== product.product_id);
             setCart(newArr);
         } else {
             const updatedData = {...cart[productIndex], quantity: cart[productIndex].quantity - 1};
