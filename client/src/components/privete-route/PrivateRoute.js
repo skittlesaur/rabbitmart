@@ -23,7 +23,7 @@ const PrivateRoute = ({component, role}) => {
         }
 
         dispatch(verifyUser(onSuccess, onError));
-    }, [])
+    }, [dispatch, navigate, role])
 
     if (auth)
         return component;

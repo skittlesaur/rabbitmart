@@ -12,7 +12,7 @@ const AdminUpdateSuccess = () => {
     useEffect(() => {
         if (!updatedData)
             navigate('/admin/products/update');
-    }, [navigate])
+    }, [navigate, updatedData])
 
     return (
         <div className={styles['wrapper']}>

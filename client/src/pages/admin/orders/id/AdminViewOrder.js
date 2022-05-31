@@ -20,7 +20,7 @@ const AdminViewOrder = () => {
         }
 
         dispatch(fetchOrder(id, onSuccess))
-    }, [id,])
+    }, [id,dispatch])
 
     if (loading)
         return <Loading/>
