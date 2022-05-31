@@ -5,13 +5,14 @@ import {
     ShowProductsPerPage,
     productsSearch,
     validateCart,
-    adminUpdateProducts
+    adminUpdateProducts, ProductsRecommendations
 } from '../controller/products/Products.js';
 import auth from "../middleware/auth.js";
 
 const router = express.Router();
 
 router.get('/', ShowProductsPerPage);
+router.get('/recommendations', ProductsRecommendations);
 router.post('/', auth, PostProducts);
 router.patch('/', auth, adminUpdateProducts)
 router.get('/search', productsSearch);

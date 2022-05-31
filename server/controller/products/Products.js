@@ -13,20 +13,41 @@ export const productsSearch = async (req, res) => {
 
     } catch (error) {
         res.status(404).json({message: error.message});
-
     }
 }
 
 export const ShowProductsPerPage = async (req, res) => {
     try {
-        const allProductsJSON = await Products.find();
+        let products = [];
 
-        const products = Pagination(req.query.page, allProductsJSON);
+        const itemsPerPage = 2;
 
-        res.status(200).json(products);
+        // If there is category: just filter them by the category,
+        // then do the pagination on it.
+        if (req.query.category) {
+            products = await ShowProductsPerCategory(req.query.category, products);
+        } else
+            products = await Products.find();
+        const numberOfPages = Math.ceil(products.length / itemsPerPage);
+        // in both cases you have to paginate the products
+        products = Pagination(req.query.page, products, itemsPerPage);
+
+
+        res.status(200).json({total_pages: numberOfPages, products: products});
 
     } catch (error) {
-        res.status(500).json({messasge: error.message});
+        res.status(500).json({message: error.message});
+    }
+}
+
+const ShowProductsPerCategory = async (category, products) => {
+    try {
+
+        products = await Products.find({"category": {$eq: category}});
+        return products;
+
+    } catch (error) {
+        throw error;
     }
 }
 
@@ -41,6 +62,48 @@ export const PostProducts = async (req, res) => {
         res.status(409).json({message: error.message});
     }
 
+}
+
+export const ProductsRecommendations = async (req, res) => {
+    try {
+        // get 2 different random categories from the database
+        let categories = await Products.aggregate([
+            {$sample: {size: 2}},
+            {$project: {category: 1, _id: 0}}
+        ]);
+        // if the categories are the same, get another two
+        while(categories[0].category === categories[1].category) {
+            categories = await Products.aggregate([
+                {$sample: {size: 2}},
+                {$project: {category: 1, _id: 0}}
+            ]);
+        }
+        let products = [];
+        
+        // get the first category products
+        let productscategory1 = 
+        await Products.aggregate([
+            {$match: {category: categories[0].category}},
+            {$sample: {size: 5}},
+            {$match: {stock: {$gt: 0}}}
+        ]);
+
+        // get the second category products
+        let productscategory2 = 
+        await Products.aggregate([
+            {$match: {category: categories[1].category}},
+            {$sample: {size: 5}},
+            {$match: {stock: {$gt: 0}}}
+        ]);
+
+        products.push({category:categories[0].category, products: productscategory1});
+        products.push({category:categories[1].category, products: productscategory2});
+
+        res.status(200).json(products);
+    }
+    catch (error) {
+        res.status(400).json({message: error.message});
+    }
 }
 
 /**
@@ -80,7 +143,7 @@ export const validateCart = async (req, res) => {
                     product_id: product._id
                 });
 
-            // calculate total price from the databse
+            // calculate total price from the database
             totalPrice += product.price * cartProduct.quantity;
 
             // add products ids to the `products` array
