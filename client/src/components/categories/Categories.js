@@ -13,42 +13,34 @@ const Categories = () => {
     const categories = [
         {
             display: "Fruits & Vegetables",
-            to: 'fruits-vegetables',
             img: FruitsAndVegetables
         },
         {
             display: "Meat, Poultry & Seafood",
-            to: 'meat-poultry-seafood',
             img: MeatPoultrySeafood
         },
         {
             display: "Breakfast",
-            to: 'breakfast',
             img: Breakfast
         },
         {
             display: "Chocolate & Candy",
-            to: 'chocolate-candy',
             img: ChocolateCandy
         },
         {
             display: "Dairy & Eggs",
-            to: 'dairy-eggs',
             img: DairyEggs
         },
         {
             display: "Beverages",
-            to: 'beverages',
             img: ColdDrinks
         },
         {
             display: "Chips & Crackers",
-            to: 'chips-crackers',
             img: Snacks
         },
         {
             display: "Ice Cream",
-            to: 'ice-cream',
             img: IceCream
         }
     ]
@@ -57,7 +49,7 @@ const Categories = () => {
         <div className={styles['categories']}>
             <div className={`${styles['categories-scroll']}`}>
                 {categories.map((item, i) =>
-                    <Link key={i} to={`/products/${item.to}`} className={styles['category']}>
+                    <Link key={i} to={`/products/${item.display}`} className={styles['category']}>
                         <div>{item.display}</div>
                         <img src={item.img} alt={item.display}/>
                     </Link>
