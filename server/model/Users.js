@@ -8,7 +8,8 @@ const UsersSchema = new Schema({
     email: {type: String, required: true},
     password: {type: String, required: true},
     role: {type: String, enum: ['USER', 'ADMIN'], default: "USER"},
-    phone: {type: String}
+    phone: {type: String},
+    wishlist: {type: Array}
 });
 
 const Users = mongoose.model('Users', UsersSchema);

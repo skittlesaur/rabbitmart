@@ -8,6 +8,7 @@ import auth from "./routes/auth.js";
 import orders from './routes/orders.js';
 import notifications from "./routes/notifications.js";
 import sgMail from '@sendgrid/mail';
+import me from "./routes/me.js";
 
 const app = express();
 dotenv.config();
@@ -22,6 +23,7 @@ app.use('/orders', orders);
 app.use('/products', products);
 app.use('/auth', auth);
 app.use('/notifications', notifications);
+app.use('/me', me);
 
 app.get('/', (req, res) => {
     res.status(200).json({
