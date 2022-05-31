@@ -17,6 +17,7 @@ export const validateCart = (cart) => API.post('/products/cart', {cart});
 
 export const authLogin = (email, password) => API.post('/auth/login', {email, password});
 export const verify = () => API.post('/auth/verify');
+export const userUpdateWishlist = (product_id) => API.patch('/me/wishlist', {product_id});
 
 export const fetchOrders = (page) => API.get(`/orders?page=${page}`);
 export const fetchOrder = (id) => API.get(`/orders/${id}`);

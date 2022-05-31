@@ -1,5 +1,5 @@
 import * as api from "../api";
-import {LOGIN, LOGOUT} from "../constants/actions/authentication";
+import {LOGIN, LOGOUT, UPDATE_WISHLIST} from "../constants/actions/authentication";
 
 export const authLogin = (email, password, onSuccess, onError) => async (dispatch) => {
     try {
@@ -19,6 +19,15 @@ export const verifyUser = (onSuccess, onError) => async () => {
     try {
         const verificationData = await api.verify().then(res => res.data);
         onSuccess(verificationData);
+    } catch (e) {
+        onError(e);
+    }
+}
+
+export const updateWishlist = (product_id, onError) => async (dispatch) => {
+    try {
+        const wishlistData = await api.userUpdateWishlist(product_id).then(res => res.data);
+        dispatch({type: UPDATE_WISHLIST, data: wishlistData.wishlist});
     } catch (e) {
         onError(e);
     }
