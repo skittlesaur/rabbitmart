@@ -64,17 +64,6 @@ export const PostProducts = async (req, res) => {
 
 }
 
-function GetSortOrder(prop) {
-    return function (a, b) {
-        if (a[prop] > b[prop]) {
-            return 1;
-        } else if (a[prop] < b[prop]) {
-            return -1;
-        }
-        return 0;
-    }
-}
-
 export const ProductsRecommendations = async (req, res) => {
     try {
         // get 2 different random categories from the database
