@@ -1,5 +1,15 @@
 import * as api from '../api';
-import {UPDATE_DATABASE, VALIDATE_CART, VALIDATE_CART_ERR} from "../constants/actions/products";
+import {FETCH_RECOMMENDATIONS, UPDATE_DATABASE, VALIDATE_CART, VALIDATE_CART_ERR} from "../constants/actions/products";
+
+export const getRecommendations = (onSuccess) => async (dispatch) => {
+    try {
+        const data = await api.getRecommendations().then(res => res.data);
+        dispatch({type: FETCH_RECOMMENDATIONS, data})
+        onSuccess(data);
+    } catch (e) {
+        console.log(e)
+    }
+}
 
 export const postProduct = (product, onSuccess, onError) => async () => {
     try {
