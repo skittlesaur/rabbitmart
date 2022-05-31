@@ -1,6 +1,6 @@
 import Users from "../../model/Users.js";
 
-export const postWishlist = async (req, res) => {
+export const updateWishlist = async (req, res) => {
     const {id, product_id} = req.body;
     try {
         const user = await Users.findById(id);
