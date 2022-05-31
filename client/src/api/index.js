@@ -11,11 +11,13 @@ API.interceptors.request.use((req) => {
     return req;
 });
 
+export const postProduct = (product) => API.post(`/products`, product);
 export const validateCart = (cart) => API.post('/products/cart', {cart});
 
 export const authLogin = (email, password) => API.post('/auth/login', {email, password});
 export const verify = () => API.post('/auth/verify');
 
+export const fetchOrders = (page) => API.get(`/orders?page=${page}`);
 export const fetchOrder = (id) => API.get(`/orders/${id}`);
 export const updateOrder = (id, status) => API.patch(`/orders/${id}`, {status});
 

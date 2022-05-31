@@ -1,9 +1,11 @@
 import styles from './navigation.module.css';
 import Logo from '../../shared/assets/logo.png';
 import {Link} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {SEARCH_HIDDEN, SEARCH_VISIBLE} from "./constants/search";
 import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {logout} from "../../actions/auth";
 
 
 const Navigation = ({cartCount}) => {
@@ -11,15 +13,21 @@ const Navigation = ({cartCount}) => {
     const [search, setSearch] = useState(SEARCH_HIDDEN);
     const [menuActive, setMenuActive] = useState(false);
     const [searchInput, setSearchInput] = useState("");
+    const searchElement = useRef();
     const navigate = useNavigate();
-    const user = JSON.parse(localStorage.getItem('profile'))?.user;
+    const user = useSelector(state => state.authentication.user);
     const auth = !!user;
     const admin = auth && user.role === 'ADMIN';
     const [dropdown, setDropdown] = useState(false);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        setDropdown(false);
+    }, [navigate])
 
     const handleLogout = () => {
-        localStorage.removeItem('profile');
-        navigate('/');
+        dispatch(logout);
+        navigate('/login');
     }
 
     const handleDropDown = () => {
@@ -31,7 +39,9 @@ const Navigation = ({cartCount}) => {
 
         if (width < 980 && search === SEARCH_HIDDEN) {
             setSearch(SEARCH_VISIBLE);
+            searchElement.current.focus();
         } else {
+            searchElement.current.blur();
             navigate(`/products?search=${searchInput}`);
             setSearch(SEARCH_HIDDEN);
             setSearchInput('');
@@ -48,6 +58,15 @@ const Navigation = ({cartCount}) => {
 
     const closeMenu = () => {
         setMenuActive(false);
+    }
+
+    const handleHideMenu = (e) => {
+        e.target.style = 'display:none';
+        const target = document.elementFromPoint(e.clientX, e.clientY);
+        if (target)
+            target.click();
+        e.target.style = '';
+        setDropdown(false);
     }
 
     return (
@@ -70,15 +89,18 @@ const Navigation = ({cartCount}) => {
                         <Link onClick={closeMenu} className={styles['account']} to={'/orders'}>Previous Orders</Link>}
                     <Link onClick={closeMenu} to={'/shipping'}>Track Shipping</Link>
                     {admin && <Link onClick={closeMenu} className={styles['account']} to={'/admin'}>Admin Panel</Link>}
-                    {auth && <a className={styles['account']} onClick={() => {
+                    {auth && <div className={styles['account']} onClick={() => {
                         handleLogout();
                         closeMenu();
-                    }}>Logout</a>}
+                    }}>Logout</div>}
                 </nav>
             </div>
             <div className={styles['actions']}>
-                <input onChange={(e) => setSearchInput(e.target.value)} value={searchInput}
+                <input onChange={(e) => setSearchInput(e.target.value)}
+                       onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                       value={searchInput}
                        placeholder={'Search'}
+                       ref={searchElement}
                        className={`${styles['search']} ${search === SEARCH_VISIBLE && styles['search-active']}`}/>
                 <div onClick={handleSearch} className={`material-symbols-outlined ${styles['icon']}`}>search</div>
                 <Link to={'/cart'}
@@ -88,6 +110,8 @@ const Navigation = ({cartCount}) => {
                 <Link onClick={auth && handleDropDown} to={!auth && 'login'}
                       className={`material-symbols-outlined ${styles['account-icon']} ${styles['icon']}`}>person</Link>
                 {auth && dropdown && <div className={styles['account-dropdown']}>
+                    <div onClick={(e) => handleHideMenu(e)}
+                         className={styles['hide-dropdown']}/>
                     <Link to={'/wishlist'}>Wishlist</Link>
                     <Link to={'/orders'}>Orders</Link>
                     {admin && <Link to={'/admin'}>Admin Panel</Link>}

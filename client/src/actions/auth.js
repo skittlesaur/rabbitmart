@@ -1,5 +1,5 @@
 import * as api from "../api";
-import {LOGIN} from "../constants/actions/authentication";
+import {LOGIN, LOGOUT} from "../constants/actions/authentication";
 
 export const authLogin = (email, password, onSuccess, onError) => async (dispatch) => {
     try {
@@ -9,6 +9,10 @@ export const authLogin = (email, password, onSuccess, onError) => async (dispatc
     } catch (e) {
         onError(e.response ? e.response.data : {message: "Server Error"});
     }
+}
+
+export const logout = async (dispatch) => {
+    dispatch({type: LOGOUT});
 }
 
 export const verifyUser = (onSuccess, onError) => async () => {

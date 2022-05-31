@@ -27,9 +27,13 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(process.env.CONNECTION_URL, {
+const mongooseOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true
-})
-.then(() => app.listen(PORT, () => console.log("Server listening on port " + PORT)))
-.catch((error) => console.log(error.message));
+}
+
+const handleServerStartup = () => {
+    app.listen(PORT, () => console.log(`Server listening on port ${PORT}`))
+}
+
+mongoose.connect(process.env.CONNECTION_URL, mongooseOptions, handleServerStartup)

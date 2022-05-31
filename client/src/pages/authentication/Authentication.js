@@ -1,18 +1,17 @@
 import styles from './authentication.module.css';
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const Authentication = ({data}) => {
 
     const navigate = useNavigate();
+    const user = useSelector(state => state.authentication.user);
 
     useEffect(() => {
-        const profile = JSON.parse(localStorage.getItem('profile'));
-        const user = profile ? profile.user : null;
-
         if (user)
-            navigate('/');
-    }, []);
+            return navigate('/');
+    }, [user, navigate])
 
     return (
         <div className={styles['wrapper']}>

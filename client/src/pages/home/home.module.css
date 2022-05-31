@@ -34,15 +34,6 @@
     z-index: 0;
 }
 
-.hero h1 span {
-    transition: .2s all ease-in-out;
-}
-
-.hero h1:hover span {
-    color: var(--PRIMARY);
-    font-size: 2rem;
-}
-
 .hero h1 {
     font-size: 1.8rem;
     line-height: 2rem;
