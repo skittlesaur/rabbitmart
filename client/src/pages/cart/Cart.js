@@ -54,7 +54,7 @@ const Cart = ({cart, cartCount, updateQuantity}) => {
             </div>
             <div className={styles['total-wrapper']}>
                 <div className={styles['total-text']}>Total ({cartCount} Items):</div>
-                <div className={styles['total-amount']}>{getTotal()} EGP</div>
+                <div className={styles['total-amount']}>{getTotal().toFixed(2)} EGP</div>
             </div>
             <div onClick={handleCheckout} className={`btn1`}>Checkout</div>
         </div>
