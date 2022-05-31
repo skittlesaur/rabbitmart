@@ -1,4 +1,22 @@
 import Users from "../../model/Users.js";
+import Products from "../../model/Products.js";
+
+export const getWishlist = async (req, res) => {
+    const {id} = req.body;
+
+    try {
+        // get user's wishlist array
+        const {wishlist} = await Users.findById(id);
+
+        // find products in the wishlist array
+        const products = await Products.find({product_id: {$in: wishlist}});
+
+        // respond with all products
+        res.status(200).json(products);
+    } catch (e) {
+        res.status(400).json({message: e.message});
+    }
+}
 
 export const updateWishlist = async (req, res) => {
     const {id, product_id} = req.body;
