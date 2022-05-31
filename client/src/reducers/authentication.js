@@ -1,4 +1,4 @@
-import {LOGIN, LOGOUT} from "../constants/actions/authentication";
+import {LOGIN, LOGOUT, UPDATE_WISHLIST} from "../constants/actions/authentication";
 
 let profile = JSON.parse(localStorage.getItem('profile'));
 
@@ -15,6 +15,9 @@ const reducer = (state = initialState, action) => {
         case LOGOUT:
             localStorage.removeItem('profile');
             return {};
+        case UPDATE_WISHLIST:
+            const user = {...state.user, wishlist: action.data};
+            return {...state, user}
         default:
             return state;
     }

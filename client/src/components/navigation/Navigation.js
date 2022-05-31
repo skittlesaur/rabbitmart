@@ -84,7 +84,7 @@ const Navigation = ({cartCount}) => {
                     {!auth &&
                         <Link className={styles['account']} onClick={closeMenu} to={'/login'}>Login/Sign Up</Link>}
                     <Link onClick={closeMenu} to={'/products'}>Products</Link>
-                    {auth && <Link onClick={closeMenu} className={styles['account']} to={'/wishlist'}>Wishlist</Link>}
+                    {auth && <Link onClick={closeMenu} className={styles['account']} to={'/wishlist'}>Wishlist {user.wishlist?.length > 0 ? `(${user.wishlist?.length})` : ''}</Link>}
                     {auth &&
                         <Link onClick={closeMenu} className={styles['account']} to={'/orders'}>Previous Orders</Link>}
                     <Link onClick={closeMenu} to={'/shipping'}>Track Shipping</Link>
@@ -112,7 +112,8 @@ const Navigation = ({cartCount}) => {
                 {auth && dropdown && <div className={styles['account-dropdown']}>
                     <div onClick={(e) => handleHideMenu(e)}
                          className={styles['hide-dropdown']}/>
-                    <Link to={'/wishlist'}>Wishlist</Link>
+                    <Link
+                        to={'/wishlist'}>Wishlist {user.wishlist?.length > 0 ? `(${user.wishlist?.length})` : ''}</Link>
                     <Link to={'/orders'}>Orders</Link>
                     {admin && <Link to={'/admin'}>Admin Panel</Link>}
                     <div onClick={handleLogout}>Logout</div>

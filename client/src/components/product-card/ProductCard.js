@@ -1,11 +1,25 @@
 import styles from './productCard.module.css';
 import {useRef, useState} from "react";
 import {motion} from 'framer-motion';
+import {useDispatch, useSelector} from "react-redux";
+import {updateWishlist} from "../../actions/auth";
+import {useNavigate} from "react-router-dom";
 
 const ProductCard = ({product, addProductToCart}) => {
 
     const [addToCart, setAddToCart] = useState(false);
     const wrapperRef = useRef();
+    const wishlist = useSelector(state => state.authentication.user?.wishlist) || [];
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleWishlist = () => {
+        const onError = () => {
+            navigate('/login');
+        }
+
+        dispatch(updateWishlist(product.product_id, onError));
+    }
 
     const handleAddToCart = () => {
         setAddToCart(true);
@@ -57,6 +71,8 @@ const ProductCard = ({product, addProductToCart}) => {
                             alt={product.name}/>}
             <div className={styles['image-wrapper']}>
                 <img src={product.image} alt={product.name}/>
+                <span onClick={handleWishlist}
+                      className={`material-symbols-outlined ${styles['wishlist']} ${wishlist.includes(product.product_id) && styles['wishlisted']}`}>favorite</span>
             </div>
             <div className={styles['content']}>
                 <p className={styles['name']}>{product.name}</p>

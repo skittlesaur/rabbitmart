@@ -15,6 +15,7 @@
     max-height: 55%;
     min-width: 100%;
     max-width: 100%;
+    position: relative;
 }
 
 .image-wrapper img {
@@ -99,4 +100,32 @@
 
 .out-of-stock {
     filter: grayscale(1);
+}
+
+.wishlist {
+    font-variation-settings: 'FILL' 0;
+    position: absolute;
+    top: 1.25em;
+    right: 1.25em;
+    background: var(--NEUTRAL_0);
+    border-radius: 50%;
+    padding: .25em;
+    font-size: 1.25rem;
+    transition: all .2s ease-out;
+    cursor: pointer;
+    color: black;
+}
+
+.wishlist:hover {
+    background: var(--NEUTRAL_1);
+    color: var(--NEUTRAL_4);
+}
+
+.wishlisted {
+    color: var(--PRIMARY) !important;
+    font-variation-settings: 'FILL' 1 !important;
+}
+
+.wishlisted:hover {
+    color: var(--PRIMARY) !important;
 }
