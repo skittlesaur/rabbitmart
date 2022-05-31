@@ -5,7 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import products from "./routes/products.js";
 import auth from "./routes/auth.js";
-
+import shipping from "./routes/shipping.js"
 const app = express();
 dotenv.config();
 
@@ -15,7 +15,7 @@ app.use(cors());
 
 app.use('/products', products);
 app.use('/auth', auth);
-
+app.use('/shipping',shipping);
 app.get('/', (req, res) => {
     res.status(200).json({
         team_name: "Curious Monkeys",
