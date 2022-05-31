@@ -89,7 +89,7 @@ export const ProductsRecommendations = async (req, res) => {
                 {$project: {category: 1, _id: 0}}
             ]);
         }
-        let products={};
+        let products = [];
         
         // get the first category products
         let productscategory1 = 
@@ -107,8 +107,8 @@ export const ProductsRecommendations = async (req, res) => {
             {$match: {stock: {$gt: 0}}}
         ]);
 
-        products[categories[0].category] = productscategory1;
-        products[categories[1].category] = productscategory2;
+        products.push({category:categories[0].category, products: productscategory1});
+        products.push({category:categories[1].category, products: productscategory2});
 
         res.status(200).json(products);
     }
