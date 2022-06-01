@@ -20,6 +20,7 @@ import AdminOrders from "./pages/admin/orders/default/AdminOrders";
 import AdminViewOrder from "./pages/admin/orders/id/AdminViewOrder";
 import AdminNewProduct from "./pages/admin/products/new/AdminNewProduct";
 import AdminShipping from "./pages/admin/shipment/default/AdminShipping";
+import AdminUpdateShipping from "./pages/admin/shipment/update/AdminUpdateShipping";
 
 const cartInitialization = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -96,6 +97,8 @@ const App = () => {
                        element={<PrivateRoute role={'ADMIN'} component={<AdminUpdateOrder/>}/>}/>
                 <Route path={'/admin/shipping'}
                        element={<PrivateRoute role={'ADMIN'} component={<AdminShipping/>}/>}/>
+                <Route path={'/admin/shipping/update'}
+                       element={<PrivateRoute role={'ADMIN'} component={<AdminUpdateShipping/>}/>}/>
                 <Route path={'/admin/products/new'}
                        element={<PrivateRoute role={'ADMIN'} component={<AdminNewProduct/>}/>}/>
                 <Route path={'/admin/products/update'}
