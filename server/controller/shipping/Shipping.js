@@ -22,14 +22,27 @@ export const getShipmentId = async (req, res) => {
 
 export const updateShipments = async (req, res) => {
     try {
-        const {status, order_id} = req.body;
+        const {status, id} = req.body;
+
+        const user = await Users.findById(id, {password: 0});
+
+        if (!user) {
+            return res.status(404).json({message: "User does not exist "});
+        }
+
+        if (user.role !== "ADMIN") {
+            return res.status(401).json({message: "Unauthorized user"});
+        }
+
         if (!status)
             return res.status(400).json({message: "Please provide the new status"});
 
         if (status !== 'CREATED' && status !== 'SHIPPED' && status !== 'DELIVERED' && status !== 'RETURNED')
             return res.status(400).json({message: "Please re-type the status correctly "});
 
-        let shipmentResponse = await Shipments.findOneAndUpdate({order_id}, {status});
+        const order_id = req.params.id;
+
+        const shipmentResponse = await Shipments.findOneAndUpdate({order_id}, {status});
 
         return res.status(200).json(shipmentResponse);
     } catch (e) {
