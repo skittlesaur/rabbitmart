@@ -5,6 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import products from "./routes/products.js";
 import auth from "./routes/auth.js";
+import shipping from "./routes/shipping.js"
 import orders from './routes/orders.js';
 import payments from './routes/payments.js';
 import notifications from "./routes/notifications.js";
@@ -26,6 +27,7 @@ app.use('/orders', orders);
 app.use('/payments', payments);
 app.use('/products', products);
 app.use('/auth', auth);
+app.use('/shipping',shipping);
 app.use('/notifications', notifications);
 app.use('/me', me);
 
