@@ -1,0 +1,27 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    --GRID-TEMPLATE: 1fr 1fr .75fr 1fr .6fr;
+}
+
+.header {
+    background: white;
+    position: sticky;
+    top: 3.7em;
+    display: grid;
+    grid-template-columns: var(--GRID-TEMPLATE);
+    padding: .5em 1em;
+    user-select: none;
+    gap: .5em;
+}
+
+.header div {
+    text-align: left;
+    font-size: .8rem;
+    font-weight: 500;
+    color: var(--NEUTRAL_7);
+}
+
+.status {
+    text-align: center !important;
+}

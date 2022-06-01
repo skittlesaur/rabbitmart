@@ -1,4 +1,3 @@
-
 .categories {
     margin: 2em 0;
 }
@@ -29,34 +28,34 @@
     background: linear-gradient(240deg, var(--NEUTRAL_0) 10%, var(--NEUTRAL_1) 100%);
     border-radius: 10px;
     overflow: hidden;
+    border: 1px solid var(--NEUTRAL_2);
 }
 
 .category div {
     position: relative;
     z-index: 1;
     text-align: center;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
+    line-height: 1.1rem;
     font-weight: 500;
     color: var(--PRIMARY);
-    filter: drop-shadow(2px 2px 0px white);
 }
 
 
 .category img {
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 0;
     width: 100%;
-    height: 60%;
+    height: 50%;
     object-fit: cover;
     object-position: 50% 0;
-    opacity: .7;
+    opacity: .6;
     transition: 0.2s all ease-in-out;
-    filter: blur(0) brightness(.9);
 }
 
 .category:hover img {
-    filter: blur(3px) brightness(1.05);
+    opacity: .7;
 }
 
 /* Large Laptop Support */

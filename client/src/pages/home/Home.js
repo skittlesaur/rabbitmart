@@ -6,10 +6,27 @@ import ProductCard from "../../components/product-card/ProductCard";
 import DeliveryIcon from '../../shared/assets/why/delivery.png';
 import ReliableIcon from '../../shared/assets/why/reliable.png';
 import PricesIcon from '../../shared/assets/why/prices.png';
-import DummyData from './DummyResponse.json';
+import {motion} from 'framer-motion';
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import Loading from "../../components/loading/Loading";
+import {getRecommendations} from "../../actions/products";
 
 const Home = ({addProductToCart}) => {
-    const products = DummyData;
+    const products = useSelector(state => state.products.recommendations);
+    const [loading, setLoading] = useState(true);
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        const onSuccess = () => {
+            setLoading(false);
+        }
+
+        dispatch(getRecommendations(onSuccess))
+    }, [dispatch])
+
+    if(loading)
+        return <Loading/>
 
     return (
         <div className={styles['wrapper']}>
@@ -20,7 +37,8 @@ const Home = ({addProductToCart}) => {
                     <Link className={'btn1'} to={'products'}>Shop Now</Link>
                 </div>
                 <div className={styles['delivery']}>
-                    <img src={DeliveryImg} alt={'Delivery'}/>
+                    <motion.img drag dragConstraints={{top: 0, right: 0, bottom: 0, left: 0}} src={DeliveryImg}
+                                alt={'Delivery'}/>
                 </div>
             </div>
             <section>
@@ -40,7 +58,8 @@ const Home = ({addProductToCart}) => {
                                 <Link to={`/products/${item.category}`}>{item.category}</Link>
                             </div>
                             <div className={styles['products-wrapper']}>
-                                {item.items.map((product, j) => <ProductCard addProductToCart={addProductToCart} product={product} key={`${i}${j}`}/>)}
+                                {item.products.map((product, j) => <ProductCard addProductToCart={addProductToCart}
+                                                                             product={product} key={`${i}${j}`}/>)}
                             </div>
                         </div>
                     )}

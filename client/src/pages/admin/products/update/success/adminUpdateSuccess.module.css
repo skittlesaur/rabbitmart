@@ -1,0 +1,32 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    padding: 2em 1em;
+}
+
+.header {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 500;
+    max-width: 50%;
+    margin-left: 2em;
+}
+
+.updated-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.updated-wrapper > * {
+    padding-bottom: 1em;
+    border-bottom: 1px solid var(--NEUTRAL_2);
+}
+
+@media screen and (min-width: 800px) {
+    .wrapper {
+        max-width: 800px;
+        margin: auto;
+    }
+}

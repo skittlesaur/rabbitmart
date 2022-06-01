@@ -1,7 +1,7 @@
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {verifyUser} from "../../actions/auth";
+import {logout, verifyUser} from "../../actions/auth";
 import Loading from "../loading/Loading";
 
 const PrivateRoute = ({component, role}) => {
@@ -12,17 +12,18 @@ const PrivateRoute = ({component, role}) => {
     useEffect(() => {
 
         const onError = () => {
+            dispatch(logout);
             navigate('/login');
         }
 
         const onSuccess = (user) => {
-            if (role && role === user.role || !role)
+            if (!role || role === user.role)
                 return setAuth(true);
             navigate('/401');
         }
 
         dispatch(verifyUser(onSuccess, onError));
-    }, [])
+    }, [dispatch, navigate, role])
 
     if (auth)
         return component;

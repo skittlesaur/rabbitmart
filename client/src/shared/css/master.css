@@ -153,10 +153,58 @@ img {
     justify-content: center;
     transition: all .2s ease-in-out;
     cursor: pointer;
+    text-align: center;
+    font-weight: 500;
 }
 
 .btn1:hover {
     transform: scale(1.05);
+}
+
+.btn2 {
+    color: var(--PRIMARY);
+    font-weight: 500;
+    border: 2px var(--PRIMARY) solid;
+    padding: .5em 1em;
+    border-radius: 5px;
+    transition: all .16s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    min-width: 10em;
+}
+
+.btn2:after {
+    content: '';
+    position: absolute;
+    background: white;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.btn2:before {
+    content: '';
+    position: absolute;
+    background: var(--PRIMARY);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    transition: all .15s ease-in-out;
+    z-index: -1;
+}
+
+.btn2:hover {
+    color: white;
+}
+
+.btn2:hover:before {
+    height: 100%;
+    top: 0;
 }
 
 .material-symbols-outlined {
@@ -167,7 +215,7 @@ img {
     'opsz' 48
 }
 
-input {
+input, select, option {
     font-size: .8rem;
     padding: .5em 1em;
     border-radius: 5px;
@@ -181,4 +229,16 @@ input:focus-visible {
 
 button {
     border: none;
+}
+
+.warning-box {
+    background: #ffefd1;
+    padding: .5em 1em;
+    border: 1px solid black;
+    font-size: .9rem;
+    line-height: 1.25rem;
+}
+
+.warning-box .warning {
+    font-weight: 500;
 }
