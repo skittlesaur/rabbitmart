@@ -10,8 +10,8 @@ const orderSchema = mongoose.Schema({
         first: String,
         last: String
     },
-    email: {type: String, required: true},
-    phone_number: {type: String, required: true},
+    email: {type: String, required: false},
+    phone_number: {type: String, required: false},
     address: {
         country: String,
         city: String,

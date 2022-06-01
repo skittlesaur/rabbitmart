@@ -9,11 +9,12 @@ import generateId from "../../utils/generateId.js";
 export const createOrder = async (req, res) => {
     try {
         const { products, total } = jwt.verify(req.body.token, process.env.JWT_SECRET_KEY);
-        console.log(products);
+        const { data } = req.body;
 
-        const paymentStatus = await axios.post("http://localhost:5000/payments", { products });
-        
-        const newOrder = new Order({
+        const paymentStatus = await axios.post("http://localhost:5000/payments", { products, total, data });
+
+       /* const { data } = req.body;
+        const order = new Order({
             order_id: generateId(),
             name: data.name,
             email: data.email,
@@ -30,22 +31,23 @@ export const createOrder = async (req, res) => {
             total: total
         });
 
-        await newOrder.save();
+        await order.save();
 
         //const updateQuantity = await axios.patch("" , { products });
 
         //const createShipment = await axios.post("" , { newOrder });
         
-        const to = data.email;
-        const notification = await axios.post("http://localhost:5000/notifications/order-confirmation", { to, newOrder });
+        const to = "youssef.elbasha.saad@gmail.com"; //order.email;
+        const notification = await axios.post("http://localhost:5000/notifications/order-confirmation", { to, order }); */
 
-        res.status(200).json({ order_id: newOrder.order_id });
+    res.status(200).json({  message: "order id" /* order_id: order.order_id */ });
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
+}
 
-
-
+export const finalizeOrder = async () => {
+    console.log("finally!!");
 }
 
 export const getOrder = async (req, res) => {
