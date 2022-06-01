@@ -1,11 +1,11 @@
 import express from "express";
-import {postshipments,updateshipments,getshipments} from "../controller/shipping.js/shipping.js";
+import {postShipments, updateShipments, getShipmentId} from "../controller/shipping/shipping.js";
 
 
 const router = express.Router();
-router.post('/',postshipments );
-router.get('/',getshipments );
-router.patch('/',updateshipments);
+router.post('/', postShipments);
+router.get('/:id', getShipmentId);
+router.patch('/', updateShipments);
 
 
 export default router;
