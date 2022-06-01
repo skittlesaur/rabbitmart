@@ -2,7 +2,6 @@ import styles from './adminUpdateShipping.module.css';
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import Loading from "../../../../components/loading/Loading";
-
 import SuccessImage from '../../../../shared/assets/state/success.png';
 import WarningImage from '../../../../shared/assets/state/warning.png';
 import Error from "../../../../components/feedback/error/Error";
