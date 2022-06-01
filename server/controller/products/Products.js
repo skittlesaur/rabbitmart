@@ -20,7 +20,7 @@ export const ShowProductsPerPage = async (req, res) => {
     try {
         let products = [];
 
-        const itemsPerPage = 2;
+        const itemsPerPage = 20;
 
         // If there is category: just filter them by the category,
         // then do the pagination on it.

@@ -1,4 +1,6 @@
 import Shipments from '../../model/shipments.js';
+import Pagination from "../../utils/pagination.js";
+import Users from "../../model/Users.js";
 
 export const getShipmentId = async (req, res) => {
     const {id} = req.params;
@@ -52,6 +54,30 @@ export const postShipments = async (req, res) => {
         res.status(409).json({message: e.message});
     }
 }
-   
 
+export const getShipments = async (req, res) => {
+    try {
+        const id = req.body.id;
+        const user = await Users.findById(id, {password: 0});
 
+        if (!user) {
+            return res.status(404).json({message: "User does not exist "});
+        }
+
+        if (user.role !== 'ADMIN') {
+            return res.status(401).json({message: "Unauthorized user"});
+        }
+
+        const {page} = req.query;
+
+        const shipments = await Shipments.find().sort({ordered_at: -1});
+
+        const total_pages = Math.ceil(shipments.length / 20);
+
+        const pagedShipments = Pagination(page, shipments, 20);
+
+        res.status(200).json({total_pages, shipments: pagedShipments});
+    } catch (e) {
+        res.status(400).json({message: e.message});
+    }
+}
