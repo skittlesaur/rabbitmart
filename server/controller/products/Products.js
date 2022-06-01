@@ -72,36 +72,35 @@ export const ProductsRecommendations = async (req, res) => {
             {$project: {category: 1, _id: 0}}
         ]);
         // if the categories are the same, get another two
-        while(categories[0].category === categories[1].category) {
+        while (categories[0].category === categories[1].category) {
             categories = await Products.aggregate([
                 {$sample: {size: 2}},
                 {$project: {category: 1, _id: 0}}
             ]);
         }
         let products = [];
-        
+
         // get the first category products
-        let productscategory1 = 
-        await Products.aggregate([
-            {$match: {category: categories[0].category}},
-            {$sample: {size: 5}},
-            {$match: {stock: {$gt: 0}}}
-        ]);
+        let productscategory1 =
+            await Products.aggregate([
+                {$match: {category: categories[0].category}},
+                {$sample: {size: 5}},
+                {$match: {stock: {$gt: 0}}}
+            ]);
 
         // get the second category products
-        let productscategory2 = 
-        await Products.aggregate([
-            {$match: {category: categories[1].category}},
-            {$sample: {size: 5}},
-            {$match: {stock: {$gt: 0}}}
-        ]);
+        let productscategory2 =
+            await Products.aggregate([
+                {$match: {category: categories[1].category}},
+                {$sample: {size: 5}},
+                {$match: {stock: {$gt: 0}}}
+            ]);
 
-        products.push({category:categories[0].category, products: productscategory1});
-        products.push({category:categories[1].category, products: productscategory2});
+        products.push({category: categories[0].category, products: productscategory1});
+        products.push({category: categories[1].category, products: productscategory2});
 
         res.status(200).json(products);
-    }
-    catch (error) {
+    } catch (error) {
         res.status(400).json({message: error.message});
     }
 }
@@ -146,19 +145,27 @@ export const validateCart = async (req, res) => {
             // calculate total price from the database
             totalPrice += product.price * cartProduct.quantity;
 
-            // add products ids to the `products` array
-            products.push(product.product_id);
+            // add products data to the `products` array
+            products.push({
+                product_id: product.product_id,
+                name: product.name,
+                price: product.price,
+                quantity: cartProduct.quantity
+            });
         }
+
+        // round to 2 decimals
+        totalPrice = totalPrice.toFixed(2);
 
         // generate validation/checkout token
         const token = jwt.sign(
-            {products: products, total_price: totalPrice},
+            {products: products, total: totalPrice},
             process.env.JWT_SECRET_KEY,
             {expiresIn: process.env.JWT_CHECKOUT_TTL});
 
         // validated successfully
         return res.status(200).json({
-            total_price: totalPrice,
+            total: totalPrice,
             cart: cart,
             token: token
         });
