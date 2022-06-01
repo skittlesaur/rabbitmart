@@ -1,6 +1,52 @@
+import axios from "axios";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 import Order from "../../model/Orders.js";
 import Users from "../../model/Users.js";
 import Pagination from "../../utils/pagination.js";
+import generateId from "../../utils/generateId.js";
+
+export const createOrder = async (req, res) => {
+    try {
+        const { products, total } = jwt.verify(req.body.token, process.env.JWT_SECRET_KEY);
+        console.log(products);
+
+        const paymentStatus = await axios.post("http://localhost:5000/payments", { products });
+        
+        const newOrder = new Order({
+            order_id: generateId(),
+            name: data.name,
+            email: data.email,
+            phone_number: data.phone_number,
+            address: data.address,
+            ordered_at: Date.now(),
+            products: products.map( product => {
+                return { 
+                    product_id: product.product_id,
+                    name: product.name,
+                    quantity: product.quantity
+                }
+            }),
+            total: total
+        });
+
+        await newOrder.save();
+
+        //const updateQuantity = await axios.patch("" , { products });
+
+        //const createShipment = await axios.post("" , { newOrder });
+        
+        const to = data.email;
+        const notification = await axios.post("http://localhost:5000/notifications/order-confirmation", { to, newOrder });
+
+        res.status(200).json({ order_id: newOrder.order_id });
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+
+
+
+}
 
 export const getOrder = async (req, res) => {
     try {
