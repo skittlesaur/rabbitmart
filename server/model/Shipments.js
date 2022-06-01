@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const {Schema} = mongoose;
 
-const ShipmentStatus = new Schema({
+const ShipmentsSchema = new Schema({
     order_id: {type: String, unique: true, required: true},
     total: Number,
     address: Object,
@@ -10,5 +10,5 @@ const ShipmentStatus = new Schema({
     ordered_at: Date
 });
 
-const Shipments = mongoose.model('shipment', ShipmentStatus);
+const Shipments = mongoose.model('Shipments', ShipmentsSchema);
 export default Shipments;
