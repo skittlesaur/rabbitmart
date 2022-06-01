@@ -5,10 +5,15 @@ import {Provider} from "react-redux";
 import {configureStore} from '@reduxjs/toolkit'
 import products from './reducers/products.js';
 import authentication from "./reducers/authentication";
+import orders from "./reducers/orders";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const store = configureStore({
-    reducer: {products, authentication}
+    reducer: {
+        products,
+        authentication,
+        orders
+    }
 });
 
 root.render(

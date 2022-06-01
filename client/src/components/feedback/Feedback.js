@@ -16,7 +16,7 @@ const Feedback = ({style, message, setMessage}) => {
                 setMessage('')
             }, 500);
         }, 5000);
-    }, [])
+    }, [setMessage])
 
     return (
         <AnimatePresence>

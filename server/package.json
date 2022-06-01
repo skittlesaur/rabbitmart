@@ -4,9 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node ./app.js"
+    "start": "node ./app.js",
+    "start-dev": "nodemon ./app.js"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "cookie-parser": "~1.4.4",
@@ -19,5 +21,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.3",
     "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
   }
 }

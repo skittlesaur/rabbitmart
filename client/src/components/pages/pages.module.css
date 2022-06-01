@@ -1,0 +1,32 @@
+.wrapper {
+    display: flex;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1em;
+    width: 70%;
+}
+
+.page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    --SIZE: 1.5em;
+    width: var(--SIZE);
+    height: var(--SIZE);
+    border: 1px solid var(--NEUTRAL_4);
+    background: white;
+    color: var(--NEUTRAL_4);
+    font-size: .8rem;
+    text-align: center;
+    line-height: 0;
+    cursor: pointer;
+}
+
+.active {
+    background: var(--PRIMARY);
+    border: none;
+    color: var(--RABBIT_YELLOW);
+    font-weight: 500;
+}
