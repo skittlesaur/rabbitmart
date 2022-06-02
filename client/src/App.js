@@ -21,6 +21,7 @@ import AdminViewOrder from "./pages/admin/orders/id/AdminViewOrder";
 import AdminNewProduct from "./pages/admin/products/new/AdminNewProduct";
 import AdminShipping from "./pages/admin/shipment/default/AdminShipping";
 import AdminUpdateShipping from "./pages/admin/shipment/update/AdminUpdateShipping";
+import Products from './pages/products/Products';
 
 const cartInitialization = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -109,6 +110,7 @@ const App = () => {
                        element={<PrivateRoute role={'ADMIN'} component={<AdminViewOrder/>}/>}/>
                 <Route path={'/401'} element={<Error401/>}/>
                 <Route path={'/*'} element={<Error404/>}/>
+                <Route path={'/products'} element={<Products />}/>
             </Routes>
             <Footer/>
         </BrowserRouter>
