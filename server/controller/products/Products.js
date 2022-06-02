@@ -5,11 +5,13 @@ import CSVtoJSON from "../../utils/CSVtoJSON.js";
 
 export const productsSearch = async (req, res) => {
     try {
+
         const products = await Products.find({"name": {$regex: req.query.search, $options: "i"}});
 
         const productsPaged = Pagination(req.query.page, products);
 
-        res.status(200).json(productsPaged);
+        const numberOfPages = Math.ceil(products.length / 2);
+        res.status(200).json({total_pages: numberOfPages, products:productsPaged});
 
     } catch (error) {
         res.status(404).json({message: error.message});
@@ -43,7 +45,7 @@ export const ShowProductsPerPage = async (req, res) => {
 const ShowProductsPerCategory = async (category, products) => {
     try {
 
-        products = await Products.find({"category": {$eq: category}});
+        products = await Products.find({"category": {$regex: category, $options: "i"}});
         return products;
 
     } catch (error) {
