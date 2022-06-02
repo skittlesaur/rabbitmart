@@ -12,11 +12,11 @@ import {Link} from "react-router-dom";
 const Categories = () => {
     const categories = [
         {
-            display: "Fruits & Vegetables",
+            display: "Fruits and Vegetables",
             img: FruitsAndVegetables
         },
         {
-            display: "Meat, Poultry & Seafood",
+            display: "Meat Poultry and Seafood",
             img: MeatPoultrySeafood
         },
         {
@@ -24,11 +24,11 @@ const Categories = () => {
             img: Breakfast
         },
         {
-            display: "Chocolate & Candy",
+            display: "Chocolate and Candy",
             img: ChocolateCandy
         },
         {
-            display: "Dairy & Eggs",
+            display: "Dairy and Eggs",
             img: DairyEggs
         },
         {
@@ -36,7 +36,7 @@ const Categories = () => {
             img: ColdDrinks
         },
         {
-            display: "Chips & Crackers",
+            display: "Chips and Crackers",
             img: Snacks
         },
         {
@@ -49,7 +49,7 @@ const Categories = () => {
         <div className={styles['categories']}>
             <div className={`${styles['categories-scroll']}`}>
                 {categories.map((item, i) =>
-                    <Link key={i} to={`/products/${item.display}`} className={styles['category']}>
+                    <Link key={i} to={`/products?category=${item.display}`} className={styles['category']}>
                         <div>{item.display}</div>
                         <img src={item.img} alt={item.display}/>
                     </Link>
