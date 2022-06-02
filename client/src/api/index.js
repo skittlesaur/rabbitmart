@@ -11,6 +11,10 @@ API.interceptors.request.use((req) => {
     return req;
 });
 
+export const getProductsPerPage = (page, category) => API.get(`/products?page=${page}${category && `&category=${category}`}`);
+export const productsSearch = (search, page) => API.get(`/products/search?search=${search}&page=${page}`);
+
+
 export const getRecommendations = () => API.get('/products/recommendations');
 export const postProduct = (product) => API.post(`/products`, product);
 export const validateCart = (cart) => API.post('/products/cart', {cart});
