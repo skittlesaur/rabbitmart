@@ -51,3 +51,21 @@ export const verifyUser = async (req, res) => {
         return res.status(404).json({message: "User not found"});
     }
 }
+
+export const verifyRole = async (req, res) => {
+    try {
+        const {id, role} = req.body;
+
+        const user = await Users.findById(id, {password: 0});
+
+        if (!user)
+            return res.status(404).json({message: `User ${id} was not found`});
+
+        if (role !== user.role)
+            return res.status(401).json({message: "Unauthorized user"});
+
+        return res.status(200).json({user});
+    } catch (e) {
+        return res.status(400).json({message: e.message});
+    }
+}
