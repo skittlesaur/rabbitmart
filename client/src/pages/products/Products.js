@@ -1,9 +1,10 @@
+import styles from './products.module.css';
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProductsPerPage, productsSearch } from "../../actions/products";
 import ProductCard from "../../components/product-card/ProductCard";
-import Pages from "../../components/pages/Pages";
+import Pages from "./Pages";
 import ProductCategories from "../../components/products-categories/Categories";
 
 const Products = () => {
@@ -69,9 +70,17 @@ const Products = () => {
 
     return (
         <div>
-            {<ProductCategories />}
-            {products.map(((product, i) => <ProductCard key= {i} product= {product}/>))}
+            <div>
+            {<ProductCategories/>}
+            </div>
+            <section>
+            <div className={styles['products-wrapper']}>
+                {products.map(((product, i) => <ProductCard key= {i} product= {product} />))}
+            </div>
+            <div>
             {<Pages max= {totalPages} current= {page} onPageClick= {handleClick}/>}
+            </div>
+            </section>
         </div>
     );
 }
