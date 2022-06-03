@@ -55,6 +55,11 @@ export const getOrder = async (req, res) => {
         if (!requiredOrder) {
             return res.status(404).json({message: "Order does not exist"});
         }
+
+        const productIds = requiredOrder.products.map(pr => pr.product_id);
+        const {data} = await axios.post(`${PRODUCTS_BASEURL}/arr`, {arr: productIds});
+
+        res.status(200).json({...requiredOrder._doc, products: data});
     } catch (error) {
         res.status(400).json({message: error.message});
     }

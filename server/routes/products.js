@@ -5,7 +5,7 @@ import {
     ShowProductsPerPage,
     productsSearch,
     validateCart,
-    adminUpdateProducts, ProductsRecommendations, getWishlistProducts
+    adminUpdateProducts, ProductsRecommendations, getProductsArr
 } from '../controller/products/Products.js';
 import auth from "../middleware/auth.js";
 
@@ -17,6 +17,6 @@ router.post('/', auth, PostProducts);
 router.patch('/', auth, adminUpdateProducts)
 router.get('/search', productsSearch);
 router.post('/cart', validateCart);
-router.post('/wishlist', getWishlistProducts);
+router.post('/arr', getProductsArr);
 
 export default router;

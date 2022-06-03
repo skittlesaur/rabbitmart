@@ -107,11 +107,11 @@ export const ProductsRecommendations = async (req, res) => {
     }
 }
 
-export const getWishlistProducts = async (req, res) => {
+export const getProductsArr = async (req, res) => {
     try {
-        const {wishlist} = req.body;
+        const {arr} = req.body;
 
-        const products = await Products.find({product_id: {$in: wishlist}});
+        const products = await Products.find({product_id: {$in: arr}});
 
         res.status(200).json(products);
     } catch (e) {
