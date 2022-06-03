@@ -14,7 +14,7 @@ const Cart = ({cart, cartCount, updateQuantity}) => {
 
     const handleCheckout = () => {
         const onSuccess = (token) => {
-            navigate(`/checkout?token=${token}`);
+            navigate(`/checkout?token=${token}&total=${getTotal()}`);
         }
 
         const onError = (e) => {
