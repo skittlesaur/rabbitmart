@@ -1,7 +1,7 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    padding: 2em 1em;
+    padding: 4em 2em;
     gap: 2em;
 }
 
@@ -20,6 +20,7 @@
 @media screen and (min-width: 1024px){
     .products-wrapper {
         grid-template-columns: repeat(4, 1fr);
+        padding: 0 2em;
     }
 }
 
