@@ -16,7 +16,7 @@ const ShippingShort = ({shipping}) => {
     return (
         <div onClick={() => navigate(`/admin/orders/${shipping.order_id}`)} className={styles['wrapper']}>
             <div className={styles['id']}>{shipping.order_id}</div>
-            <div className={styles['id']}>{shipping.address}</div>
+            <div className={styles['id']}>{shipping.address.area}, {shipping.address.city}</div>
             <div className={styles['total']}>{shipping.total.toFixed(2)}</div>
             <div onClick={(e) => {
                 e.stopPropagation();
