@@ -1,6 +1,7 @@
 import Shipments from '../../model/Shipments.js';
 import Pagination from "../../utils/pagination.js";
-import Users from "../../model/Users.js";
+import axios from "axios";
+import {USER_BASEURL} from "../../services/BaseURLs.js";
 
 export const getShipmentId = async (req, res) => {
     const {id} = req.params;
@@ -24,14 +25,12 @@ export const updateShipments = async (req, res) => {
     try {
         const {status, id} = req.body;
 
-        const user = await Users.findById(id, {password: 0});
-
-        if (!user) {
-            return res.status(404).json({message: "User does not exist "});
-        }
-
-        if (user.role !== "ADMIN") {
-            return res.status(401).json({message: "Unauthorized user"});
+        // verify the user's role by calling the `User` service
+        try {
+            await axios.post(`${USER_BASEURL}/role`, {id, role: 'ADMIN'})
+        } catch (e) {
+            const {response} = e;
+            return res.status(response.status).json(response.data);
         }
 
         if (!status)
@@ -71,14 +70,13 @@ export const postShipments = async (req, res) => {
 export const getShipments = async (req, res) => {
     try {
         const id = req.body.id;
-        const user = await Users.findById(id, {password: 0});
 
-        if (!user) {
-            return res.status(404).json({message: "User does not exist "});
-        }
-
-        if (user.role !== 'ADMIN') {
-            return res.status(401).json({message: "Unauthorized user"});
+        // verify the user's role by calling the `User` service
+        try {
+            await axios.post(`${USER_BASEURL}/role`, {id, role: 'ADMIN'})
+        } catch (e) {
+            const {response} = e;
+            return res.status(response.status).json(response.data);
         }
 
         const {page} = req.query;
