@@ -1,4 +1,4 @@
-import Shipments from '../../model/shipments.js';
+import Shipments from '../../model/Shipments.js';
 import Pagination from "../../utils/pagination.js";
 import Users from "../../model/Users.js";
 

@@ -1,5 +1,5 @@
 import express from "express";
-import {postShipments, updateShipments, getShipmentId, getShipments} from "../controller/shipping/shipping.js";
+import {postShipments, updateShipments, getShipmentId, getShipments} from "../controller/shipping/Shipping.js";
 import auth from "../middleware/auth.js";
 
 
