@@ -23,6 +23,9 @@ import AdminShipping from "./pages/admin/shipment/default/AdminShipping";
 import AdminUpdateShipping from "./pages/admin/shipment/update/AdminUpdateShipping";
 import Products from './pages/products/Products';
 
+import Checkout from "./pages/checkout/checkout";
+import Success from "./pages/checkout/success";
+
 const cartInitialization = JSON.parse(localStorage.getItem('cart')) || [];
 
 const App = () => {
@@ -89,9 +92,11 @@ const App = () => {
                 <Route path={'/products'} element={<Products addProductToCart={addProductToCart}/>}/>
                 <Route path={'/cart'}
                        element={<CartPage cart={cart} cartCount={cartCount} updateQuantity={updateQuantity}/>}/>
+                <Route path={'/checkout'} element={<Checkout/>}/>
+                <Route path={'/checkout/success'} element={<Success setCart={setCart}/>}/>
                 <Route path={'/signup'} element={<Signup/>}/>
                 <Route path={'/login'} element={<Login/>}/>
-                <Route path={'/wishlist'} element={<PrivateRoute component={<Wishlist/>}/>}/>
+                <Route path={'/wishlist'} element={<PrivateRoute component={<Wishlist addProductToCart={addProductToCart}/>}/>}/>
                 <Route path={'/admin'} element={<PrivateRoute role={'ADMIN'} component={<Admin/>}/>}/>
                 <Route path={'/admin/orders'}
                        element={<PrivateRoute role={'ADMIN'} component={<AdminOrders/>}/>}/>

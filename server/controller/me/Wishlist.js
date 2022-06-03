@@ -1,5 +1,6 @@
 import Users from "../../model/Users.js";
-import Products from "../../model/Products.js";
+import axios from "axios";
+import {PRODUCTS_BASEURL} from "../../services/BaseURLs.js";
 
 export const getWishlist = async (req, res) => {
     const {id} = req.body;
@@ -8,11 +9,11 @@ export const getWishlist = async (req, res) => {
         // get user's wishlist array
         const {wishlist} = await Users.findById(id);
 
-        // find products in the wishlist array
-        const products = await Products.find({product_id: {$in: wishlist}});
+        // request the products in the wishlist from the `Products` service
+        const {data} = await axios.post(`${PRODUCTS_BASEURL}/wishlist`, {wishlist});
 
         // respond with all products
-        res.status(200).json(products);
+        res.status(200).json(data);
     } catch (e) {
         res.status(400).json({message: e.message});
     }

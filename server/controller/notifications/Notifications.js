@@ -10,7 +10,7 @@ const defaults = {
 
 export const orderConfirmation = async (req, res) => {
     const {to, order} = req.body;
-
+    
     const email = {
         ...defaults,
         to,

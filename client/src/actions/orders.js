@@ -28,3 +28,14 @@ export const fetchOrders = (page, onSuccess, onError) => async (dispatch) => {
         onError(e);
     }
 }
+
+export const postOrder = (token, data, onSuccess, onError) => async () => {
+    try {
+        // const [name, email, phone, country, city, area,
+        //     street, building_number, floor, apartment_number] = data;
+        const {url} = await api.processPayment(token, data).then(res => res.data);
+        onSuccess(url);
+    } catch (e) {
+        onError(e);
+    }
+}

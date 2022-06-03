@@ -107,6 +107,18 @@ export const ProductsRecommendations = async (req, res) => {
     }
 }
 
+export const getWishlistProducts = async (req, res) => {
+    try {
+        const {wishlist} = req.body;
+
+        const products = await Products.find({product_id: {$in: wishlist}});
+
+        res.status(200).json(products);
+    } catch (e) {
+        res.status(400).json({message: e.message});
+    }
+}
+
 /**
  * Validates cart products before processing to purchasing
  *
