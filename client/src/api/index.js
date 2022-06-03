@@ -15,8 +15,8 @@ export const getRecommendations = () => API.get('/products/recommendations');
 export const postProduct = (product) => API.post(`/products`, product);
 export const validateCart = (cart) => API.post('/products/cart', {cart});
 
-export const authLogin = (email, password) => API.post('/auth/login', {email, password});
-export const verify = () => API.post('/auth/verify');
+export const authLogin = (email, password) => API.post('/me/login', {email, password});
+export const verify = () => API.post('/me/verify');
 export const userUpdateWishlist = (product_id) => API.patch('/me/wishlist', {product_id});
 export const getWishlist = () => API.get('/me/wishlist');
 
