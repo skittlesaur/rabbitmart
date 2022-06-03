@@ -1,6 +1,8 @@
 import {Link, useNavigate} from "react-router-dom";
 import styles from './checkout.module.css';
-import {useState, useRef, useEffect} from "react";
+import '../.././shared/css/master.css';
+import { useSearchParams } from "react-router-dom";
+import {useState, useRef, useEffect, useParams} from "react";
 import {useDispatch} from "react-redux";
 import Error from "../../components/feedback/error/Error";
 import {postOrder} from "../../actions/orders";
@@ -19,7 +21,9 @@ const Checkout = () => {
     const apartment_number = useRef();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    //const totalPrice = 
+    //const {total} = this.probs.match.params;
+    const [searchParams] = useSearchParams();
+
     const handleCheckout = () => {
         
         if (!fname.current.value)
@@ -113,21 +117,22 @@ const Checkout = () => {
                 <input ref={lname} type = "text" placeholder="last name"/>
                 
                 <input ref={email} type = "text" placeholder="email"/>
-                <div></div>
                 <input ref={phone} type = "text" placeholder="phone"/>
                 <input ref={country} type = "text" placeholder="country" />
                 <input ref={city} type = "text" placeholder="city" />
-                <div></div>
+                
                 <input ref={area} type = "text" placeholder="area" />
                 <input ref={street} type = "text" placeholder="street" />
                 <input ref={building_number} type = "text" placeholder="building number" />
-                <div></div>
+                
                 <input ref={floor} type = "text" placeholder="floor" />
                 <input ref={apartment_number} type = "text" placeholder="apartment number" />
-                <div>total price: </div> 
+                <div className={styles["total-text"]}>total price:</div>
+                <div className={styles['total-amount']}>{searchParams.get("total")} EGP</div>
+                
 
             </div>
-            <div className={styles['button-wrapper']}>
+            <div className={styles['total-wrapper']}>
                 <button onClick={handleCheckout} className = {'btn1'}>Checkout</button>
             </div>
             
