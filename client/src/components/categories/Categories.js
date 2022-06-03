@@ -6,6 +6,7 @@ import DairyEggs from '../../shared/assets/categories/dairy_eggs.png';
 import ColdDrinks from '../../shared/assets/categories/cold.png';
 import Snacks from '../../shared/assets/categories/snacks.png';
 import IceCream from '../../shared/assets/categories/icecream.png';
+import All from '../../shared/assets/categories/all.png';
 import styles from './categories.module.css';
 import {Link} from "react-router-dom";
 
@@ -13,7 +14,7 @@ const Categories = () => {
     const categories = [
         {
             display: "All",
-            img: FruitsAndVegetables
+            img: All
         },
         {
             display: "Fruits and Vegetables",
