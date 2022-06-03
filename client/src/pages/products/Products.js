@@ -6,17 +6,20 @@ import {getProductsPerPage, productsSearch} from "../../actions/products";
 import ProductCard from "../../components/product-card/ProductCard";
 import Pages from "../../components/pages/Pages";
 import Categories from "../../components/categories/Categories";
+import Loading from "../../components/loading/Loading";
 
 const Products = ({addProductToCart}) => {
     const [page, setPage] = useState(1);
     const [products, setProducts] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
+    const [loading, setLoading] = useState(false);
 
     const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
+        setLoading(true)
         const query = new URLSearchParams(location.search);
         const page = query.get('page') || 1;
         setPage(Number(page));
@@ -44,6 +47,7 @@ const Products = ({addProductToCart}) => {
     const onSuccess = (res) => {
         setTotalPages(res.total_pages);
         setProducts(res.products);
+        setLoading(false);
     }
 
     const handleClick = (i) => {
@@ -69,11 +73,15 @@ const Products = ({addProductToCart}) => {
                 <h1>Products</h1>
             </div>
             <Categories/>
-            <div className={styles['products-wrapper']}>
-                {products.map(((product, i) => <ProductCard addProductToCart={addProductToCart} key={i}
-                                                            product={product}/>))}
-            </div>
-            <Pages max={totalPages} current={page} onPageClick={handleClick}/>
+            {loading ? <Loading/> :
+                <>
+                    <div className={styles['products-wrapper']}>
+                        {products.map(((product, i) => <ProductCard addProductToCart={addProductToCart} key={i}
+                                                                    product={product}/>))}
+                    </div>
+                    <Pages max={totalPages} current={page} onPageClick={handleClick}/>
+                </>
+            }
         </div>
     )
         ;
