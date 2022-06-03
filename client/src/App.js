@@ -21,6 +21,7 @@ import AdminViewOrder from "./pages/admin/orders/id/AdminViewOrder";
 import AdminNewProduct from "./pages/admin/products/new/AdminNewProduct";
 import AdminShipping from "./pages/admin/shipment/default/AdminShipping";
 import AdminUpdateShipping from "./pages/admin/shipment/update/AdminUpdateShipping";
+import Products from './pages/products/Products';
 
 import Checkout from "./pages/checkout/checkout";
 import Success from "./pages/checkout/success";
@@ -88,6 +89,7 @@ const App = () => {
             <Navigation cartCount={cartCount}/>
             <Routes>
                 <Route path={'/'} element={<Home addProductToCart={addProductToCart}/>}/>
+                <Route path={'/products'} element={<Products addProductToCart={addProductToCart}/>}/>
                 <Route path={'/cart'}
                        element={<CartPage cart={cart} cartCount={cartCount} updateQuantity={updateQuantity}/>}/>
                 <Route path={'/checkout'} element={<Checkout/>}/>

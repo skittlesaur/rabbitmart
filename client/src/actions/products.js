@@ -1,6 +1,24 @@
 import * as api from '../api';
 import {FETCH_RECOMMENDATIONS, UPDATE_DATABASE, VALIDATE_CART, VALIDATE_CART_ERR} from "../constants/actions/products";
 
+export const getProductsPerPage = (page, category, onSuccess) => async () => {
+    try {
+        const products = await api.getProductsPerPage(page, category).then(res => res.data);
+        onSuccess(products);
+    } catch (error) {
+        console.log(error);
+    } 
+}
+
+export const productsSearch = (search, page, onSuccess) => async () => {
+    try {
+        const products = await api.productsSearch(search, page).then(res => res.data);
+        onSuccess(products);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const getRecommendations = (onSuccess) => async (dispatch) => {
     try {
         const data = await api.getRecommendations().then(res => res.data);

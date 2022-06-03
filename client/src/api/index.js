@@ -12,6 +12,8 @@ API.interceptors.request.use((req) => {
     return req;
 });
 
+export const getProductsPerPage = (page, category) => API.get(`${PRODUCTS_BASEURL}?page=${page}${category && `&category=${category}`}`);
+export const productsSearch = (search, page) => API.get(`${PRODUCTS_BASEURL}/search?search=${search}&page=${page}`);
 export const getRecommendations = () => API.get(`${PRODUCTS_BASEURL}/recommendations`);
 export const postProduct = (product) => API.post(`${PRODUCTS_BASEURL}`, product);
 export const adminUpdateDatabase = (csv, mode) => API.patch(`${PRODUCTS_BASEURL}`, {csv, mode});
