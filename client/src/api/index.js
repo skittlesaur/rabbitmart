@@ -26,5 +26,5 @@ export const updateShipment = (id, status) => API.patch(`/shipping/${id}`, {stat
 export const fetchOrders = (page) => API.get(`/orders?page=${page}`);
 export const fetchOrder = (id) => API.get(`/orders/${id}`);
 export const updateOrder = (id, status) => API.patch(`/orders/${id}`, {status});
-export const postOrder = (data) => API.post('/orders', data);
+export const postOrder = (token, data) => API.post('/orders', {token, data});
 export const adminUpdateDatabase = (csv, mode) => API.patch(`/products`, {csv, mode});

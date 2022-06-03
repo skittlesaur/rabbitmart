@@ -29,11 +29,11 @@ export const fetchOrders = (page, onSuccess, onError) => async (dispatch) => {
     }
 }
 
-export const postOrder = (data, onSuccess, onError) => async (dispatch) => {
+export const postOrder = (token, data, onSuccess, onError) => async () => {
     try {
         // const [name, email, phone, country, city, area,
         //     street, building_number, floor, apartment_number] = data;
-        const ordersData = await api.postOrder(data).then(res => res.data);
+        await api.postOrder(token, data).then(res => res.data);
         onSuccess();
     } catch (e) {
         onError(e);
