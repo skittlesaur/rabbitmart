@@ -10,11 +10,8 @@ import styles from './categories.module.css';
 import {Link} from "react-router-dom";
 
 const ProductCategories = () => {
+    const allCategory = { display: "All" };
     const categories = [
-        {
-            display: "all",
-            img: FruitsAndVegetables
-        },
         {
             display: "Fruits and Vegetables",
             img: FruitsAndVegetables
@@ -52,8 +49,11 @@ const ProductCategories = () => {
     return (
         <div className={styles['categories']}>
             <div className={`${styles['categories-scroll']}`}>
+                    <Link key={0} to={`/products?category=all`} className={styles['all-category']}>
+                        <div>{allCategory.display}</div>
+                    </Link>
                 {categories.map((item, i) =>
-                    <Link key={i} to={`/products?category=${item.display}`} className={styles['category']}>
+                    <Link key={i + 1} to={`/products?category=${item.display}`} className={styles['category']}>
                         <div>{item.display}</div>
                         <img src={item.img} alt={item.display}/>
                     </Link>
