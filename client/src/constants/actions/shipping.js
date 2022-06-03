@@ -1,0 +1,1 @@
+export const SHIPPING_FETCH_ALL = 'SHIPPING_FETCH_ALL';

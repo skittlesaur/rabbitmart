@@ -1,10 +1,11 @@
 import axios from "axios";
 import jwt from "jsonwebtoken";
 import Order from "../../model/Orders.js";
-import Users from "../../model/Users.js";
 import Pagination from "../../utils/pagination.js";
 import generateId from "../../utils/generateId.js";
-
+import axios from "axios";
+import {USER_BASEURL, PRODUCTS_BASEURL, NOTIFICATIONS_BASEURL, SHIPPING_BASEURL} from "../../services/BaseURLs.js";
+ 
 export const createOrder = async (req, res) => {
   try {
     const { data } = req.body;
@@ -25,17 +26,17 @@ export const createOrder = async (req, res) => {
     await order.save();
 
     const deductQuantity = await axios.patch(
-      "http://localhost:5000/products/updateQuantity",
+      `${PRODUCTS_BASEURL}/updateQuantity`,
       { products: order.products }
     );
 
     const to = order.email;
     const notification = await axios.post(
-      "http://localhost:5000/notifications/order-confirmation",
+      `${NOTIFICATIONS_BASEURL}/order-confirmation`,
       { to, order }
     );
 
-    const ship = await axios.post("http://localhost:5000/shipping/", {
+    const ship = await axios.post(`${SHIPPING_BASEURL}`, {
       ordered_at: order.ordered_at,
       order_id: order.order_id,
       address: order.address,
@@ -55,6 +56,23 @@ export const getOrder = async (req, res) => {
     if (!requiredOrder) {
       return res.status(404).json({ message: "Order does not exist" });
     }
+}
+
+export const getAllOrders = async (req, res) => {
+    try {
+
+        const id = req.body.id;
+
+        // verify the user's role by calling the `User` service
+        try {
+            await axios.post(`${USER_BASEURL}/role`, {id, role: 'ADMIN'})
+        } catch (e) {
+            const {response} = e;
+            return res.status(response.status).json(response.data);
+        }
+
+        const orders = await Order.find().sort({ordered_at: -1});
+        const ordersPaged = Pagination(req.query.page, orders);
 
     res.status(200).json(requiredOrder);
   } catch (error) {
@@ -88,41 +106,33 @@ export const getAllOrders = async (req, res) => {
 
 export const updateOrder = async (req, res) => {
   try {
-    const orderStatus = req.body.status;
-    const id = req.body.id;
 
-    const user = await Users.findById(id, { password: 0 });
+        const orderStatus = req.body.status;
+        const id = req.body.id;
 
-    if (!user) {
-      return res.status(404).json({ message: "User does not exist " });
+        // verify the user's role by calling the `User` service
+        try {
+            await axios.post(`${USER_BASEURL}/role`, {id, role: 'ADMIN'})
+        } catch (e) {
+            const {response} = e;
+            return res.status(response.status).json(response.data);
+        }
+
+        if (!['CREATED', 'PROCESSING', 'FULFILLED', 'CANCELLED'].includes(orderStatus)) {
+            return res.status(400).json({message: "Invalid status, has to be CREATED, PROCESSING, FULFILLED, CANCELLED"});
+        }
+
+        const updatedOrder = await Order.findOneAndUpdate({"order_id": req.params.id}, {
+            status: orderStatus,
+        });
+
+        if (!updatedOrder) {
+            return res.status(404).json({message: "Order does not exist"});
+        }
+
+        res.status(200).json(updatedOrder);
+
+    } catch (error) {
+        res.status(404).json({message: error.message});
     }
-
-    if (user.role !== "ADMIN") {
-      return res.status(401).json({ message: "Unauthorized user" });
-    }
-
-    if (
-      !["CREATED", "PROCESSING", "FULFILLED", "CANCELLED"].includes(orderStatus)
-    ) {
-      return res.status(400).json({
-        message:
-          "Invalid status, has to be CREATED, PROCESSING, FULFILLED, CANCELLED",
-      });
-    }
-
-    const updatedOrder = await Order.findOneAndUpdate(
-      { order_id: req.params.id },
-      {
-        status: orderStatus,
-      }
-    );
-
-    if (!updatedOrder) {
-      return res.status(404).json({ message: "Order does not exist" });
-    }
-
-    res.status(200).json(updatedOrder);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
 };

@@ -19,6 +19,10 @@ import ScrollToTop from "./components/scroll-to-top/ScrollToTop";
 import AdminOrders from "./pages/admin/orders/default/AdminOrders";
 import AdminViewOrder from "./pages/admin/orders/id/AdminViewOrder";
 import AdminNewProduct from "./pages/admin/products/new/AdminNewProduct";
+import AdminShipping from "./pages/admin/shipment/default/AdminShipping";
+import AdminUpdateShipping from "./pages/admin/shipment/update/AdminUpdateShipping";
+
+import Checkout from "./pages/checkout/checkout";
 
 const cartInitialization = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -85,14 +89,19 @@ const App = () => {
                 <Route path={'/'} element={<Home addProductToCart={addProductToCart}/>}/>
                 <Route path={'/cart'}
                        element={<CartPage cart={cart} cartCount={cartCount} updateQuantity={updateQuantity}/>}/>
+                <Route path={'/checkout'} element={<Checkout/>}/>
                 <Route path={'/signup'} element={<Signup/>}/>
                 <Route path={'/login'} element={<Login/>}/>
-                <Route path={'/wishlist'} element={<PrivateRoute component={<Wishlist/>}/>}/>
+                <Route path={'/wishlist'} element={<PrivateRoute component={<Wishlist addProductToCart={addProductToCart}/>}/>}/>
                 <Route path={'/admin'} element={<PrivateRoute role={'ADMIN'} component={<Admin/>}/>}/>
                 <Route path={'/admin/orders'}
                        element={<PrivateRoute role={'ADMIN'} component={<AdminOrders/>}/>}/>
                 <Route path={'/admin/orders/update'}
                        element={<PrivateRoute role={'ADMIN'} component={<AdminUpdateOrder/>}/>}/>
+                <Route path={'/admin/shipping'}
+                       element={<PrivateRoute role={'ADMIN'} component={<AdminShipping/>}/>}/>
+                <Route path={'/admin/shipping/update'}
+                       element={<PrivateRoute role={'ADMIN'} component={<AdminUpdateShipping/>}/>}/>
                 <Route path={'/admin/products/new'}
                        element={<PrivateRoute role={'ADMIN'} component={<AdminNewProduct/>}/>}/>
                 <Route path={'/admin/products/update'}

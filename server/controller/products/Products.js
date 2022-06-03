@@ -20,7 +20,7 @@ export const ShowProductsPerPage = async (req, res) => {
     try {
         let products = [];
 
-        const itemsPerPage = 2;
+        const itemsPerPage = 20;
 
         // If there is category: just filter them by the category,
         // then do the pagination on it.
@@ -102,6 +102,18 @@ export const ProductsRecommendations = async (req, res) => {
         res.status(200).json(products);
     } catch (error) {
         res.status(400).json({message: error.message});
+    }
+}
+
+export const getWishlistProducts = async (req, res) => {
+    try {
+        const {wishlist} = req.body;
+
+        const products = await Products.find({product_id: {$in: wishlist}});
+
+        res.status(200).json(products);
+    } catch (e) {
+        res.status(400).json({message: e.message});
     }
 }
 
