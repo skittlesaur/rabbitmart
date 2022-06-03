@@ -1,6 +1,7 @@
 import Order from "../../model/Orders.js";
-import Users from "../../model/Users.js";
 import Pagination from "../../utils/pagination.js";
+import axios from "axios";
+import {USER_BASEURL} from "../../services/BaseURLs.js";
 
 export const getOrder = async (req, res) => {
     try {
@@ -22,14 +23,13 @@ export const getAllOrders = async (req, res) => {
     try {
 
         const id = req.body.id;
-        const user = await Users.findById(id, {password: 0});
 
-        if (!user) {
-            return res.status(404).json({message: "User does not exist "});
-        }
-
-        if (user.role !== 'ADMIN') {
-            return res.status(401).json({message: "Unauthorized user"});
+        // verify the user's role by calling the `User` service
+        try {
+            await axios.post(`${USER_BASEURL}/role`, {id, role: 'ADMIN'})
+        } catch (e) {
+            const {response} = e;
+            return res.status(response.status).json(response.data);
         }
 
         const orders = await Order.find().sort({ordered_at: -1});
@@ -50,16 +50,13 @@ export const updateOrder = async (req, res) => {
         const orderStatus = req.body.status;
         const id = req.body.id;
 
-        const user = await Users.findById(id, {password: 0});
-
-        if (!user) {
-            return res.status(404).json({message: "User does not exist "});
+        // verify the user's role by calling the `User` service
+        try {
+            await axios.post(`${USER_BASEURL}/role`, {id, role: 'ADMIN'})
+        } catch (e) {
+            const {response} = e;
+            return res.status(response.status).json(response.data);
         }
-
-        if (user.role !== "ADMIN") {
-            return res.status(401).json({message: "Unauthorized user"});
-        }
-
 
         if (!['CREATED', 'PROCESSING', 'FULFILLED', 'CANCELLED'].includes(orderStatus)) {
             return res.status(400).json({message: "Invalid status, has to be CREATED, PROCESSING, FULFILLED, CANCELLED"});

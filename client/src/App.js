@@ -92,7 +92,7 @@ const App = () => {
                 <Route path={'/checkout'} element={<Checkout/>}/>
                 <Route path={'/signup'} element={<Signup/>}/>
                 <Route path={'/login'} element={<Login/>}/>
-                <Route path={'/wishlist'} element={<PrivateRoute component={<Wishlist/>}/>}/>
+                <Route path={'/wishlist'} element={<PrivateRoute component={<Wishlist addProductToCart={addProductToCart}/>}/>}/>
                 <Route path={'/admin'} element={<PrivateRoute role={'ADMIN'} component={<Admin/>}/>}/>
                 <Route path={'/admin/orders'}
                        element={<PrivateRoute role={'ADMIN'} component={<AdminOrders/>}/>}/>

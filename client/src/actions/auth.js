@@ -32,3 +32,12 @@ export const updateWishlist = (product_id, onError) => async (dispatch) => {
         onError(e);
     }
 }
+
+export const getWishlist = (onSuccess, onError) => async () => {
+    try {
+        const wishlist = await api.getWishlist().then(res => res.data);
+        onSuccess(wishlist);
+    } catch (e) {
+        onError(e);
+    }
+}
