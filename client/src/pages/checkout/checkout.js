@@ -1,4 +1,3 @@
-import {useNavigate} from "react-router-dom";
 import styles from './checkout.module.css';
 import '../.././shared/css/master.css';
 import {useState, useRef} from "react";
@@ -20,7 +19,6 @@ const Checkout = () => {
     const floor = useRef();
     const apartment_number = useRef();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const cart = useSelector(state => state.products.cart_validation);
 
@@ -60,8 +58,8 @@ const Checkout = () => {
             return setError("Enter a valid building number");
 
 
-        const onSuccess = () => {
-            navigate('/');
+        const onSuccess = (url) => {
+            window.location.href = url;
         }
 
         const onError = (e) => {
@@ -71,18 +69,21 @@ const Checkout = () => {
 
         const data = {
 
-            fname: fname.current.value,
-            lname: lname.current.value,
+            name: {
+                first: fname.current.value,
+                last: lname.current.value,
+            },
             email: email.current.value,
-            phone: phone.current.value,
-            country: country.current.value,
-            city: city.current.value,
-            area: area.current.value,
-            street: street.current.value,
-            building_number: building_number.current.value,
-            floor: floor.current.value,
-            apartment_number: apartment_number.current.value
-
+            phone_number: phone.current.value,
+            address: {
+                country: country.current.value,
+                city: city.current.value,
+                area: area.current.value,
+                street: street.current.value,
+                building_number: building_number.current.value,
+                floor: floor.current.value,
+                apartment_number: apartment_number.current.value
+            }
         };
 
         dispatch(postOrder(cart.token, data, onSuccess, onError));

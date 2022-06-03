@@ -43,6 +43,7 @@ export const createOrder = async (req, res) => {
 
         res.status(200).json({order_id: order.order_id});
     } catch (error) {
+        console.log(error);
         res.status(404).json({error: error.message});
     }
 };

@@ -23,6 +23,7 @@ import AdminShipping from "./pages/admin/shipment/default/AdminShipping";
 import AdminUpdateShipping from "./pages/admin/shipment/update/AdminUpdateShipping";
 
 import Checkout from "./pages/checkout/checkout";
+import Success from "./pages/checkout/success";
 
 const cartInitialization = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -90,6 +91,7 @@ const App = () => {
                 <Route path={'/cart'}
                        element={<CartPage cart={cart} cartCount={cartCount} updateQuantity={updateQuantity}/>}/>
                 <Route path={'/checkout'} element={<Checkout/>}/>
+                <Route path={'/checkout/success'} element={<Success setCart={setCart}/>}/>
                 <Route path={'/signup'} element={<Signup/>}/>
                 <Route path={'/login'} element={<Login/>}/>
                 <Route path={'/wishlist'} element={<PrivateRoute component={<Wishlist addProductToCart={addProductToCart}/>}/>}/>

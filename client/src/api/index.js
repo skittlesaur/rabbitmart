@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {ORDERS_BASEURL, PRODUCTS_BASEURL, SHIPPING_BASEURL, USER_BASEURL} from "./BaseURLs";
+import {ORDERS_BASEURL, PAYMENTS_BASEURL, PRODUCTS_BASEURL, SHIPPING_BASEURL, USER_BASEURL} from "./BaseURLs";
 
 const API = axios.create();
 
@@ -26,7 +26,8 @@ export const fetchShipments = (page) => API.get(`${SHIPPING_BASEURL}?page=${page
 export const fetchShipment = (id) => API.get(`${SHIPPING_BASEURL}/${id}`);
 export const updateShipment = (id, status) => API.patch(`${SHIPPING_BASEURL}/${id}`, {status});
 
-export const fetchOrders = (page) => API.get(`/orders?page=${page}`);
-export const fetchOrder = (id) => API.get(`/orders/${id}`);
-export const updateOrder = (id, status) => API.patch(`/orders/${id}`, {status});
-export const postOrder = (token, data) => API.post('/orders', {token, data});
+export const fetchOrders = (page) => API.get(`${ORDERS_BASEURL}?page=${page}`);
+export const fetchOrder = (id) => API.get(`${ORDERS_BASEURL}/${id}`);
+export const updateOrder = (id, status) => API.patch(`${ORDERS_BASEURL}/${id}`, {status});
+
+export const processPayment = (token, data) => API.post(`${PAYMENTS_BASEURL}`, {token, data});
