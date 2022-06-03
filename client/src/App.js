@@ -86,6 +86,7 @@ const App = () => {
             <Navigation cartCount={cartCount}/>
             <Routes>
                 <Route path={'/'} element={<Home addProductToCart={addProductToCart}/>}/>
+                <Route path={'/products'} element={<Products addProductToCart={addProductToCart}/>}/>
                 <Route path={'/cart'}
                        element={<CartPage cart={cart} cartCount={cartCount} updateQuantity={updateQuantity}/>}/>
                 <Route path={'/signup'} element={<Signup/>}/>
@@ -110,7 +111,6 @@ const App = () => {
                        element={<PrivateRoute role={'ADMIN'} component={<AdminViewOrder/>}/>}/>
                 <Route path={'/401'} element={<Error401/>}/>
                 <Route path={'/*'} element={<Error404/>}/>
-                <Route path={'/products'} element={<Products />}/>
             </Routes>
             <Footer/>
         </BrowserRouter>

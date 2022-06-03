@@ -5,7 +5,7 @@
 .categories-scroll {
     display: grid;
     grid-auto-flow: column;
-    gap: 1em;
+    gap: .5em;
     overflow-x: auto;
     overflow-y: hidden;
     overscroll-behavior: contain;
@@ -19,7 +19,7 @@
     cursor: pointer;
     position: relative;
 
-    --CATEGORY_SIZE: 8em;
+    --CATEGORY_SIZE: 7em;
     width: var(--CATEGORY_SIZE);
     height: var(--CATEGORY_SIZE);
 

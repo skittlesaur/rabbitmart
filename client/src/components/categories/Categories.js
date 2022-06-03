@@ -12,6 +12,10 @@ import {Link} from "react-router-dom";
 const Categories = () => {
     const categories = [
         {
+            display: "All",
+            img: FruitsAndVegetables
+        },
+        {
             display: "Fruits and Vegetables",
             img: FruitsAndVegetables
         },
