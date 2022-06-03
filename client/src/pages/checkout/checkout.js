@@ -19,7 +19,7 @@ const Checkout = () => {
     const apartment_number = useRef();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    //const totalPrice = 
     const handleCheckout = () => {
         
         if (!fname.current.value)
@@ -30,7 +30,6 @@ const Checkout = () => {
             return setError("Enter an email address");
         if(!validateEmail(email.current.value))
             return setError("Enter a valid email address");
-        
         if(!phone.current.value)
             return setError("Enter a phone number");
         if(!validatePhone(phone.current.value))
@@ -125,7 +124,7 @@ const Checkout = () => {
                 <div></div>
                 <input ref={floor} type = "text" placeholder="floor" />
                 <input ref={apartment_number} type = "text" placeholder="apartment number" />
-                
+                <div>total price: </div> 
 
             </div>
             <div className={styles['button-wrapper']}>
