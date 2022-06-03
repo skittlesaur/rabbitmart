@@ -21,7 +21,6 @@ const Checkout = () => {
     const apartment_number = useRef();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    //const {total} = this.probs.match.params;
     const [searchParams] = useSearchParams();
 
     const handleCheckout = () => {
