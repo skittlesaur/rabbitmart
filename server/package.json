@@ -8,7 +8,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "node ./app.js",
+    "start": "node ./index.js",
     "start-dev": "nodemon ./app.js"
   },
   "dependencies": {
