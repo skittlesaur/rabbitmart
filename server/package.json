@@ -25,6 +25,7 @@
     "stripe": "^9.6.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "@vercel/node": "^1.15.0"
   }
 }
