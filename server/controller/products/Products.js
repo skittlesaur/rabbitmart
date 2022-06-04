@@ -18,6 +18,24 @@ export const productsSearch = async (req, res) => {
     }
 }
 
+export const updateQuantity = async (req, res) => {
+    try {
+        const { products } = req.body;
+        for(const product of products){
+            const searchedProduct = await Products.findOne({ product_id: product.product_id });
+            if(searchedProduct.stock - product.quantity <= 0){
+                await Products.findOneAndUpdate({product_id: product.product_id},{ "stock": 0});
+            }
+            else{
+                await Products.findOneAndUpdate({product_id: product.product_id},{"stock": searchedProduct.stock - product.quantity}); 
+            }
+        }
+        res.status(200).json({ message: "updated" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 export const ShowProductsPerPage = async (req, res) => {
     try {
         let products = [];
