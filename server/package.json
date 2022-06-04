@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "node ./app.js",
+    "build": "node build --output public",
     "start-dev": "nodemon ./app.js"
   },
   "dependencies": {
