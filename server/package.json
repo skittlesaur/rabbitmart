@@ -9,7 +9,6 @@
   },
   "scripts": {
     "start": "node ./app.js",
-    "build": "node build --output public",
     "start-dev": "nodemon ./app.js"
   },
   "dependencies": {
@@ -30,7 +29,6 @@
     "stripe": "^9.6.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16",
-    "@vercel/node": "^1.15.0"
+    "nodemon": "^2.0.16"
   }
 }
