@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "engines": {
-    "node": "14.x"
+    "node": "16.x"
   },
   "scripts": {
     "start": "node ./index.js"
@@ -26,8 +26,5 @@
     "mongoose": "^6.3.3",
     "morgan": "~1.9.1",
     "stripe": "^9.6.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.16"
   }
 }
