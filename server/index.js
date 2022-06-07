@@ -48,3 +48,5 @@ const handleServerStartup = () => {
 }
 
 mongoose.connect(process.env.CONNECTION_URL, mongooseOptions, handleServerStartup)
+
+export default app
