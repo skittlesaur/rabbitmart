@@ -1,45 +1,35 @@
-import {useEffect, useState , useRef} from "react";
-import {useParams} from "react-router-dom";
+import {useState, useRef} from "react";
 import {useDispatch} from "react-redux";
-import Loading from "../../components/loading/Loading";
-import { fetchShipment } from "../../actions/shipment";
-import Error from "../../components/feedback/error/Error";
+import {fetchShipment} from "../../actions/shipment";
 
 const Shipment = () => {
 
-    const {id} = 3;
     const dispatch = useDispatch();
     const [shipment, setShipment] = useState([]);
     const [error, setError] = useState('');
-    const idref =useRef();
+    const inputRef = useRef();
 
-    function handleAddTodo(e){
-        var id_Input=idref.current.value;
-        if(id_Input === '') 
-        {return window.alert('you didnot provide an Id');}
-        else{
-        }
-        
-    }
-    const handleFetch=() => {
+    const handleFetch = () => {
 
         const onSuccess = (shipment) => {
             setShipment(shipment);
         }
+
         const onError = (e) => {
             setError(e.message)
         }
-        dispatch(fetchShipment(id, onSuccess,onError))
+
+        dispatch(fetchShipment(inputRef.current.value, onSuccess, onError))
     }
 
     return (
-        <> 
+        <>
             <div>Please provide your shipment id</div>
-            <input ref={idref} type="text"/>
+            <input ref={inputRef} type="text"/>
             <button onClick={handleFetch}> Get Shipment Status</button>
-            {shipment}
-            {/* <div></div> */}
-             
+            <div>
+                {shipment.status}
+            </div>
         </>
     );
 
