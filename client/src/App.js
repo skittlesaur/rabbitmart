@@ -6,6 +6,7 @@ import Footer from "./components/footer/Footer";
 import CartPage from "./pages/cart/Cart";
 import {useEffect, useState} from "react";
 import Signup from "./pages/authentication/signup/Signup";
+import Shipment from "./pages/shipment/Shipment";
 import Login from "./pages/authentication/login/Login";
 import PrivateRoute from "./components/privete-route/PrivateRoute";
 import Wishlist from "./pages/wishlist/Wishlist";
@@ -86,6 +87,7 @@ const App = () => {
                 <Route path={'/cart'}
                        element={<CartPage cart={cart} cartCount={cartCount} updateQuantity={updateQuantity}/>}/>
                 <Route path={'/signup'} element={<Signup/>}/>
+                <Route path={'/shipping'} element={<Shipment/>}/>
                 <Route path={'/login'} element={<Login/>}/>
                 <Route path={'/wishlist'} element={<PrivateRoute component={<Wishlist/>}/>}/>
                 <Route path={'/admin'} element={<PrivateRoute role={'ADMIN'} component={<Admin/>}/>}/>

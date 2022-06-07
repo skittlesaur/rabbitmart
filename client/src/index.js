@@ -6,13 +6,15 @@ import {configureStore} from '@reduxjs/toolkit'
 import products from './reducers/products.js';
 import authentication from "./reducers/authentication";
 import orders from "./reducers/orders";
-
+import shipment from "./reducers/shipment";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const store = configureStore({
     reducer: {
         products,
         authentication,
-        orders
+        shipment,
+        orders,
+        
     }
 });
 
