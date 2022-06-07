@@ -119,7 +119,8 @@ export const ProductsRecommendations = async (req, res) => {
         products.push({category: categories[0].category, products: productscategory1});
         products.push({category: categories[1].category, products: productscategory2});
 
-        res.status(200).json(products);
+        res.set('Cache-control', 'no-store');
+        return res.status(200).json(products);
     } catch (error) {
         res.status(400).json({message: error.message});
     }
