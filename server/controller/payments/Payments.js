@@ -1,4 +1,4 @@
-import {stripe} from "../../app.js";
+import {stripe} from "../../index.js";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 import generateId from "../../utils/generateId.js";
