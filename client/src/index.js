@@ -7,6 +7,7 @@ import products from './reducers/products.js';
 import authentication from "./reducers/authentication";
 import orders from "./reducers/orders";
 import shipment from "./reducers/shipment";
+import order from './pages/order/Order';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const store = configureStore({
     reducer: {
@@ -14,7 +15,7 @@ const store = configureStore({
         authentication,
         shipment,
         orders,
-        
+        order
     }
 });
 

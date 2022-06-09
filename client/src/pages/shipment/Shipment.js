@@ -18,6 +18,9 @@ const Shipment = () => {
         const onError = (e) => {
             setError(e.message)
         }
+        if(!inputRef){
+            window.alert('Please enter your shipment/order id')
+        }
 
         dispatch(fetchShipment(inputRef.current.value, onSuccess, onError))
     }
