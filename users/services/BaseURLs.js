@@ -1,0 +1,1 @@
+export const PRODUCTS_BASEURL = 'https://rabbitmart-cms.vercel.app/products'
