@@ -28,6 +28,7 @@ import Products from './pages/products/Products';
 import Checkout from "./pages/checkout/checkout";
 import Success from "./pages/checkout/success";
 import ShipmentId from "./pages/shipment/id/ShipmentId";
+import OrderId from "./pages/order/id/OrderId";
 
 const cartInitialization = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -101,7 +102,8 @@ const App = () => {
                 <Route path={'/shipping'} element={<Shipment/>}/>
                 <Route path={'/shipping/:id'} element={<ShipmentId/>}/>
                 <Route path={'/login'} element={<Login/>}/>
-                <Route path={'/order'} element={<Order/>}/>
+                <Route path={'/orders'} element={<Order/>}/>
+                <Route path={'/orders/:id'} element={<OrderId/>}/>
                 <Route path={'/wishlist'} element={<PrivateRoute component={<Wishlist addProductToCart={addProductToCart}/>}/>}/>
                 <Route path={'/admin'} element={<PrivateRoute role={'ADMIN'} component={<Admin/>}/>}/>
                 <Route path={'/admin/orders'}
