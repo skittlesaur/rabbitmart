@@ -1,10 +1,11 @@
 import * as api from '../api/index';
-import {ORDERS_FETCH_ALL} from "../constants/actions/orders";
+import {ORDERS_FETCH, ORDERS_FETCH_ALL} from "../constants/actions/orders";
 
-export const fetchOrder = (id, onSuccess, onError) => async () => {
+export const fetchOrder = (id, onSuccess, onError) => async (dispatch) => {
     try {
-        const orderData = await api.fetchOrder(id);
-        onSuccess(orderData.data);
+        const orderData = await api.fetchOrder(id).then(res => res.data);
+        dispatch({type: ORDERS_FETCH, data: orderData})
+        onSuccess(orderData);
     } catch (e) {
         onError(e.response.data);
     }

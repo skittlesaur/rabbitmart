@@ -7,6 +7,10 @@ export const getShipmentId = async (req, res) => {
     const {id} = req.params;
     try {
         const your_shipment = await Shipments.findOne({"order_id": id});
+
+        if (!your_shipment)
+            return res.status(400).json({message: 'Invalid order id'});
+
         return res.status(200).json({
             order_id: your_shipment.order_id,
             total: your_shipment.total,
