@@ -5,7 +5,9 @@ import Navigation from "./components/navigation/Navigation";
 import Footer from "./components/footer/Footer";
 import CartPage from "./pages/cart/Cart";
 import {useEffect, useState} from "react";
+import Order from "./pages/order/Order";
 import Signup from "./pages/authentication/signup/Signup";
+import Shipment from "./pages/shipment/Shipment";
 import Login from "./pages/authentication/login/Login";
 import PrivateRoute from "./components/privete-route/PrivateRoute";
 import Wishlist from "./pages/wishlist/Wishlist";
@@ -95,7 +97,9 @@ const App = () => {
                 <Route path={'/checkout'} element={<Checkout/>}/>
                 <Route path={'/checkout/success'} element={<Success setCart={setCart}/>}/>
                 <Route path={'/signup'} element={<Signup/>}/>
+                <Route path={'/shipping'} element={<Shipment/>}/>
                 <Route path={'/login'} element={<Login/>}/>
+                <Route path={'/order'} element={<Order/>}/>
                 <Route path={'/wishlist'} element={<PrivateRoute component={<Wishlist addProductToCart={addProductToCart}/>}/>}/>
                 <Route path={'/admin'} element={<PrivateRoute role={'ADMIN'} component={<Admin/>}/>}/>
                 <Route path={'/admin/orders'}

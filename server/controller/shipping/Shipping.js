@@ -11,7 +11,7 @@ export const getShipmentId = async (req, res) => {
             order_id: your_shipment.order_id,
             total: your_shipment.total,
             address: your_shipment.address,
-            status: your_shipment.shippment_status,
+            status: your_shipment.status,
             ordered_at: your_shipment.ordered_at
         });
     } catch (e) {
