@@ -1,5 +1,5 @@
 import * as api from "../api";
-import {SHIPPING_FETCH_ALL} from "../constants/actions/shipping";
+import {SHIPPING_FETCH, SHIPPING_FETCH_ALL} from "../constants/actions/shipping";
 
 export const fetchShipments = (page, onSuccess) => async (dispatch) => {
     try {
@@ -11,10 +11,11 @@ export const fetchShipments = (page, onSuccess) => async (dispatch) => {
     }
 }
 
-export const fetchShipment = (id, onSuccess, onError) => async () => {
+export const fetchShipment = (id, onSuccess, onError) => async (dispatch) => {
     try {
-        const orderData = await api.fetchShipment(id);
-        onSuccess(orderData.data);
+        const shipmentData = await api.fetchShipment(id).then(res => res.data);
+        dispatch({type: SHIPPING_FETCH, data: shipmentData})
+        onSuccess(shipmentData);
     } catch (e) {
         onError(e.response.data);
     }
