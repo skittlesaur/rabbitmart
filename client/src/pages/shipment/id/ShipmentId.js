@@ -1,6 +1,6 @@
 import styles from './shipmentId.module.css';
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import Loading from "../../../components/loading/Loading";
 import {fetchShipment} from "../../../actions/shipping";
@@ -12,6 +12,7 @@ const ShipmentId = () => {
     const shipment = useSelector(state => state.shipping.fetched);
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const onSuccess = () => {
@@ -20,7 +21,7 @@ const ShipmentId = () => {
 
         const onError = (e) => {
             setLoading(false);
-            console.log(e.message);
+            navigate('/404')
         }
 
         if (shipment && shipment.order_id === id)

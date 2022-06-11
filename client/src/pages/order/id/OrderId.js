@@ -1,6 +1,6 @@
 import styles from './orderId.module.css';
 import {useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import Loading from "../../../components/loading/Loading";
 import Order from '../../../shared/assets/tracking/order.png';
@@ -12,6 +12,7 @@ const OrderId = () => {
     const order = useSelector(state => state.orders.fetched);
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const onSuccess = () => {
@@ -20,7 +21,7 @@ const OrderId = () => {
 
         const onError = (e) => {
             setLoading(false);
-            console.log(e.message);
+            navigate('/404')
         }
 
         if (order && order.order_id === id)
