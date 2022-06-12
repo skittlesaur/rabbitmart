@@ -55,7 +55,7 @@ const Home = ({addProductToCart}) => {
                     {products.map((item, i) =>
                         <div key={i} className={styles['category-wrapper']}>
                             <div className={'heading2'}>
-                                <Link to={`/products/${item.category}`}>{item.category}</Link>
+                                <Link to={`/products?category=${item.category}`}>{item.category}</Link>
                             </div>
                             <div className={styles['products-wrapper']}>
                                 {item.products.map((product, j) => <ProductCard addProductToCart={addProductToCart}
