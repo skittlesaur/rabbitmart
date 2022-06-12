@@ -1,0 +1,262 @@
+.wrapper {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background: var(--PRIMARY);
+    box-shadow: 0 0 8px var(--PRIMARY);
+    z-index: 105;
+    padding: 1em 2em;
+    gap: 1em;
+    align-items: center;
+}
+
+.logo {
+    justify-self: start;
+    width: auto;
+    height: 1.2em;
+    flex-shrink: 0;
+}
+
+.logo img {
+    object-fit: contain;
+}
+
+.actions {
+    justify-self: end;
+    color: var(--RABBIT_YELLOW);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1em;
+}
+
+.actions .icon {
+    cursor: pointer;
+    transition: 0.2s ease-out all;
+    visibility: visible;
+    position: relative;
+    z-index: 1;
+}
+
+.actions > .icon:hover {
+    color: white;
+}
+
+.search {
+    font-size: .8rem;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    padding: .25em .75em;
+    visibility: hidden;
+    transition: 0.25s ease-in-out all;
+    position: relative;
+    max-width: 15em;
+}
+
+.search-active {
+    visibility: visible;
+}
+
+.hide-search {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hide-icon {
+    display: none;
+}
+
+.nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 3em;
+    gap: 3em;
+    transform: translateX(-110%);
+    transition: .3s all ease-out;
+    z-index: 2;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.nav > * {
+    font-size: 1.75rem;
+    line-height: 2rem;
+    transition: all .2s ease-out;
+}
+
+.nav > *:hover {
+    color: var(--PRIMARY);
+    font-weight: 500;
+}
+
+.close-menu span {
+    font-size: 1.75rem;
+}
+
+.close-menu {
+    cursor: pointer;
+    color: var(--NEUTRAL_3);
+    display: flex;
+    align-items: flex-end;
+    gap: .5em;
+    transition: .2s ease-out all;
+}
+
+.close-menu:hover {
+    margin-left: 1em;
+}
+
+.show-menu {
+    transform: translateX(0);
+}
+
+.cart-counter {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--PRIMARY_ALPHA_50);
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .8rem;
+    font-weight: 500;
+    padding: .5em;
+    --SIZE: 1.5em;
+    width: var(--SIZE);
+    height: var(--SIZE);
+}
+
+.account-icon {
+    display: none;
+}
+
+.account-dropdown {
+    position: fixed;
+    top: 3.5em;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    box-shadow: 2px 3px 8px rgba(234, 234, 234, 0.5);
+    padding: 1em 2em;
+    border-radius: 5px;
+    width: 10em;
+    color: black;
+    gap: 1em;
+}
+
+.account-dropdown > * {
+    border-bottom: 1px solid var(--NEUTRAL_2);
+    text-align: center;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    font-size: .9rem;
+}
+
+.account-dropdown > *:hover {
+    background: var(--NEUTRAL_1);
+}
+
+.hide-dropdown {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+    cursor: default;
+    opacity: 0;
+}
+
+.hide-dropdown:hover {
+    background: none;
+}
+
+@media screen and (min-width: 980px) {
+
+    .account-icon {
+        display: block;
+    }
+
+    .account {
+        display: none;
+    }
+
+    .menu {
+        display: none !important;
+    }
+
+    .hide-icon {
+        display: block;
+    }
+
+    .hide-search {
+        display: none;
+    }
+
+    .search {
+        visibility: visible;
+        width: 15em;
+    }
+
+    .nav-wrapper {
+        transform: translateX(0);
+        background: none;
+        position: relative;
+    }
+
+    .nav {
+        flex-direction: row;
+        gap: 1em;
+    }
+
+    .nav a {
+        font-size: .9rem;
+        color: white;
+    }
+
+    .nav a:hover {
+        color: var(--RABBIT_YELLOW);
+    }
+
+    .close-menu {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .wrapper {
+        padding: 1em 8em;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .nav-wrapper {
+        justify-self: center;
+    }
+
+    .nav {
+        gap: 1.5em;
+    }
+}

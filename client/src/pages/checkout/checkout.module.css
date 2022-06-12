@@ -1,0 +1,43 @@
+.wrapper {
+    padding: 2em 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+}
+
+.total-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.total-amount {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--PRIMARY);
+}
+
+.total-text {
+    font-size: 1rem;
+    color: var(--PRIMARY);
+}
+
+@media screen and (min-width: 800px) {
+    .wrapper {
+        max-width: 800px;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .form {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

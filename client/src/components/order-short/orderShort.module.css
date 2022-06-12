@@ -1,0 +1,56 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: var(--GRID-TEMPLATE);
+    grid-auto-rows: 2em;
+    color: var(--NEUTRAL_4);
+    gap: .5em;
+    transition: all .3s ease-out;
+    padding: .25em 1em;
+    cursor: pointer;
+}
+
+.wrapper div {
+    font-size: .9rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    align-self: center;
+}
+
+.wrapper div::-webkit-scrollbar {
+    display: none;
+}
+
+.wrapper:hover {
+    color: var(--NEUTRAL_7);
+    background: var(--NEUTRAL_0);
+}
+
+.status {
+    font-size: .7rem !important;
+    align-self: center;
+    justify-self: center;
+    width: 7em;
+    text-align: center;
+    color: rgb(var(--COLOR));
+    background: rgba(var(--COLOR), .15);
+    font-weight: 500;
+    padding: .1em .5em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.CREATED {
+    --COLOR: 26, 187, 206;
+}
+
+.FULFILLED {
+    --COLOR: 61, 199, 66;
+}
+
+.PROCESSING {
+    --COLOR: 225, 179, 63;
+}
+
+.CANCELLED {
+    --COLOR: 253, 103, 103;
+}

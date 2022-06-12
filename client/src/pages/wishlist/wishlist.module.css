@@ -1,0 +1,40 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 4em 1em;
+    gap: 4em;
+    min-height: 70vh;
+}
+
+.no-products {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    align-self: center;
+    text-align: center;
+}
+
+.products-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 1.5em;
+}
+
+@media screen and (min-width: 760px) {
+    .products-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .products-wrapper{
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .wrapper{
+        max-width: 1024px;
+        margin: auto;
+    }
+}

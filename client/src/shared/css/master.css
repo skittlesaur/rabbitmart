@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --PRIMARY: #00b106;
+    --PRIMARY_ALPHA_50: rgba(26, 224, 33, 0.50);
+    --RABBIT_YELLOW: #e0ff16;
+    --RABBIT_YELLOW_ALPHA_50: rgba(224, 255, 22, 0.5);
+
+    --NEUTRAL_0: #f6f6f6;
+    --NEUTRAL_1: #eaeaea;
+    --NEUTRAL_2: #d2d2d2;
+    --NEUTRAL_3: #a4a4a4;
+    --NEUTRAL_4: #868686;
+    --NEUTRAL_5: #707070;
+    --NEUTRAL_7: #383838;
+    --NEUTRAL_8: #333333;
+    --NEUTRAL_9: #171717;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+}
+
+* > span {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+p, div, a {
+    line-height: 1.5rem;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+h2, .heading2 > * {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+section {
+    margin: 1.5em 0;
+}
+
+.heading, .heading2 {
+    position: relative;
+    cursor: default;
+    user-select: none;
+}
+
+.heading {
+    text-align: center;
+    align-self: center;
+}
+
+.heading2 {
+    display: inline-block;
+    margin-left: 1em;
+    padding-left: 2em;
+    transition: 0.2s all ease-out;
+}
+
+.heading-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2em 0;
+}
+
+.heading:before {
+    content: '';
+    position: absolute;
+    width: 110%;
+    left: -5%;
+    height: 5px;
+    transform: rotate(-1deg);
+    top: calc(100% - 2px);
+    transition: all .2s ease-out;
+    z-index: -1;
+    border-bottom: 7px solid var(--PRIMARY);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+.heading:hover:before {
+    border-bottom-width: 14px;
+    top: calc(100% + 2px - 14px);
+}
+
+.heading2:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: calc(50% - 1px);
+    height: 3px;
+    width: 1.5em;
+    background: var(--PRIMARY);
+    border-radius: 5px;
+    transition: 0.2s all ease-out;
+}
+
+.heading2:hover {
+    padding-left: 2.5em;
+}
+
+.heading2:hover:before {
+    width: 2em;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.btn1 {
+    color: white;
+    background: var(--PRIMARY);
+    padding: .25em 1em;
+    min-width: 8em;
+    min-height: 2.25em;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 500;
+}
+
+.btn1:hover {
+    transform: scale(1.05);
+}
+
+.btn2 {
+    color: var(--PRIMARY);
+    font-weight: 500;
+    border: 2px var(--PRIMARY) solid;
+    padding: .5em 1em;
+    border-radius: 5px;
+    transition: all .16s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    min-width: 10em;
+}
+
+.btn2:after {
+    content: '';
+    position: absolute;
+    background: white;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.btn2:before {
+    content: '';
+    position: absolute;
+    background: var(--PRIMARY);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    transition: all .15s ease-in-out;
+    z-index: -1;
+}
+
+.btn2:hover {
+    color: white;
+}
+
+.btn2:hover:before {
+    height: 100%;
+    top: 0;
+}
+
+.material-symbols-outlined {
+    user-select: none;
+    font-variation-settings: 'FILL' 0,
+    'wght' 600,
+    'GRAD' 0,
+    'opsz' 48
+}
+
+input, select, option {
+    font-size: .8rem;
+    padding: .5em 1em;
+    border-radius: 5px;
+    border: 1px solid var(--NEUTRAL_4);
+    outline: none;
+}
+
+input:focus-visible {
+    border: 2px solid var(--PRIMARY);
+}
+
+button {
+    border: none;
+}
+
+.warning-box {
+    background: #ffefd1;
+    padding: .5em 1em;
+    border: 1px solid black;
+    font-size: .9rem;
+    line-height: 1.25rem;
+}
+
+.warning-box .warning {
+    font-weight: 500;
+}
