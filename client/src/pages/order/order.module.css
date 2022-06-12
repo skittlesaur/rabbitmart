@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 4em 2em;
+    gap: 2em;
+    min-height: 80vh;
+}
+
+
+@media screen and (min-width: 800px) {
+    .wrapper {
+        max-width: 800px;
+        margin: auto;
+    }
+}

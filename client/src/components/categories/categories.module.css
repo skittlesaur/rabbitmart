@@ -1,0 +1,67 @@
+.categories {
+    margin: 2em 0;
+}
+
+.categories-scroll {
+    display: grid;
+    grid-auto-flow: column;
+    gap: .5em;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior: contain;
+    scroll-snap-type: inline mandatory;
+    padding: 1em 1em;
+    scroll-padding: 0 1em;
+}
+
+.category {
+    scroll-snap-align: start;
+    cursor: pointer;
+    position: relative;
+
+    --CATEGORY_SIZE: 7em;
+    width: var(--CATEGORY_SIZE);
+    height: var(--CATEGORY_SIZE);
+
+    padding: 1em .25em;
+
+    background: linear-gradient(240deg, var(--NEUTRAL_0) 10%, var(--NEUTRAL_1) 100%);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--NEUTRAL_2);
+}
+
+.category div {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.1rem;
+    font-weight: 500;
+    color: var(--PRIMARY);
+}
+
+
+.category img {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+    object-position: 50% 0;
+    opacity: .6;
+    transition: 0.2s all ease-in-out;
+}
+
+.category:hover img {
+    opacity: .7;
+}
+
+/* Large Laptop Support */
+@media screen and (min-width: 1440px) {
+    .categories {
+        max-width: 1200px;
+        margin: auto;
+    }
+}
