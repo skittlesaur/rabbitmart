@@ -130,3 +130,45 @@
 .wishlisted:hover {
     color: var(--PRIMARY) !important;
 }
+
+@media screen and (max-width: 425px) {
+    .products-page {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border: 1px solid var(--NEUTRAL_3);
+        border-radius: 10px;
+        overflow: hidden;
+        height: 11em;
+        gap: 0;
+    }
+
+    .products-page .image-wrapper {
+        min-width: 30%;
+        max-width: 40%;
+        min-height: 100%;
+        max-height: 100%;
+        background: transparent;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .products-page .image-wrapper img {
+        min-height: 7em;
+    }
+
+    .products-page .image-wrapper .wishlist {
+        right: auto;
+        left: 1em;
+        top: 2em;
+    }
+
+    .products-page .content {
+        gap: .25em;
+    }
+
+    .products-page .content .details {
+        flex-direction: column;
+    }
+}

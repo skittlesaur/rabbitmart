@@ -77,7 +77,7 @@ const Products = ({addProductToCart}) => {
                 <>
                     <div className={styles['products-wrapper']}>
                         {products.map(((product, i) => <ProductCard addProductToCart={addProductToCart} key={i}
-                                                                    product={product}/>))}
+                                                                    product={product} productsPage={true}/>))}
                     </div>
                     <Pages max={totalPages} current={page} onPageClick={handleClick}/>
                 </>

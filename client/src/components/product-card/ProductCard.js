@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {updateWishlist} from "../../actions/auth";
 import {useNavigate} from "react-router-dom";
 
-const ProductCard = ({product, addProductToCart}) => {
+const ProductCard = ({product, addProductToCart, productsPage = false}) => {
 
     const [addToCart, setAddToCart] = useState(false);
     const wrapperRef = useRef();
@@ -48,7 +48,8 @@ const ProductCard = ({product, addProductToCart}) => {
     }
 
     return (
-        <div ref={wrapperRef} className={`${styles['wrapper']} ${!product.stock && styles['out-of-stock']}`}>
+        <div ref={wrapperRef}
+             className={`${styles['wrapper']} ${productsPage ? styles['products-page'] : ''} ${!product.stock && styles['out-of-stock']}`}>
             {addToCart &&
                 <motion.img initial={{
                     x: getXi(),
