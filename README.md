@@ -12,6 +12,7 @@ Mart is only available on mobile platforms, our job is to make the shopping expe
 | Redux        | MongoDB      |
 | Axios        | Stripe       |
 |              | SendGrid     |
+|              | Axios        |
 
 ## Usage
 
