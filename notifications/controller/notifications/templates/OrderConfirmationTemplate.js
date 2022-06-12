@@ -123,13 +123,12 @@ const create = (order) => `
             <p class="title">Phone Number</p>
             <p class="value">${order.phone_number}</p>
             <p class="title">Address</p>
-            <p class="value">${order.address}</p>
+            <p class="value">${order.address.city}, ${order.address.area}, ${order.address.building_number}</p>
         </div>
         <h1>Order Summary</h1>
         <div class="sum">
-            <p>Order Tracking Id: <span class="val">#HELLO1</span></p>
+            <p>Order Tracking Id: <span class="val">#${order.order_id}</span></p>
             <p>Items Purchased: <span class="val">${order.products.length} Items</span></p>
-            <p>Expected Arrival: <span class="val">${order.ordered_at}</span></p>
             <p>Grand Total: <span class="val">${order.total} EGP</span></p>
         </div>
         <div class="buttons">
