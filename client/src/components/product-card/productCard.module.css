@@ -156,6 +156,7 @@
 
     .products-page .image-wrapper img {
         min-height: 7em;
+        max-height: 7em;
     }
 
     .products-page .image-wrapper .wishlist {
