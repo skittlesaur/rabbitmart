@@ -1,1 +1,1 @@
-export const PRODUCTS_BASEURL = 'https://rabbitmart-cms.vercel.app/products'
+export const PRODUCTS_BASEURL = 'https://rabbitmart-products.vercel.app/products'
