@@ -1,3 +1,5 @@
+import {WEBSITE_BASE_URL} from "../../../services/BaseURLs.js";
+
 const create = (order) => `
 <!DOCTYPE html>
 <html lang="en">
@@ -131,8 +133,8 @@ const create = (order) => `
             <p>Grand Total: <span class="val">${order.total} EGP</span></p>
         </div>
         <div class="buttons">
-            <a class="order" href="http://localhost:3000/orders/${order.order_id}">View Order</a>
-            <a href="http://localhost:3000/shipping/${order.order_id}">Track Shipping</a>
+            <a class="order" href="${WEBSITE_BASE_URL}/orders/${order.order_id}">View Order</a>
+            <a href="${WEBSITE_BASE_URL}/shipping/${order.order_id}">Track Shipping</a>
         </div>
     </div>
 </div>
