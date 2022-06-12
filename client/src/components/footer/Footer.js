@@ -11,18 +11,18 @@ const Footer = () => {
                 </div>
                 <div className={styles['pages-wrapper']}>
                     <div className={styles['pages']}>
-                        <div className={styles['page-title']}>My Account</div>
+                        <div className={styles['page-title']}>Shopping</div>
                         <div className={styles['pages-list']}>
-                            <Link to={'/orders'}>Order History</Link>
+                            <Link to={'/orders'}>Track Order</Link>
+                            <Link to={'/shipping'}>Track Shipping</Link>
                             <Link to={'/cart'}>Shopping Cart</Link>
-                            <Link to={'/settings'}>Settings</Link>
                         </div>
                     </div>
                     <div className={styles['pages']}>
                         <div className={styles['page-title']}>Products</div>
                         <div className={styles['pages-list']}>
-                            <Link to={'/products/fruits & vegetables'}>Fruits & Vegetables</Link>
-                            <Link to={'/products/grocery'}>Grocery Products</Link>
+                            <Link to={'/products?category=Fruits%20and%20Vegetables'}>Fruits & Vegetables</Link>
+                            <Link to={'/products?category=Beverages'}>Beverages</Link>
                             <Link to={'/products'}>All Products</Link>
                         </div>
                     </div>
