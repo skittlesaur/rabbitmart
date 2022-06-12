@@ -11,7 +11,6 @@ const Checkout = () => {
     const lname = useRef();
     const email = useRef();
     const phone = useRef();
-    const country = useRef();
     const city = useRef();
     const area = useRef();
     const street = useRef();
@@ -38,8 +37,6 @@ const Checkout = () => {
             return setError("Enter a valid phone number");
         if (!city.current.value)
             return setError("Enter a city");
-        if (!country.current.value)
-            return setError("Enter a country");
         if (!area.current.value)
             return setError("Enter an area");
         if (!street.current.value)
@@ -76,7 +73,7 @@ const Checkout = () => {
             email: email.current.value,
             phone_number: phone.current.value,
             address: {
-                country: country.current.value,
+                country: 'Egypt',
                 city: city.current.value,
                 area: area.current.value,
                 street: street.current.value,
@@ -118,7 +115,6 @@ const Checkout = () => {
 
                 <input ref={email} type="text" placeholder="Email"/>
                 <input ref={phone} type="text" placeholder="Phone"/>
-                <input ref={country} type="text" placeholder="Country"/>
                 <input ref={city} type="text" placeholder="City"/>
 
                 <input ref={area} type="text" placeholder="Area"/>

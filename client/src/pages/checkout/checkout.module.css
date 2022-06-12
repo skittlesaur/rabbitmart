@@ -35,3 +35,9 @@
         margin: auto;
     }
 }
+
+@media screen and (max-width: 425px) {
+    .form {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
