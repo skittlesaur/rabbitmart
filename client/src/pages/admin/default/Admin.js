@@ -8,7 +8,6 @@ const Admin = () => {
                 <h1>Admin Panel</h1>
             </div>
             <div className={styles['actions']}>
-                <Link to={'/admin/products'} className={styles['action']}>View Products</Link>
                 <Link to={'/admin/products/new'} className={styles['action']}>Add New Product</Link>
                 <Link to={'/admin/products/update'} className={styles['action']}>Update Products</Link>
                 <Link to={'/admin/orders'} className={styles['action']}>Track Orders</Link>

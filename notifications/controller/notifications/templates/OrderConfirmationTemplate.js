@@ -1,5 +1,14 @@
 import {WEBSITE_BASE_URL} from "../../../services/BaseURLs.js";
 
+const calculateTotalItems = (products) => {
+    let total = 0;
+
+    for (const product of products)
+        total += product.quantity || 1;
+
+    return total;
+}
+
 const create = (order) => `
 <!DOCTYPE html>
 <html lang="en">
@@ -128,7 +137,7 @@ const create = (order) => `
         <h1>Order Summary</h1>
         <div class="sum">
             <p>Order Tracking Id: <span class="val">#${order.order_id}</span></p>
-            <p>Items Purchased: <span class="val">${order.products.length} Items</span></p>
+            <p>Items Purchased: <span class="val">${calculateTotalItems(order.products)} Items</span></p>
             <p>Grand Total: <span class="val">${order.total} EGP</span></p>
         </div>
         <div class="buttons">
